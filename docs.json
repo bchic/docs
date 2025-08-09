@@ -8,6 +8,18 @@
     "dark": "#15803D"
   },
   "favicon": "/favicon.svg",
+  "internationalization": {
+    "default": "de",
+    "languages": {
+      "de": {
+        "name": "Deutsch"
+      },
+      "en": {
+        "name": "English",
+        "path": "/en"
+      }
+    }
+  },
   "navigation": {
     "tabs": [
       {
@@ -17,19 +29,28 @@
             "group": "Get Started",
             "pages": [
               "index",
+              "en/index",
               "quickstart",
-              "development"
+              "en/quickstart",
+              "development",
+              "en/development"
             ]
           },
           {
             "group": "Essentials",
             "pages": [
               "essentials/markdown",
+              "en/essentials/markdown",
               "essentials/code",
+              "en/essentials/code",
               "essentials/images",
+              "en/essentials/images",
               "essentials/settings",
+              "en/essentials/settings",
               "essentials/navigation",
-              "essentials/reusable-snippets"
+              "en/essentials/navigation",
+              "essentials/reusable-snippets",
+              "en/essentials/reusable-snippets"
             ]
           }
         ]
@@ -40,16 +61,21 @@
           {
             "group": "API Documentation",
             "pages": [
-              "api-reference/introduction"
+              "api-reference/introduction",
+              "en/api-reference/introduction"
             ]
           },
           {
             "group": "Endpoint Examples",
             "pages": [
               "api-reference/endpoint/get",
+              "en/api-reference/endpoint/get",
               "api-reference/endpoint/create",
+              "en/api-reference/endpoint/create",
               "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "en/api-reference/endpoint/delete",
+              "api-reference/endpoint/webhook",
+              "en/api-reference/endpoint/webhook"
             ]
           }
         ]
