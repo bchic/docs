@@ -1,128 +1,114 @@
 {
   "$schema": "https://mintlify.com/docs.json",
+  "name": "bchic analytics",
   "theme": "mint",
-  "name": "Mint Starter Kit",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#3D84FF",
+    "light": "#5A9BFF",
+    "dark": "#3D84FF"
   },
-  "favicon": "/favicon.svg",
-  "internationalization": {
-    "default": "de",
-    "languages": {
-      "de": {
-        "name": "Deutsch"
-      },
-      "en": {
-        "name": "English",
-        "path": "/en"
-      }
-    }
+  "favicon": "/favicon.png",
+  "logo": {
+    "light": "/logo/logo-dark.png",
+    "dark": "/logo/logo-white.png"
   },
   "navigation": {
-    "tabs": [
+    "languages": [
       {
-        "tab": "Guides",
-        "groups": [
+        "language": "de",
+        "tabs": [
           {
-            "group": "Get Started",
-            "pages": [
-              "index",
-              "en/index",
-              "quickstart",
-              "en/quickstart",
-              "development",
-              "en/development"
+            "tab": "Plattform",
+            "groups": [
+              {
+                "group": "Erste Schritte",
+                "pages": ["de/index", "de/plattform/erste-schritte/schnellstart", "de/plattform/erste-schritte/dashboard-tour"]
+              },
+              {
+                "group": "Startseite",
+                "pages": ["de/plattform/pages/dashboard"]
+              },
+
+              {
+                "group": "Ereignisse Seiten",
+                "pages": ["de/plattform/pages/events/übersicht", "de/plattform/pages/events/outbound-link", "de/plattform/pages/events/scroll-depth"]
+              },
+
+              {
+                "group": "Pfade",
+                "pages": ["de/plattform/funktionen/Pfade Analysieren"]
+              },
+              {
+                "group": "UTM Kampagnen",
+                "pages": ["de/plattform/funktionen/Erstellen & Auswerten"]
+              }
             ]
           },
           {
-            "group": "Essentials",
-            "pages": [
-              "essentials/markdown",
-              "en/essentials/markdown",
-              "essentials/code",
-              "en/essentials/code",
-              "essentials/images",
-              "en/essentials/images",
-              "essentials/settings",
-              "en/essentials/settings",
-              "essentials/navigation",
-              "en/essentials/navigation",
-              "essentials/reusable-snippets",
-              "en/essentials/reusable-snippets"
+            "tab": "Ressourcen",
+            "groups": [
+              {
+                "group": "Daten interpretieren",
+                "pages": ["de/ressourcen/daten/wichtige-kennzahlen", "de/ressourcen/daten/absprungrate-verstehen"]
+              },
+              {
+                "group": "Best Practices",
+                "pages": ["de/ressourcen/best-practices/datenschutzkonform-tracken"]
+              }
+            ]
+          },
+          {
+            "tab": "Konfiguration & API",
+            "groups": [
+              {
+                "group": "Account & Team",
+                "pages": ["de/konfiguration/account/einstellungen", "de/konfiguration/account/team-verwalten"]
+              },
+              {
+                "group": "Tracking-Script",
+                "pages": ["de/konfiguration/script/standard-installation", "de/konfiguration/script/events-verfolgen"]
+              },
+              {
+                "group": "API (demnächst)",
+                "pages": []
+              }
             ]
           }
         ]
       },
       {
-        "tab": "API Reference",
-        "groups": [
+        "language": "en",
+        "tabs": [
           {
-            "group": "API Documentation",
-            "pages": [
-              "api-reference/introduction",
-              "en/api-reference/introduction"
-            ]
-          },
-          {
-            "group": "Endpoint Examples",
-            "pages": [
-              "api-reference/endpoint/get",
-              "en/api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "en/api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "en/api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook",
-              "en/api-reference/endpoint/webhook"
+            "tab": "Features",
+            "groups": [
+              {
+                "group": "Getting Started",
+                "pages": ["en/index", "en/features/getting-started/quickstart", "en/features/getting-started/dashboard-tour"]
+              },
+              {
+                "group": "Features in Detail",
+                "pages": ["en/features/features/creating-reports", "en/features/features/filters-and-segments"]
+              }
             ]
           }
         ]
       }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Community",
-          "href": "https://mintlify.com/community",
-          "icon": "slack"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
-    }
-  },
-  "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    ]
   },
   "navbar": {
     "links": [
-      {
-        "label": "Support",
-        "href": "mailto:hi@mintlify.com"
-      }
+      { "label": "Support", "href": "https://www.bchic.de/plattform/kontakt" }
     ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
+      "label": "Zum Dashboard",
+      "href": "https://analytics.bchic.de"
     }
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "github": "https://github.com/bchicanalytics"
     }
   }
 }

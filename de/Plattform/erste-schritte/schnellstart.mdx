@@ -1,0 +1,137 @@
+---
+title: "Schnellstart"
+description: "Richten Sie Ihren Account ein und installieren Sie das Tracking-Script, um in weniger als 5 Minuten die ersten Daten zu erfassen."
+---
+
+Diese Anleitung führt Sie durch den gesamten Prozess, von der Registrierung bis zur ersten Datenerfassung.
+
+<Steps>
+<Step title="Account erstellen">
+  Der Start ist einfach. Zuerst erstellen Sie Ihren bchic-Account.
+
+  1. **Gehen Sie zu [bchic.de/anmelden](https://analytics.bchic.de/auth/sign-up) und erstellen Sie Ihr kostenloses Konto.**
+  2. Geben Sie Ihre Website und Ihre Zugangsdaten ein.
+  3. Klicken Sie auf **"Account erstellen & Setup starten"**, um den Onboarding-Prozess zu beginnen.
+
+  <Card
+    title="Jetzt kostenlosen bchic-Account erstellen"
+    icon="arrow-up-right-from-square"
+    href="https://analytics.bchic.de/auth/sign-up"
+  >
+  </Card>
+</Step>
+
+<Step title="Tracking-Script installieren">
+
+  <div className="block dark:hidden my-8">
+    <video className="rounded-lg" autoPlay loop muted playsInline>
+      <source src="/videos/onboarding.mp4" type="video/mp4" />
+    </video>
+  </div>
+  <div className="hidden dark:block my-8">
+    <video className="rounded-lg" autoPlay loop muted playsInline>
+      <source src="/videos/onboarding.mp4" type="video/mp4" />
+    </video>
+  </div>
+
+  Jetzt verbinden wir Ihre Webseite mit bchic. Wählen Sie unten Ihre Plattform aus, um die passende Schritt-für-Schritt-Anleitung zu sehen.
+
+  <Tabs>
+    <Tab id="wordpress" title="WordPress">
+        **Anleitung:**
+        1. Loggen Sie sich in Ihr WordPress-Dashboard ein.
+        2. Navigieren Sie zu `Plugins` > `Installieren` und suchen Sie nach 'Insert Headers and Footers'.
+        3. Installieren und aktivieren Sie das Plugin.
+        4. Gehen Sie zu den Plugin-Einstellungen und fügen Sie das Skript in den 'Header'-Bereich ein.
+        5. Speichern Sie die Änderungen.
+        <Info>Ihre persönliche `data-website-id` finden Sie in Ihrem Onbaording Flow.</Info>
+    </Tab>
+    <Tab id="webflow" title="Webflow">
+        **Anleitung:**
+
+        Dieses Video zeigt den gesamten Prozess in Webflow:
+        <video className="my-4 rounded-md" autoPlay loop muted playsInline>
+            <source src="/videos/webflow-guide.mp4" type="video/mp4" />
+        </video>
+
+        1. Öffnen Sie Ihr Projekt im Webflow Designer.
+        2. Klicken Sie oben links auf 'Project Settings'.
+        3. Gehen Sie zum Tab 'Custom Code'.
+        4. Fügen Sie das Skript in das Feld 'Head Code' ein.
+        5. Speichern Sie die Änderungen und veröffentlichen Sie Ihre Seite.
+        <Info>Ihre persönliche `data-website-id` finden Sie in Ihrem Onbaording Flow.</Info>
+    </Tab>
+    <Tab id="shopify" title="Shopify">
+        **Anleitung:**
+        1. Loggen Sie sich in Ihr Shopify-Admin-Panel ein.
+        2. Gehen Sie zu `Online-Shop` > `Themes`.
+        3. Klicken Sie bei Ihrem aktuellen Theme auf `Aktionen` > `Code bearbeiten`.
+        4. Öffnen Sie die Datei `theme.liquid` im Layout-Verzeichnis.
+        5. Fügen Sie das Skript direkt vor dem schließenden `</head>`-Tag ein.
+        6. Klicken Sie auf 'Speichern'.
+        <Info>Ihre persönliche `data-website-id` finden Sie in Ihrem Onbaording Flow.</Info>
+    </Tab>
+    <Tab id="squarespace" title="Squarespace">
+        **Anleitung:**
+        1. Gehen Sie in Ihrem Squarespace-Menü zu `Einstellungen` > `Erweitert`.
+        2. Wählen Sie 'Code einfügen' (Code Injection).
+        3. Fügen Sie das Skript in das Textfeld 'HEADER' ein.
+        4. Klicken Sie oben links auf 'Speichern'.
+        <Info>Ihre persönliche `data-website-id` finden Sie in Ihrem Onbaording Flow.</Info>
+    </Tab>
+    <Tab id="wix" title="Wix">
+        **Anleitung:**
+        1. Gehen Sie in Ihrer Website-Verwaltung zu `Einstellungen`.
+        2. Scrollen Sie runter zum Abschnitt `Erweitert` und klicken Sie auf 'Benutzerdefinierter Code'.
+        3. Klicken Sie auf `+ Benutzerdefinierten Code hinzufügen` im Bereich 'Head'.
+        4. Fügen Sie das Skript ein und stellen Sie sicher, dass es auf allen Seiten geladen wird.
+        5. Klicken Sie auf 'Anwenden'.
+        <Info>Ihre persönliche `data-website-id` finden Sie in Ihrem Onbaording Flow.</Info>
+    </Tab>
+    <Tab id="framer" title="Framer">
+        **Anleitung:**
+        1. Öffnen Sie Ihr Projekt in Framer.
+        2. Gehen Sie zu `Settings` > `General`.
+        3. Scrollen Sie zum Abschnitt `Custom Code`.
+        4. Fügen Sie das Skript in das 'End of `<head>` tag' Feld ein.
+        5. Veröffentlichen Sie Ihre Seite.
+        <Info>Ihre persönliche `data-website-id` finden Sie in Ihrem Onbaording Flow.</Info>
+    </Tab>
+    <Tab id="html" title="Andere / HTML">
+        **Anleitung:**
+        1. Öffnen Sie die HTML-Datei Ihrer Webseite in einem Editor.
+        2. Finden Sie das schließende `</head>`-Tag.
+        3. Fügen Sie das Skript direkt vor dem `</head>`-Tag ein.
+        4. Speichern Sie die Datei und laden Sie sie auf Ihren Server hoch.
+        <Info>Ihre persönliche `data-website-id` finden Sie in Ihrem Onbaording Flow.</Info>
+    </Tab>
+  </Tabs>
+
+  <h3 className="mt-12">Direkt zu Ihrem Anbieter</h3>
+  <CardGroup cols={3} className="mt-4">
+    <Card title="WordPress" icon="wordpress" href="https://wordpress.com" />
+    <Card title="Webflow" icon="w" href="https://webflow.com" />
+    <Card title="Shopify" icon="shopify" href="https://www.shopify.com" />
+    <Card title="Squarespace" icon="square" href="https://www.squarespace.com" />
+    <Card title="Wix" icon="wix" href="https://www.wix.com" />
+    <Card title="Framer" icon="f" href="https://www.framer.com" />
+  </CardGroup>
+</Step>
+
+<Step title="Installation überprüfen">
+  Sehr gut, der technische Teil ist geschafft. Prüfen Sie nun die Verbindung.
+
+  1. **Besuchen Sie Ihre eigene Webseite** in einem neuen Browser-Tab, damit ein erster Besuch registriert wird.
+  2. Kehren Sie zum bchic-Onboarding zurück und klicken Sie auf den Button **"Verbindung überprüfen"**.
+  3. Bei Erfolg werden Sie direkt zu Ihrem Dashboard weitergeleitet. Herzlichen Glückwunsch!
+
+</Step>
+</Steps>
+
+### Was kommt als Nächstes?
+
+Sie sammeln jetzt Ihre ersten Daten! Der nächste logische Schritt ist, sich mit dem Herzstück des Tools vertraut zu machen.
+
+<Card title="Die Dashboard Tour" icon="gauge-high" href="/funktionen/erste-schritte/dashboard-tour">
+  Eine geführte Tour durch alle Bereiche und Graphen Ihres neuen Dashboards.
+</Card>

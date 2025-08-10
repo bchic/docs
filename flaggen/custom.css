@@ -1,0 +1,30 @@
+/* Haupt-Header als Referenzpunkt für die Positionierung nehmen */
+header[role="banner"] {
+    position: relative;
+}
+
+/*
+  Den ersten Tab (unseren Sprach-Switcher) aus dem normalen Fluss nehmen
+  und absolut positionieren.
+*/
+nav[role="tablist"] a:first-child {
+    position: absolute;
+    /* Pass diese Werte an, um die Position exakt neben deinem Logo zu justieren */
+    left: 230px;
+    top: 18px;
+
+    /* Etwas Styling, damit es wie ein Button aussieht */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+    padding: 6px 12px;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/*
+  Den zweiten Tab (jetzt "Funktionen") nach rechts verschieben,
+  damit er nicht unter dem positionierten Sprach-Switcher liegt.
+*/
+nav[role="tablist"] a:nth-child(2) {
+    /* Pass diesen Wert an, er sollte etwas größer sein als die Breite deines Switchers */
+    margin-left: 160px;
+}
