@@ -1,0 +1,86 @@
+---
+title: 'Wichtige Kennzahlen erklärt'
+description: 'Ein detailliertes Lexikon der wichtigsten Web-Analytics-Metriken. Verstehen Sie, was Besucher, Sitzungen und Absprungrate in unserem datenschutzfreundlichen, cookieless System bedeuten.'
+---
+
+## Die Bausteine Ihrer Analyse: Ein datenschutzfreundlicher Ansatz
+
+Jede Analyse beginnt mit dem Verständnis der fundamentalen Kennzahlen. Unsere Plattform verfolgt einen **datenschutzfreundlichen, cookieless Ansatz**. Das bedeutet, wir speichern keine persistenten Cookies im Browser Ihrer Nutzer. Stattdessen verwenden wir eine anonymisierte Kennung, die täglich wechselt.
+
+Diese Methode hat direkte Auswirkungen darauf, wie "Besucher" gezählt und interpretiert werden. Diese Seite erklärt Ihnen die Bedeutung und die Nuancen jeder Metrik in diesem Kontext.
+
+---
+
+### Besucher (Unique Visitors)
+
+*   **Was es misst:** Die Anzahl der einzigartigen, anonymisierten Kennungen, die Ihre Website innerhalb eines 24-Stunden-Fensters besucht haben.
+
+*   **Wie es funktioniert:** Wenn ein Nutzer Ihre Seite besucht, wird eine anonymisierte Kennung aus seiner IP-Adresse und anderen Browser-Merkmalen generiert. Ein täglich wechselnder "Salt" (eine zufällige Zeichenfolge) sorgt dafür, dass diese Kennung nur für 24 Stunden gültig ist. Dies schützt die Privatsphäre Ihrer Nutzer, da sie nicht über mehrere Tage hinweg verfolgt werden können.
+
+*   **Die 24-Stunden-Regel:**
+    *   Besucht ein Nutzer Ihre Seite am Montag um 10 Uhr und erneut um 15 Uhr, wird er als **ein** Besucher gezählt.
+    *   Besucht derselbe Nutzer die Seite am Dienstag wieder, erhält er eine neue, anonyme Kennung und wird als **neuer, zusätzlicher Besucher** für diesen Tag gezählt.
+
+*   **Worauf Sie achten sollten:** Diese Kennzahl ist perfekt, um Ihre tägliche Reichweite zu messen. Sie zeigt, wie viele verschiedene Personen Sie an einem bestimmten Tag erreicht haben. Für die Analyse von **wiederkehrenden Besuchern über längere Zeiträume (z.B. Woche oder Monat) ist sie ungeeignet**. Betrachten Sie stattdessen Trends in der täglichen Besucherzahl, um Ihr Wachstum zu bewerten.
+
+---
+
+### Aufrufe (Pageviews)
+
+*   **Was es misst:** Die Gesamtzahl der aufgerufenen Seiten.
+
+*   **Wie es funktioniert:** Jedes Mal, wenn eine Seite auf Ihrer Website geladen oder neu geladen (refresh) wird, zählt dies als ein Aufruf. Diese Metrik ist vom Cookieless-Ansatz unberührt.
+
+*   **Worauf Sie achten sollten:** Diese Zahl wird im Verhältnis zu anderen Metriken interessant. `Aufrufe / Besucher` gibt Ihnen die durchschnittliche Anzahl der Seiten, die ein Besucher pro Tag ansieht, und ist ein starker Indikator für das Engagement mit Ihren Inhalten.
+
+---
+
+### Sitzungen (Sessions)
+
+*   **Was es misst:** Einen zusammenhängenden Zeitraum von Interaktionen eines Besuchers auf Ihrer Website.
+
+*   **Wie es funktioniert:** Eine Sitzung beginnt, wenn ein Besucher auf Ihre Seite kommt. Sie endet automatisch nach 30 Minuten Inaktivität. Alle Aktionen innerhalb dieses Zeitfensters gehören zu derselben Sitzung. Kommt derselbe Nutzer (innerhalb des 24-Stunden-Fensters) nach mehr als 30 Minuten Pause zurück, startet eine neue Sitzung.
+
+*   **Worauf Sie achten sollten:** Die Anzahl der Sitzungen ist immer höher oder gleich der Anzahl der Besucher. Das Verhältnis `Sitzungen / Besucher` zeigt Ihnen, wie oft ein durchschnittlicher Besucher **innerhalb eines Tages** auf Ihre Seite zurückkehrt. Es ist ein Maß für die unmittelbare Relevanz oder das "Binge-Watching" Ihrer Inhalte an einem einzigen Tag.
+
+---
+
+### Absprungrate (Bounce Rate)
+
+*   **Was es misst:** Den prozentualen Anteil der Sitzungen, bei denen nur eine einzige Seite aufgerufen und keine weitere Interaktion durchgeführt wurde.
+
+*   **Wie es funktioniert:** Ein "Bounce" (Absprung) tritt auf, wenn ein Besucher auf einer Seite landet und diese wieder verlässt, ohne auf einen anderen Link zu klicken oder ein Event auszulösen. `Formel: (Anzahl der Bounces / Gesamtzahl der Sitzungen) * 100%`. Diese Berechnung ist vom Cookieless-Ansatz unberührt.
+
+*   **Worauf Sie achten sollten:** Der Kontext ist entscheidend.
+    *   **Kommerzielle Seiten:** Eine hohe Absprungrate ist oft ein Alarmsignal.
+    *   **Informative Seiten (Blog, News):** Eine hohe Absprungrate kann bedeuten, dass der Nutzer seine Antwort schnell gefunden hat und zufrieden war.
+
+---
+
+### Engagement Rate
+
+*   **Was es misst:** Den prozentualen Anteil der Sitzungen, in denen der Nutzer aktiv wurde. Sie ist das genaue Gegenteil der Absprungrate.
+
+*   **Wie es funktioniert:** Eine Sitzung gilt als "engagiert", wenn z.B. mehr als eine Seite aufgerufen wurde oder die Sitzung länger als 10 Sekunden dauerte. Dies ist oft eine fairere Metrik als die Absprungrate.
+
+*   **Worauf Sie achten sollten:** Eine hohe Engagement Rate ist fast immer ein gutes Zeichen für die Qualität Ihrer Inhalte und die Benutzerfreundlichkeit Ihrer Seite.
+
+---
+
+### Durchschnittliche Besuchszeit (Avg. Session Duration)
+
+*   **Was es misst:** Die durchschnittliche Dauer einer Sitzung.
+
+*   **Wie es funktioniert:** Gemessen wird die Zeit zwischen dem ersten und letzten Ereignis einer Sitzung. Die Zeit auf der **letzten Seite** einer Sitzung kann nicht gemessen werden, was die Metrik leicht ungenau machen kann.
+
+*   **Worauf Sie achten sollten:** Ein hoher Wert auf einem Blog ist gut (Besucher liest). Ein hoher Wert auf einer Checkout-Seite ist schlecht (Besucher hat Probleme).
+
+---
+
+### Events
+
+*   **Was es misst:** Spezifische Interaktionen (z.B. Klicks, Formular-Absendungen), die Sie selbst als wichtig definieren.
+
+*   **Wie es funktioniert:** Events sind benutzerdefinierte Aktionen und werden unabhängig von Seitenaufrufen gezählt. Sie sind das mächtigste Werkzeug, um Conversions zu messen.
+
+*   **Worauf Sie achten sollten:** Nutzen Sie Events, um den wahren Erfolg Ihrer Website zu messen, z.B. die Anzahl der Käufe, Anmeldungen oder Downloads.

@@ -1,0 +1,53 @@
+---
+title: 'Nutzerflüsse (User Journeys)'
+description: 'Verfolgen Sie die Navigationspfade Ihrer Besucher Schritt für Schritt, um zu verstehen, wie sie mit Ihrer Website interagieren, wo sie abspringen und welche Inhalte am meisten fesseln.'
+---
+
+### Die Pfad-Visualisierung: Schritt für Schritt durch die User Journey
+
+Die Seite "Nutzerflüsse" (oft auch als User Journeys oder Pfadanalyse bezeichnet) visualisiert die häufigsten Wege, die Besucher auf Ihrer Website einschlagen. Die Darstellung erfolgt in Form eines Sankey-Diagramms, das von links nach rechts die Abfolge der besuchten Seiten zeigt.
+
+
+Das Diagramm ist in Spalten unterteilt, die jeweils einen Interaktionsschritt darstellen:
+
+*   **Spalte 1:** Zeigt die Einstiegsseiten der Besucher. Dies sind die ersten Seiten, die in einer Sitzung aufgerufen wurden.
+*   **Spalte 2, 3, etc.:** Jede weitere Spalte repräsentiert den nächsten Klick des Nutzers. Die Linien zwischen den Spalten visualisieren den Fluss der Besucher von einer Seite zur nächsten.
+
+**Was die Zahlen bedeuten:**
+
+*   **Zahlen in den Boxen:** Die Zahl in jeder Box (z.B. `174` bei `/blog-posts/dfb-pokal-ter...`) gibt an, wie viele Besucher diese spezifische Seite in diesem Schritt erreicht haben.
+*   **Kopfzeile jeder Spalte:** Über jeder Spalte finden Sie die Gesamtanzahl der Besucher, die diesen Schritt erreicht haben (z.B. `174 besucher` in Schritt 1), sowie die prozentuale Veränderung zum vorherigen Schritt. Ein negativer Wert (z.B. `-74%`) stellt die Absprungrate zwischen den Schritten dar – also den Anteil der Besucher, die ihre Sitzung nach dem vorherigen Schritt beendet haben.
+
+### Interaktive Analyse von Nutzerpfaden
+
+Der Graph ist interaktiv gestaltet, um Ihnen eine tiefgehende Analyse zu ermöglichen.
+
+**Pfade hervorheben und fokussieren:**
+
+Klicken Sie auf eine beliebige Seiten-Box in einer Spalte, um den Pfad zu dieser und von dieser Seite zu isolieren. Das Diagramm fokussiert sich dann auf die spezifischen Journeys, die durch Ihre Auswahl verlaufen. Dies ist besonders nützlich, um zu verstehen:
+
+*   Woher kommen die Besucher, die auf Ihrer `/tickets`-Seite landen?
+*   Wohin gehen die Besucher, nachdem sie einen bestimmten Blogartikel gelesen haben?
+*   Welche Wege führen am häufigsten zu einem Ziel im `/fanshop`?
+
+Im obigen Screenshot könnten Sie zum Beispiel auf `/` in der ersten Spalte klicken, um nur die Pfade zu sehen, die auf der Startseite beginnen.
+
+### Wichtige Anwendungsfälle
+
+Die Analyse der Nutzerflüsse hilft Ihnen, wichtige Fragen über das Nutzerverhalten zu beantworten:
+
+*   **Absprungpunkte identifizieren:** Ein hoher prozentualer Abfall zwischen zwei Schritten zeigt, an welcher Stelle Nutzer die Seite verlassen. Ist der Übergang unklar? Fehlt ein Call-to-Action?
+*   **Conversion-Pfade optimieren:** Verfolgen Sie den Weg der Nutzer zu wichtigen Zielseiten (z.B. `/tickets` oder `/kontakt`). Gibt es unerwartete Umwege oder Abbrüche, die Sie beheben können?
+*   **Content-Strategie validieren:** Sehen Sie, welche Inhalte (z.B. Blog-Posts) Besucher dazu anregen, weiter auf Ihrer Seite zu stöbern und welche eher zu einem Absprung führen.
+
+---
+
+### FAQ
+
+**Warum werden manche Pfade nicht angezeigt?**
+
+Um die Übersichtlichkeit des Graphen zu wahren, werden nur die häufigsten Pfade dargestellt. Sehr seltene Navigationswege werden oft in einer "(other)"-Kategorie zusammengefasst oder aus Gründen der Performance standardmäßig ausgeblendet.
+
+**Kann ich den Startpunkt der Analyse ändern?**
+
+Ja. Standardmäßig zeigt der Report Pfade, die mit einer beliebigen Seite beginnen. Sie können jedoch die Filter am oberen Rand der Seite nutzen, um die Analyse auf Sitzungen zu beschränken, die auf einer bestimmten Seite (z.B. einer Kampagnen-Landingpage) gestartet sind.

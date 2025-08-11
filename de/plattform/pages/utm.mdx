@@ -1,0 +1,60 @@
+---
+title: 'UTM Kampagnen'
+description: 'Messen Sie die Effektivität Ihrer Marketing-Aktivitäten, indem Sie nachverfolgbare Links erstellen und die Performance direkt im Kampagnen-Dashboard analysieren.'
+---
+
+Mit dem Feature "UTM Kampagnen" können Sie den Erfolg Ihrer externen Marketinginitiativen präzise nachverfolgen. Erstellen Sie spezielle Links für Newsletter, Social-Media-Posts oder Anzeigen und sehen Sie genau, wie viele Klicks und Sitzungen jede einzelne Kampagne generiert hat.
+
+<img src="/images/utm-dashboard-full.png" alt="Das UTM Kampagnen-Dashboard mit Filterleiste, Quellen-Karten und einer Visualisierung der Klicks über Zeit." style={{width: '100%', borderRadius: '8px', margin: '16px 0'}} />
+
+### Filtern und Anpassen
+
+Die Leiste am oberen Rand der Seite gibt Ihnen die volle Kontrolle über die angezeigten Daten:
+
+*   **Zeitraum wählen:** Definieren Sie den Analysezeitraum über vordefinierte Optionen wie `Letzten 24 Stunden` oder `Letzten 7 Tage`. Über `Mehr` können Sie einen benutzerdefinierten Zeitraum auswählen.
+*   **Kampagnen-Typ filtern:** Segmentieren Sie Ihre Kampagnen mit den Schaltern `Alle`, `Bezahlt` oder `Organisch`, um schnell zwischen verschiedenen Marketing-Taktiken zu unterscheiden.
+*   **Neuen Link erstellen:** Die Schaltfläche `+ Neuen UTM Link erstellen` ist Ihr direkter Weg zum Link-Builder, um eine neue Kampagne zu starten.
+
+### Die Analyse-Widgets
+
+Unterhalb der Filterleiste finden Sie die detaillierte Auswertung Ihrer Kampagnen-Performance:
+
+*   **Quellen-Karten:** Oben sehen Sie eine Zusammenfassung pro Traffic-Quelle (z.B. `Whatsapp`, `Chatgpt.com`). Jede Karte zeigt die Gesamt-Klicks von dieser Quelle und bietet über das Link-Symbol ebenfalls eine schnelle Möglichkeit, einen neuen UTM-Link zu erstellen.
+*   **Top Kampagnen:** Dieses Widget listet Ihre einzelnen Kampagnen nach Namen auf und sortiert sie nach der Anzahl der Klicks. So erkennen Sie auf einen Blick Ihre erfolgreichsten Aktionen. Die farbigen Punkte korrespondieren mit den Linien im Graphen.
+*   **Kampagnen Visualisierung:** Der interaktive Graph zeigt den zeitlichen Verlauf der Klicks (oder `Sitzungen`, umschaltbar oben rechts) für Ihre Top-Kampagnen. So können Sie genau sehen, wann eine Kampagne Traffic generiert hat – ideal zur Analyse von zeitlich begrenzten Aktionen.
+
+### Neuen UTM-Link erstellen
+
+Das Erstellen eines nachverfolgbaren Links ist unkompliziert. Um den Link-Builder zu öffnen, klicken Sie entweder auf die Schaltfläche `+ Neuen UTM Link erstellen` in der oberen Filterleiste oder auf das Link-Symbol in einer der Quellen-Karten.
+
+<img src="/images/utm-creator-modal.png" alt="Dialogfenster zum Erstellen eines neuen UTM-Links mit Feldern für Quelle, Medium und Kampagnen-Name." style={{width: '100%', borderRadius: '8px', margin: '16px 0'}} />
+
+Füllen Sie die folgenden Felder aus, um Ihren Link zu konfigurieren:
+
+1.  **Kampagnen Quelle (`utm_source`):** Der Ort, an dem der Link platziert wird. Dies ist die übergeordnete Herkunft des Traffics.
+    *   *Beispiele: `google`, `facebook`, `newsletter`*
+2.  **Kampagnen Medium (`utm_medium`):** Die Art des Links. Dies beschreibt, wie der Nutzer zu Ihnen gelangt.
+    *   *Beispiele: `cpc` (Cost-per-Click), `email`, `social`, `banner`*
+3.  **Kampagnen Name (`utm_campaign`):** Der spezifische Name Ihrer Marketing-Aktion. Dies ist der wichtigste Parameter, um verschiedene Initiativen voneinander zu unterscheiden.
+    *   *Beispiele: `sommer-sale-2024`, `dfb-pokal-ankündigung`*
+
+Der **generierte Link** wird Ihnen in Echtzeit angezeigt. Kopieren Sie ihn mit einem Klick und verwenden Sie ihn in Ihren Marketingmaterialien. Jeder Klick auf diesen Link wird automatisch im Dashboard erfasst und der richtigen Kampagne zugeordnet.
+
+---
+
+### FAQ
+
+**Was ist der Unterschied zwischen Quelle, Medium und Kampagne?**
+
+Stellen Sie es sich wie eine Adresse vor:
+*   `Quelle (Source)`: Die Stadt (Woher? z.B. Facebook)
+*   `Medium`: Die Straße (Wie? z.B. Bezahlte Anzeige)
+*   `Kampagne (Campaign)`: Der Grund des Besuchs (Warum? z.B. Werbung für den Winterschlussverkauf)
+
+**Warum sehe ich "Unbenannte Kampagne" im Dashboard?**
+
+Dies geschieht, wenn ein Besucher über einen Link kommt, der zwar UTM-Parameter für `utm_source` oder `utm_medium` enthält, aber der Parameter `utm_campaign` fehlt oder leer ist.
+
+**Muss ich jeden Link mit diesem Tool erstellen?**
+
+Nein. Unser System erfasst automatisch alle eingehenden Links mit UTM-Parametern. Der Link-Builder ist jedoch ein nützliches Werkzeug, um konsistente und fehlerfreie Links zu gewährleisten und den Prozess zu vereinfachen.

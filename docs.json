@@ -36,11 +36,11 @@
 
               {
                 "group": "Pfade",
-                "pages": ["de/plattform/funktionen/Pfade Analysieren"]
+                "pages": ["de/plattform/pages/user-journey"]
               },
               {
-                "group": "UTM Kampagnen",
-                "pages": ["de/plattform/funktionen/Erstellen & Auswerten"]
+                "group": "UTM",
+                "pages": ["de/plattform/pages/utm"]
               }
             ]
           },
@@ -48,29 +48,16 @@
             "tab": "Ressourcen",
             "groups": [
               {
-                "group": "Daten interpretieren",
-                "pages": ["de/ressourcen/daten/wichtige-kennzahlen", "de/ressourcen/daten/absprungrate-verstehen"]
+                "group": "Daten richtig interpretieren",
+                "pages": ["de/ressourcen/getting-startet/ziel-definieren", "de/ressourcen/getting-startet/kennzahlen"]
               },
               {
-                "group": "Best Practices",
-                "pages": ["de/ressourcen/best-practices/datenschutzkonform-tracken"]
-              }
-            ]
-          },
-          {
-            "tab": "Konfiguration & API",
-            "groups": [
-              {
-                "group": "Account & Team",
-                "pages": ["de/konfiguration/account/einstellungen", "de/konfiguration/account/team-verwalten"]
+                "group": "Benchmarks",
+                "pages": ["de/ressourcen/benchmarks/informativ", "de/ressourcen/benchmarks/kommerziell", "de/ressourcen/benchmarks/landing-pages"]
               },
               {
-                "group": "Tracking-Script",
-                "pages": ["de/konfiguration/script/standard-installation", "de/konfiguration/script/events-verfolgen"]
-              },
-              {
-                "group": "API (demnächst)",
-                "pages": []
+                "group": "Tipps &  Tricks",
+                "pages": ["de/ressourcen/tipps/handlungsempfehlungen"]
               }
             ]
           }
