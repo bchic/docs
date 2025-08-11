@@ -1,0 +1,133 @@
+---
+title: "Quickstart"
+description: "Set up your account and install the tracking script to start collecting data in under 5 minutes."
+---
+
+This guide will walk you through the entire process, from signing up to collecting your first data.
+
+<Steps>
+<Step title="Create Your Account">
+  Getting started is easy. First, create your bchic account.
+
+  1. **Go to [bchic.de/anmelden](https://analytics.bchic.de/auth/sign-up) to create your free account.**
+  2. Enter your website and your credentials.
+  3. Click **"Create Account & Start Setup"** to begin the onboarding process.
+
+  <Card
+    title="Create your free bchic account now"
+    icon="arrow-up-right-from-square"
+    href="https://analytics.bchic.de/auth/sign-up"
+  >
+  </Card>
+</Step>
+
+<Step title="Install the Tracking Script">
+
+  <div className="block dark:hidden my-8">
+    <video className="rounded-lg" autoPlay loop muted playsInline>
+      <source src="/videos/onboarding.mp4" type="video/mp4" />
+    </video>
+  </div>
+  <div className="hidden dark:block my-8">
+    <video className="rounded-lg" autoPlay loop muted playsInline>
+      <source src="/videos/onboarding.mp4" type="video/mp4" />
+    </video>
+  </div>
+
+  Now, let's connect your website to bchic. Select your platform below to see the specific step-by-step instructions.
+
+  <Tabs>
+    <Tab id="wordpress" title="WordPress">
+        **Instructions:**
+        1. Log in to your WordPress dashboard.
+        2. Navigate to `Plugins` > `Add New` and search for 'Insert Headers and Footers'.
+        3. Install and activate the plugin.
+        4. Go to the plugin's settings and paste the script into the 'Header' section.
+        5. Save your changes.
+        <Info>You can find your personal `data-website-id` in your onboarding flow.</Info>
+    </Tab>
+    <Tab id="webflow" title="Webflow">
+        **Instructions:**
+
+        This video shows the entire process in Webflow:
+        <video className="my-4 rounded-md" autoPlay loop muted playsInline>
+            <source src="/videos/webflow-guide.mp4" type="video/mp4" />
+        </video>
+
+        1. Open your project in the Webflow Designer.
+        2. Click on 'Project Settings' in the top-left corner.
+        3. Go to the 'Custom Code' tab.
+        4. Paste the script into the 'Head Code' field.
+        5. Save the changes and publish your site.
+        <Info>You can find your personal `data-website-id` in your onboarding flow.</Info>
+    </Tab>
+    <Tab id="shopify" title="Shopify">
+        **Instructions:**
+        1. Log in to your Shopify admin panel.
+        2. Go to `Online Store` > `Themes`.
+        3. On your current theme, click `Actions` > `Edit code`.
+        4. Open the `theme.liquid` file in the Layout directory.
+        5. Paste the script right before the closing `</head>` tag.
+        6. Click 'Save'.
+        <Info>You can find your personal `data-website-id` in your onboarding flow.</Info>
+    </Tab>
+    <Tab id="squarespace" title="Squarespace">
+        **Instructions:**
+        1. In your Squarespace menu, go to `Settings` > `Advanced`.
+        2. Select 'Code Injection'.
+        3. Paste the script into the 'HEADER' text field.
+        4. Click 'Save' in the top-left corner.
+        <Info>You can find your personal `data-website-id` in your onboarding flow.</Info>
+    </Tab>
+    <Tab id="wix" title="Wix">
+        **Instructions:**
+        1. In your site's dashboard, go to `Settings`.
+        2. Scroll down to the `Advanced` section and click 'Custom Code'.
+        3. Click `+ Add Custom Code` in the 'Head' section.
+        4. Paste the script and ensure it is set to load on all pages.
+        5. Click 'Apply'.
+        <Info>You can find your personal `data-website-id` in your onboarding flow.</Info>
+    </Tab>
+    <Tab id="framer" title="Framer">
+        **Instructions:**
+        1. Open your project in Framer.
+        2. Go to `Settings` > `General`.
+        3. Scroll to the `Custom Code` section.
+        4. Paste the script into the 'End of `<head>` tag' field.
+        5. Publish your site.
+        <Info>You can find your personal `data-website-id` in your onboarding flow.</Info>
+    </Tab>
+    <Tab id="html" title="Other / HTML">
+        **Instructions:**
+        1. Open your website's HTML file in an editor.
+        2. Find the closing `</head>` tag.
+        3. Paste the script just before the `</head>` tag.
+        4. Save the file and upload it to your server.
+        <Info>You can find your personal `data-website-id` in your onboarding flow.</Info>
+    </Tab>
+  </Tabs>
+
+  <h3 className="mt-12">Platform Links</h3>
+  <CardGroup cols={3} className="mt-4">
+    <Card title="WordPress" icon="wordpress" href="https://wordpress.com" />
+    <Card title="Webflow" icon="w" href="https://webflow.com" />
+    <Card title="Shopify" icon="shopify" href="https://www.shopify.com" />
+    <Card title="Squarespace" icon="square" href="https://www.squarespace.com" />
+    <Card title="Wix" icon="wix" href="https://www.wix.com" />
+    <Card title="Framer" icon="f" href="https://www.framer.com" />
+  </CardGroup>
+</Step>
+
+<Step title="Verify the Installation">
+  Great, the technical part is done. Now, let's check the connection.
+
+  1. **Visit your own website** in a new browser tab to register the first visit.
+  2. Return to the bchic onboarding flow and click the **"Verify Connection"** button.
+  3. If successful, you'll be taken directly to your dashboard. Congratulations!
+
+</Step>
+</Steps>
+
+### What's Next?
+
+You are now collecting your first data! The next logical step is to familiarize yourself with the core of the tool.

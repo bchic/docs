@@ -1,0 +1,86 @@
+---
+title: 'Key Metrics Explained'
+description: 'A detailed glossary of key web analytics metrics. Understand what visitors, sessions, and bounce rate mean within our privacy-focused, cookieless system.'
+---
+
+## The Building Blocks of Your Analysis: A Privacy-Focused Approach
+
+Every analysis begins with understanding the fundamental metrics. Our platform uses a **privacy-focused, cookieless approach**. This means we do not store persistent cookies in your users' browsers. Instead, we use an anonymized identifier that rotates daily.
+
+This method has a direct impact on how "visitors" are counted and interpreted. This page explains the meaning and nuances of each metric in this context.
+
+---
+
+### Visitors (Unique Visitors)
+
+*   **What it measures:** The number of unique, anonymized identifiers that have visited your website within a single 24-hour window.
+
+*   **How it works:** When a user visits your site, an anonymized identifier is generated from their IP address and other browser characteristics. A daily rotating "salt" (a random string) ensures that this identifier is only valid for 24 hours. This protects your users' privacy, as they cannot be tracked across multiple days.
+
+*   **The 24-Hour Rule:**
+    *   If a user visits your site on Monday at 10 AM and again at 3 PM, they are counted as **one** visitor.
+    *   If the same user visits the site again on Tuesday, they receive a new, anonymous identifier and are counted as a **new, additional visitor** for that day.
+
+*   **How to interpret this:** This metric is perfect for measuring your daily reach. It shows how many different people you reached on a specific day. It is **unsuitable for analyzing returning visitors over longer periods (e.g., a week or month)**. Instead, look at trends in your daily visitor count to evaluate your growth.
+
+---
+
+### Pageviews
+
+*   **What it measures:** The total number of pages viewed.
+
+*   **How it works:** Every time a page on your website is loaded or reloaded (refreshed), it counts as one pageview. This metric is unaffected by the cookieless approach.
+
+*   **How to interpret this:** This number becomes interesting in relation to other metrics. `Pageviews / Visitors` gives you the average number of pages a visitor views per day and is a strong indicator of engagement with your content.
+
+---
+
+### Sessions
+
+*   **What it measures:** A continuous period of interactions from a single visitor on your website.
+
+*   **How it works:** A session begins when a visitor arrives on your site. It automatically ends after 30 minutes of inactivity. All actions within this timeframe belong to the same session. If the same user (within the 24-hour window) returns after more than a 30-minute break, a new session begins.
+
+*   **How to interpret this:** The number of sessions is always greater than or equal to the number of visitors. The `Sessions / Visitors` ratio shows you how often an average visitor returns to your site **within a single day**. It's a measure of immediate relevance or the "binge-watching" of your content in one day.
+
+---
+
+### Bounce Rate
+
+*   **What it measures:** The percentage of sessions in which only a single page was viewed and no other interaction took place.
+
+*   **How it works:** A "bounce" occurs when a visitor lands on a page and then leaves without clicking another link or triggering an event. `Formula: (Number of Bounces / Total Number of Sessions) * 100%`. This calculation is unaffected by the cookieless approach.
+
+*   **How to interpret this:** Context is crucial.
+    *   **Commercial sites:** A high bounce rate is often an alarm signal.
+    *   **Informational sites (blogs, news):** A high bounce rate can mean the user found their answer quickly and was satisfied.
+
+---
+
+### Engagement Rate
+
+*   **What it measures:** The percentage of sessions in which the user became active. It is the exact opposite of the Bounce Rate.
+
+*   **How it works:** A session is considered "engaged" if, for example, more than one page was viewed or the session lasted longer than 10 seconds. This is often a fairer metric than bounce rate.
+
+*   **How to interpret this:** A high engagement rate is almost always a good sign of your content's quality and your site's usability.
+
+---
+
+### Avg. Session Duration
+
+*   **What it measures:** The average length of a session.
+
+*   **How it works:** It measures the time between the first and last event in a session. The time spent on the **last page** of a session cannot be measured, which can make this metric slightly inaccurate.
+
+*   **How to interpret this:** A high value on a blog is good (the visitor is reading). A high value on a checkout page is bad (the visitor is having trouble).
+
+---
+
+### Events
+
+*   **What it measures:** Specific interactions (e.g., clicks, form submissions) that you define as important.
+
+*   **How it works:** Events are custom actions and are counted independently of pageviews. They are the most powerful tool for measuring conversions.
+
+*   **How to interpret this:** Use events to measure the true success of your website, such as the number of purchases, sign-ups, or downloads.

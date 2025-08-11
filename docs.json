@@ -67,15 +67,46 @@
         "language": "en",
         "tabs": [
           {
-            "tab": "Features",
+            "tab": "Platform",
             "groups": [
               {
                 "group": "Getting Started",
-                "pages": ["en/index", "en/features/getting-started/quickstart", "en/features/getting-started/dashboard-tour"]
+                "pages": ["en/index", "en/plattform/erste-schritte/schnellstart", "en/plattform/erste-schritte/dashboard-tour"]
               },
               {
-                "group": "Features in Detail",
-                "pages": ["en/features/features/creating-reports", "en/features/features/filters-and-segments"]
+                "group": "Dashboard",
+                "pages": ["en/plattform/pages/dashboard"]
+              },
+
+              {
+                "group": "Events",
+                "pages": ["en/plattform/pages/events/übersicht", "en/plattform/pages/events/outbound-link", "en/plattform/pages/events/scroll-depth"]
+              },
+
+              {
+                "group": "Paths",
+                "pages": ["en/plattform/pages/user-journey"]
+              },
+              {
+                "group": "UTM",
+                "pages": ["en/plattform/pages/utm"]
+              }
+            ]
+          },
+          {
+            "tab": "Resources",
+            "groups": [
+              {
+                "group": "Interpreting Data",
+                "pages": ["en/ressourcen/getting-startet/ziel-definieren", "en/ressourcen/getting-startet/kennzahlen"]
+              },
+              {
+                "group": "Benchmarks",
+                "pages": ["en/ressourcen/benchmarks/informativ", "en/ressourcen/benchmarks/kommerziell", "en/ressourcen/benchmarks/landing-pages"]
+              },
+              {
+                "group": "Tips & Tricks",
+                "pages": ["en/ressourcen/tipps/handlungsempfehlungen"]
               }
             ]
           }
