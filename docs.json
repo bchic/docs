@@ -60,6 +60,15 @@
                 "pages": ["de/ressourcen/tipps/handlungsempfehlungen"]
               }
             ]
+          },
+          {
+            "tab": "Changelog",
+            "groups": [
+              {
+                "group": "Changelog",
+                "pages": ["de/changelog/changelog"]
+              }
+            ]
           }
         ]
       },
@@ -107,6 +116,15 @@
               {
                 "group": "Tips & Tricks",
                 "pages": ["en/ressourcen/tipps/handlungsempfehlungen"]
+              }
+            ]
+          },
+          {
+            "tab": "Changelog",
+            "groups": [
+              {
+                "group": "Changelog",
+                "pages": ["en/changelog/changelog"]
               }
             ]
           }
