@@ -124,6 +124,12 @@
       "href": "https://analytics.bchic.de"
     }
   },
+  "analytics": {
+    "custom": {
+      "src": "https://analytics.bchic.de/script.js",
+      "id": "ee491184-2c23-4d95-85bf-0dd28f37635a"
+    }
+  },
   "footer": {
     "socials": {
       "github": "https://github.com/bchicanalytics"
