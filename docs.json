@@ -126,7 +126,7 @@
   },
   "html": {
     "head": [
-      "<script defer src='https://analytics.bchic.de/script.js' data-website-id='ee491184-2c23-4d95-85bf-0dd28f37635a'></script>"
+      "<script defer src='https://analytics.bchic.de/script.js' data-website-id='ee491184-2c23-4d95-85bf-0dd28f37635a' suppressHydrationWarning></script>"
     ]
   },
   "footer": {
