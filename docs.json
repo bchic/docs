@@ -45,6 +45,23 @@
             ]
           },
           {
+            "tab": "Filter",
+            "groups": [
+              {
+                "group": "Grundlagen",
+                "pages": ["de/filter/introduction", "de/filter/aufbau-der-leiste"]
+              },
+              {
+                "group": "Anwendung",
+                "pages": ["de/filter/filter-erstellen-und-speichern"]
+              },
+              {
+                "group": "Filter-Referenz",
+                "pages": ["de/filter/spezialfilter-details"]
+              }
+            ]
+          },
+          {
             "tab": "Ressourcen",
             "groups": [
               {

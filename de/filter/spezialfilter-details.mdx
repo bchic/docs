@@ -1,0 +1,46 @@
+---
+title: 'Die Spezialfilter im Detail'
+description: 'Eine detaillierte Erklärung aller verfügbaren Spezialfilter und ihrer Einstellungsmöglichkeiten.'
+---
+
+Die Spezialfilter sind vordefinierte, leistungsstarke Segmente, die Sie als Bausteine für Ihre Analysen verwenden können. Hier ist eine Übersicht über jeden Filter und seine Konfigurationsmöglichkeiten.
+
+### Path Filters (Pfadfilter)
+
+Dieser Filtertyp konzentriert sich auf den Navigationspfad der Besucher. Er klappt auf, um mehrere spezifische Optionen anzuzeigen:
+*   **Entry Path**: Filtert nach der ersten Seite, die ein Besucher in seiner Sitzung aufgerufen hat.
+*   **Exit Path**: Filtert nach der letzten Seite, die ein Besucher vor dem Verlassen Ihrer Webseite angesehen hat.
+*   **Containing Paths**: Zeigt Sitzungen an, die eine oder mehrere bestimmte Seiten enthalten.
+*   **Path Funnel**: Definiert eine feste Abfolge von Seiten und filtert nach Besuchern, die diesen Pfad eingehalten haben.
+
+
+### Leser (Readers)
+
+Dieser Filter hilft Ihnen, engagierte Besucher zu identifizieren, die eine Mindestdauer auf der Seite verbracht und/oder eine Mindestanzahl an Seiten aufgerufen haben.
+*   **Einstellungen**: `Min. Dauer (Sekunden)`, `Min. Seiten`.
+
+
+
+### Abspringer (Bouncers)
+
+Isoliert Besuche mit sehr geringer Interaktion (Bounces). Dies sind Sitzungen, in denen der Besucher die Seite nach nur einer Seitenansicht schnell wieder verlässt.
+*   **Einstellungen**: `Max. Seiten`, `Max. Dauer (Sekunden)`.
+
+
+
+### Ohne Abspringer (Non-Bouncers)
+
+Das Gegenteil des "Abspringer"-Filters. Er schließt alle Besuche aus, die als Absprung gelten, und zeigt somit alle Sitzungen mit einem Mindestmaß an Interaktion.
+*   **Einstellungen**: Die Kriterien (`Max. Seiten`, `Max. Dauer`) werden zur Exklusion verwendet.
+
+
+### UTM/Channel Filter
+
+Ein unverzichtbarer Filter zur Analyse Ihrer Marketing-Kampagnen. Filtern Sie Besuche nach Traffic-Kanälen (z.B. Bezahlt, Organisch) und/oder spezifischen UTM-Parametern.
+*   **Einstellungen**: `UTM Campaign`, `UTM Source`, `UTM Content`, `Channels`.
+
+
+### Event (Ereignis)
+
+Ermöglicht das Filtern von Sitzungen basierend auf spezifischen, benutzerdefinierten Ereignissen wie Klicks auf externe Links (`outbound-link-click`), Button-Klicks oder anderen Interaktionen.
+*   **Einstellungen**: `Event Name`, `Event Value`.
