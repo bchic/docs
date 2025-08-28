@@ -124,7 +124,7 @@
             "groups": [
               {
                 "group": "Basics",
-                "pages": ["en/filter/introduction", "de/filter/aufbau-der-leiste"]
+                "pages": ["en/filter/introduction", "en/filter/aufbau-der-leiste"]
               },
               {
                 "group": "Usage",
