@@ -1,0 +1,39 @@
+---
+title: 'The Special Filters in Detail'
+description: 'A detailed explanation of all available special filters and their configuration options.'
+---
+
+The special filters are predefined, powerful segments that you can use as building blocks for your analyses. Here is an overview of each filter and its configuration options.
+
+### Path Filters
+
+This filter type focuses on the visitor's navigation path. It expands to show several specific options:
+*   **Entry Path**: Filters by the first page a visitor viewed in their session.
+*   **Exit Path**: Filters by the last page a visitor viewed before leaving your website.
+*   **Containing Paths**: Shows sessions that include one or more specific pages.
+*   **Path Funnel**: Defines a fixed sequence of pages and filters for visitors who have followed this path.
+
+### Readers
+
+This filter helps you identify engaged visitors who have spent a minimum amount of time on the site and/or viewed a minimum number of pages.
+*   **Settings**: `Min. Duration (seconds)`, `Min. Pages`.
+
+### Bouncers
+
+Isolates visits with very low interaction (bounces). These are sessions where the visitor leaves the site quickly after only one page view.
+*   **Settings**: `Max. Pages`, `Max. Duration (seconds)`.
+
+### Non-Bouncers
+
+The opposite of the "Bouncers" filter. It excludes all visits that are considered a bounce, thus showing all sessions with a minimum level of interaction.
+*   **Settings**: The criteria (`Max. Pages`, `Max. Duration`) are used for exclusion.
+
+### UTM/Channel Filter
+
+An essential filter for analyzing your marketing campaigns. Filter visits by traffic channels (e.g., Paid, Organic) and/or specific UTM parameters.
+*   **Settings**: `UTM Campaign`, `UTM Source`, `UTM Content`, `Channels`.
+
+### Event
+
+Allows filtering of sessions based on specific, custom events such as clicks on external links (`outbound-link-click`), button clicks, or other interactions.
+*   **Settings**: `Event Name`, `Event Value`.

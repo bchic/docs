@@ -120,6 +120,23 @@
             ]
           },
           {
+            "tab": "Filter",
+            "groups": [
+              {
+                "group": "Basics",
+                "pages": ["en/filter/introduction", "de/filter/aufbau-der-leiste"]
+              },
+              {
+                "group": "Usage",
+                "pages": ["en/filter/filter-erstellen-und-speichern"]
+              },
+              {
+                "group": "Filter Reference",
+                "pages": ["en/filter/spezialfilter-details"]
+              }
+            ]
+          },
+          {
             "tab": "Resources",
             "groups": [
               {
