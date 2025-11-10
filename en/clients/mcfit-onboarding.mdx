@@ -1,0 +1,322 @@
+---
+title: 'Enterprise Onboarding Guide'
+description: 'Complete setup guide for integrating our analytics platform into your enterprise environment. Follow these steps to implement server-side tracking and event tagging.'
+---
+
+<Note>
+**Estimated Setup Time:** max. 30 minutes depending on your site complexity  
+**Required Access:** Developer access to your website's codebase  
+</Note>
+
+---
+
+## Phase 1: Script Integration
+
+The first step is integrating our analytics script into your website.
+
+<Note>
+Please keep in mind that this is only an additional resource to the in-product onboarding. You'll get the script for your website in the onboarding flow.
+</Note>
+
+### Installation Steps
+
+<Steps>
+<Step title="Locate your unique script">
+  Your unique tracking script is available in your dashboard under **Settings → Installation**.
+  
+  It will look like this:
+```html
+  <script defer src="https://analytics.bchic.de/script.js" data-website-id="1234567"></script>
+```
+  <Warning>
+  **Important:** Each domain requires its own unique `data-site` identifier. Never share this script across different domains.
+  </Warning>
+</Step>
+<Step title="Add the script to your website">
+  Insert the script in the `<head>` section of your HTML, just before the closing `</head>` tag.
+  <Tabs>
+  <Tab title="Standard HTML">
+```html index.html
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Your Website</title>
+  <!-- Other head elements -->
+  
+  <!-- Analytics Script - Add before closing </head> -->
+  <script src="https://analytics.yourcompany.com/script.js" 
+          data-site="YOUR_SITE_ID" 
+          defer></script>
+</head>
+<body>
+  <!-- Your content -->
+</body>
+</html>
+```
+  </Tab>
+  
+  <Tab title="React / Next.js">
+```jsx _app.js or layout.js
+    import Head from 'next/head';
+    
+    export default function App({ Component, pageProps }) {
+      return (
+        <>
+          <Head>
+            <script 
+              src="https://analytics.yourcompany.com/script.js" 
+              data-site="YOUR_SITE_ID" 
+              defer 
+            />
+          </Head>
+          <Component {...pageProps} />
+        </>
+      );
+    }
+```
+  </Tab>
+  <Tab title="WordPress">
+    Add this code to your theme's `header.php` file or use a plugin like "Insert Headers and Footers":
+```html header.php
+    <!-- Add before wp_head() or in the <head> section -->
+    <script src="https://analytics.yourcompany.com/script.js" 
+            data-site="YOUR_SITE_ID" 
+            defer></script>
+    <?php wp_head(); ?>
+```
+  </Tab>
+  <Tab title="Google Tag Manager">
+    1. Create a new **Custom HTML** tag in GTM
+    2. Paste the script code
+    3. Set trigger to **All Pages**
+    4. Publish your container
+```html
+    <script src="https://analytics.yourcompany.com/script.js" 
+            data-site="YOUR_SITE_ID" 
+            defer></script>
+```
+  </Tab>
+  </Tabs>
+</Step>
+<Step title="Verify installation">
+  After deploying the script, verify it's working correctly, by clicking the button in the onboarding flow. Bchic Analytics will automatically check if data is available and redirect you to the dashboard. 
+</Step>
+</Steps>
+
+### Before & After Comparison
+
+This is how your dashboard will look like when the script was successfully initiated.
+
+<Frame caption="This is how your dashboard will look like when the script was successfully initiated.">
+  <img src="/images/onboarding/before-script.png" alt="HTML head section without analytics script showing basic meta tags and stylesheets" />
+</Frame>
+
+## Phase 2: Event Tagging
+
+Now that the script is running, the next step is to tag specific elements on your website so the analytics platform can track user interactions like button clicks, form submissions, and custom events.
+
+### Understanding Event Types
+
+Our platform supports two types of event tracking:
+
+<CardGroup cols={2}>
+<Card title="Property-Type Events" icon="tag">
+  **Simple event tracking** that only sends the event name.
+Use Case: Track that a button was clicked, without additional context.
+
+Example: Newsletter signup button, download link
+</Card>
+
+<Card title="Payload Events" icon="database">
+  **Advanced tracking** that sends event name + additional non-personal data.
+Use Case: Track which product was added to cart, which filter was applied.
+
+Example: Product category, search term, filter selection
+</Card>
+</CardGroup>
+
+<Warning>
+**Critical Privacy Requirement**
+Our platform is designed to work without personal data. Never include:
+
+Email addresses
+Names or usernames
+Phone numbers
+IP addresses
+Any personally identifiable information (PII)
+
+Why this matters: Including personal data defeats the purpose of our privacy-first analytics and may violate data protection regulations. It also degrades the platform's ability to provide accurate, aggregated insights.
+
+What you CAN send: Product IDs, category names, page sections, feature names, non-personal filter values, generic labels.
+</Warning>
+
+### Adding Event Attributes
+
+Events are tracked by adding data attributes to your HTML elements. The script automatically detects these attributes and sends the data to our servers.
+
+<Steps>
+<Step title="Choose your event type">
+  Decide whether you need a simple property-type event or a payload event with additional data.
+Decision Guide:
+
+Need to know IF something happened? → **Property-Type**
+
+Need to know WHAT happened specifically? → **Payload Event**
+</Step>
+<Step title="Add the data attribute">
+  Add the appropriate data attribute to your HTML element.
+  <Tabs>
+  <Tab title="Property-Type Event">
+    **Syntax:** `data-bchic-event="event-name"`
+```html
+    <!-- Before: Untracked button -->
+    <button class="cta-button">
+      Download Whitepaper
+    </button>
+<!-- After: Tracked with property-type event -->
+<button class="cta-button" 
+        data-bchic-event="whitepaper-download">
+  Download Whitepaper
+</button>
+```
+    
+    **What gets tracked:** Event name `whitepaper-download` is sent when clicked.
+  </Tab>
+  
+  <Tab title="Payload Event">
+    **Syntax:** `window.bchic.track" TO BE ADDED='{"key": "value"}'`
+```html
+    <!-- Before: Untracked product card -->
+    <div class="product-card">
+      <h3>Premium Plan</h3>
+      <button class="add-to-cart">Add to Cart</button>
+    </div>
+    
+    <!-- After: Tracked with payload event -->
+    <div class="product-card">
+      <h3>Premium Plan</h3>
+      <button class="add-to-cart" 
+              window.bchic.track="add-to-cart"
+              TO BE ADDED='{"product": "premium-plan", "category": "subscription"}'>
+        Add to Cart
+      </button>
+    </div>
+```
+**What gets tracked:** Event name `add-to-cart` plus payload data `{"product": "premium-plan", "category": "subscription"}`.
+
+<Note>
+**JSON Format Required:** The payload must be valid JSON. Use single quotes around the attribute value and double quotes inside the JSON object.
+</Note>
+  </Tab>
+  </Tabs>
+</Step>
+<Step title="Test your events">
+  After adding event attributes, test them to ensure they're firing correctly:
+  Navigate to the Events section in Bchic Analytics and see the events getting logged. 
+  
+  The events should appear in real time, if they don't show up immediately, simply refresh (**Command + R** / **Ctrl + R**) the site and you should see your events.
+  <Note>
+  We already track the Scroll-Depth and Outbound clicks by default, so there is no more setting up for you to do here. 
+  </Note>
+</Step>
+</Steps>
+
+## Best Practices for Event Naming
+
+Follow these conventions to keep your event data organized and meaningful:
+
+<Info>
+This is not available yet, but in the future it will be possible to change the naming of individual event-names, which allows your marketing teams to work with real names instead of IDs. The default will always stay the ID, but can be given a more user friendly name.
+</Info>
+
+<Tabs>
+<Tab title="Naming Conventions">
+  **Use kebab-case for event names:**
+  - ✅ `newsletter-signup`
+  - ✅ `add-to-cart`
+  - ✅ `video-play`
+  - ❌ `Newsletter_Signup`
+  - ❌ `addToCart`
+
+Be specific but concise:
+
+✅ pricing-cta-click
+❌ click
+❌ user-clicked-the-pricing-page-call-to-action-button
+
+Use consistent terminology:
+
+If you use signup in one place, don't use register elsewhere for the same action
+</Tab>
+
+<Tab title="Privacy Checklist">
+  **Before adding any payload data, verify:**
+  
+  - Contains NO email addresses
+  - Contains NO names or usernames
+  - Contains NO phone numbers
+  - Contains NO location data more specific than country/region
+  - Contains NO user IDs or session IDs
+  - Contains NO IP addresses
+  - Contains ONLY generic, aggregatable data
+  
+  **Safe payload examples:**
+  - Product categories, SKUs, or generic identifiers
+  - Feature names or section labels
+  - Non-personal filter selections
+  - Content types or formats
+  - Generic status indicators
+</Tab>
+</Tabs>
+
+---
+
+## Setup Completion Checklist
+
+Congratulations! If you've followed all the steps above, your analytics implementation should be complete. Use this checklist to verify everything is configured correctly:
+
+<Tip>
+Once all of this is done, you can hand over to the Marketing Team. If you have not added your colleagues to the platform yet, you can find a guide on how to do this here.
+</Tip>
+
+<AccordionGroup>
+<Accordion title="✅ Script Integration Verification">
+  - Analytics script is added to the `<head>` section of all pages
+  - Script includes the correct `data-site` identifier
+  - Script loads successfully (verified in Dashboard or Network Tab)
+  - Real-time pageviews appear in the dashboard
+  - Script is present on all subdomains/pages that need tracking
+</Accordion>
+
+<Accordion title="✅ Event Tagging Verification">
+  - Key conversion points are tagged (CTAs, forms, downloads)
+  - Event names follow consistent naming conventions
+  - Events fire correctly when tested in browser
+  - Events appear in the dashboard's real-time event stream
+</Accordion>
+
+<Accordion title="✅ Dashboard Configuration">
+  - Team members have appropriate dashboard access
+  - Key events are marked as conversion goals
+  - Custom user groups/filters are configured
+  - Email reports are set up (coming soon)
+</Accordion>
+</AccordionGroup>
+
+---
+
+## What Your Analytics Look Like When Everything Works
+
+Once your setup is complete and data starts flowing, here's what you can expect to see in your dashboard:
+
+<Frame caption="Real-time dashboard showing live pageviews and events">
+  <img src="/images/onboarding/dashboard-realtime.png" alt="Analytics dashboard displaying real-time visitor activity, current pageviews, and active events" />
+</Frame>
+
+---
+
+## Need Help?
+
+Reach out to enterprise-support@yourcompany.com for assistance.

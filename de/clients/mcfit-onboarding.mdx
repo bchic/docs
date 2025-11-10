@@ -1,0 +1,322 @@
+---
+title: 'Enterprise Onboarding Anleitung'
+description: 'Vollständige Einrichtungsanleitung zur Integration unserer Analytics-Plattform in Ihre Unternehmensumgebung. Folgen Sie diesen Schritten zur Implementierung von Server-seitigem Tracking und Event-Tagging.'
+---
+
+<Note>
+**Geschätzte Einrichtungszeit:** max. 30 Minuten, abhängig von der Komplexität Ihrer Website
+**Erforderlicher Zugriff:** Entwicklerzugang zur Codebasis Ihrer Website
+</Note>
+
+---
+
+## Phase 1: Script-Integration
+
+Der erste Schritt besteht darin, unser Analytics-Script in Ihre Website zu integrieren.
+
+<Note>
+Bitte beachten Sie, dass dies nur eine zusätzliche Ressource zum Onboarding im Produkt ist. Sie erhalten das Script für Ihre Website im Onboarding-Ablauf.
+</Note>
+
+### Installationsschritte
+
+<Steps>
+<Step title="Finden Sie Ihr eindeutiges Script">
+  Ihr eindeutiges Tracking-Script ist in Ihrem Dashboard unter **Einstellungen → Installation** verfügbar.
+
+  Es sieht folgendermaßen aus:
+```html
+  <script defer src="https://analytics.bchic.de/script.js" data-website-id="1234567"></script>
+```
+  <Warning>
+  **Wichtig:** Jede Domain benötigt ihre eigene eindeutige `data-site` Kennung. Teilen Sie dieses Script niemals über verschiedene Domains hinweg.
+  </Warning>
+</Step>
+<Step title="Fügen Sie das Script zu Ihrer Website hinzu">
+  Fügen Sie das Script im `<head>`-Bereich Ihres HTML ein, direkt vor dem schließenden `</head>`-Tag.
+  <Tabs>
+  <Tab title="Standard HTML">
+```html index.html
+    <!DOCTYPE html>
+    <html lang="de">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Ihre Website</title>
+  <!-- Weitere Head-Elemente -->
+
+  <!-- Analytics Script - Vor dem schließenden </head> hinzufügen -->
+  <script src="https://analytics.yourcompany.com/script.js"
+          data-site="YOUR_SITE_ID"
+          defer></script>
+</head>
+<body>
+  <!-- Ihr Inhalt -->
+</body>
+</html>
+```
+  </Tab>
+
+  <Tab title="React / Next.js">
+```jsx _app.js or layout.js
+    import Head from 'next/head';
+
+    export default function App({ Component, pageProps }) {
+      return (
+        <>
+          <Head>
+            <script
+              src="https://analytics.yourcompany.com/script.js"
+              data-site="YOUR_SITE_ID"
+              defer
+            />
+          </Head>
+          <Component {...pageProps} />
+        </>
+      );
+    }
+```
+  </Tab>
+  <Tab title="WordPress">
+    Fügen Sie diesen Code zur `header.php`-Datei Ihres Themes hinzu oder verwenden Sie ein Plugin wie "Insert Headers and Footers":
+```html header.php
+    <!-- Vor wp_head() oder im <head>-Bereich hinzufügen -->
+    <script src="https://analytics.yourcompany.com/script.js"
+            data-site="YOUR_SITE_ID"
+            defer></script>
+    <?php wp_head(); ?>
+```
+  </Tab>
+  <Tab title="Google Tag Manager">
+    1. Erstellen Sie ein neues **Custom HTML** Tag in GTM
+    2. Fügen Sie den Script-Code ein
+    3. Setzen Sie den Trigger auf **Alle Seiten**
+    4. Veröffentlichen Sie Ihren Container
+```html
+    <script src="https://analytics.yourcompany.com/script.js"
+            data-site="YOUR_SITE_ID"
+            defer></script>
+```
+  </Tab>
+  </Tabs>
+</Step>
+<Step title="Installation überprüfen">
+  Nachdem Sie das Script bereitgestellt haben, überprüfen Sie, ob es korrekt funktioniert, indem Sie auf die Schaltfläche im Onboarding-Ablauf klicken. Bchic Analytics prüft automatisch, ob Daten verfügbar sind, und leitet Sie zum Dashboard weiter.
+</Step>
+</Steps>
+
+### Vorher-Nachher-Vergleich
+
+So sieht Ihr Dashboard aus, wenn das Script erfolgreich initialisiert wurde.
+
+<Frame caption="So sieht Ihr Dashboard aus, wenn das Script erfolgreich initialisiert wurde.">
+  <img src="/images/onboarding/before-script.png" alt="HTML Head-Bereich ohne Analytics-Script, zeigt grundlegende Meta-Tags und Stylesheets" />
+</Frame>
+
+## Phase 2: Event-Tagging
+
+Nachdem das Script läuft, besteht der nächste Schritt darin, bestimmte Elemente auf Ihrer Website zu taggen, damit die Analytics-Plattform Benutzerinteraktionen wie Button-Klicks, Formularübermittlungen und benutzerdefinierte Events tracken kann.
+
+### Event-Typen verstehen
+
+Unsere Plattform unterstützt zwei Arten von Event-Tracking:
+
+<CardGroup cols={2}>
+<Card title="Property-Type Events" icon="tag">
+  **Einfaches Event-Tracking**, das nur den Event-Namen sendet.
+Anwendungsfall: Tracken, dass ein Button geklickt wurde, ohne zusätzlichen Kontext.
+
+Beispiel: Newsletter-Anmelde-Button, Download-Link
+</Card>
+
+<Card title="Payload Events" icon="database">
+  **Erweitertes Tracking**, das Event-Namen + zusätzliche nicht-personenbezogene Daten sendet.
+Anwendungsfall: Tracken, welches Produkt in den Warenkorb gelegt wurde, welcher Filter angewendet wurde.
+
+Beispiel: Produktkategorie, Suchbegriff, Filterauswahl
+</Card>
+</CardGroup>
+
+<Warning>
+**Kritische Datenschutzanforderung**
+Unsere Plattform ist so konzipiert, dass sie ohne personenbezogene Daten funktioniert. Verwenden Sie niemals:
+
+E-Mail-Adressen
+Namen oder Benutzernamen
+Telefonnummern
+IP-Adressen
+Jegliche personenidentifizierbare Informationen (PII)
+
+Warum das wichtig ist: Die Einbeziehung personenbezogener Daten widerspricht dem Zweck unserer datenschutzfreundlichen Analytics und kann gegen Datenschutzbestimmungen verstoßen. Es beeinträchtigt auch die Fähigkeit der Plattform, genaue, aggregierte Einblicke zu liefern.
+
+Was Sie senden KÖNNEN: Produkt-IDs, Kategorienamen, Seitenabschnitte, Feature-Namen, nicht-personenbezogene Filterwerte, generische Labels.
+</Warning>
+
+### Event-Attribute hinzufügen
+
+Events werden durch Hinzufügen von Datenattributen zu Ihren HTML-Elementen getrackt. Das Script erkennt diese Attribute automatisch und sendet die Daten an unsere Server.
+
+<Steps>
+<Step title="Wählen Sie Ihren Event-Typ">
+  Entscheiden Sie, ob Sie ein einfaches Property-Type Event oder ein Payload Event mit zusätzlichen Daten benötigen.
+Entscheidungshilfe:
+
+Müssen Sie wissen, OB etwas passiert ist? → **Property-Type**
+
+Müssen Sie wissen, WAS genau passiert ist? → **Payload Event**
+</Step>
+<Step title="Fügen Sie das Datenattribut hinzu">
+  Fügen Sie das entsprechende Datenattribut zu Ihrem HTML-Element hinzu.
+  <Tabs>
+  <Tab title="Property-Type Event">
+    **Syntax:** `data-bchic-event="event-name"`
+```html
+    <!-- Vorher: Nicht getrackter Button -->
+    <button class="cta-button">
+      Whitepaper herunterladen
+    </button>
+<!-- Nachher: Getrackt mit Property-Type Event -->
+<button class="cta-button"
+        data-bchic-event="whitepaper-download">
+  Whitepaper herunterladen
+</button>
+```
+
+    **Was wird getrackt:** Event-Name `whitepaper-download` wird beim Klicken gesendet.
+  </Tab>
+
+  <Tab title="Payload Event">
+    **Syntax:** `window.bchic.track" TO BE ADDED='{"key": "value"}'`
+```html
+    <!-- Vorher: Nicht getrackte Produktkarte -->
+    <div class="product-card">
+      <h3>Premium Plan</h3>
+      <button class="add-to-cart">In den Warenkorb</button>
+    </div>
+
+    <!-- Nachher: Getrackt mit Payload Event -->
+    <div class="product-card">
+      <h3>Premium Plan</h3>
+      <button class="add-to-cart"
+              window.bchic.track="add-to-cart"
+              TO BE ADDED='{"product": "premium-plan", "category": "subscription"}'>
+        In den Warenkorb
+      </button>
+    </div>
+```
+**Was wird getrackt:** Event-Name `add-to-cart` plus Payload-Daten `{"product": "premium-plan", "category": "subscription"}`.
+
+<Note>
+**JSON-Format erforderlich:** Das Payload muss gültiges JSON sein. Verwenden Sie einfache Anführungszeichen um den Attributwert und doppelte Anführungszeichen innerhalb des JSON-Objekts.
+</Note>
+  </Tab>
+  </Tabs>
+</Step>
+<Step title="Testen Sie Ihre Events">
+  Nachdem Sie Event-Attribute hinzugefügt haben, testen Sie diese, um sicherzustellen, dass sie korrekt ausgelöst werden:
+  Navigieren Sie zum Events-Bereich in Bchic Analytics und sehen Sie sich die protokollierten Events an.
+
+  Die Events sollten in Echtzeit erscheinen. Falls sie nicht sofort angezeigt werden, aktualisieren Sie einfach die Seite (**Command + R** / **Ctrl + R**), und Sie sollten Ihre Events sehen.
+  <Note>
+  Wir tracken Scroll-Tiefe und Outbound-Klicks bereits standardmäßig, sodass Sie hier nichts weiter einrichten müssen.
+  </Note>
+</Step>
+</Steps>
+
+## Best Practices für Event-Benennung
+
+Befolgen Sie diese Konventionen, um Ihre Event-Daten organisiert und aussagekräftig zu halten:
+
+<Info>
+Dies ist noch nicht verfügbar, aber in Zukunft wird es möglich sein, die Benennung einzelner Event-Namen zu ändern, was es Ihren Marketing-Teams ermöglicht, mit echten Namen anstelle von IDs zu arbeiten. Die Standardeinstellung bleibt immer die ID, kann aber mit einem benutzerfreundlicheren Namen versehen werden.
+</Info>
+
+<Tabs>
+<Tab title="Benennungskonventionen">
+  **Verwenden Sie kebab-case für Event-Namen:**
+  - ✅ `newsletter-signup`
+  - ✅ `add-to-cart`
+  - ✅ `video-play`
+  - ❌ `Newsletter_Signup`
+  - ❌ `addToCart`
+
+Seien Sie spezifisch, aber prägnant:
+
+✅ pricing-cta-click
+❌ click
+❌ user-clicked-the-pricing-page-call-to-action-button
+
+Verwenden Sie konsistente Terminologie:
+
+Wenn Sie an einer Stelle signup verwenden, nutzen Sie nicht woanders register für dieselbe Aktion
+</Tab>
+
+<Tab title="Datenschutz-Checkliste">
+  **Bevor Sie Payload-Daten hinzufügen, überprüfen Sie:**
+
+  - Enthält KEINE E-Mail-Adressen
+  - Enthält KEINE Namen oder Benutzernamen
+  - Enthält KEINE Telefonnummern
+  - Enthält KEINE Standortdaten, die spezifischer als Land/Region sind
+  - Enthält KEINE Benutzer-IDs oder Session-IDs
+  - Enthält KEINE IP-Adressen
+  - Enthält NUR generische, aggregierbare Daten
+
+  **Sichere Payload-Beispiele:**
+  - Produktkategorien, SKUs oder generische Kennungen
+  - Feature-Namen oder Abschnittsbezeichnungen
+  - Nicht-personenbezogene Filterauswahlen
+  - Inhaltstypen oder Formate
+  - Generische Statusindikatoren
+</Tab>
+</Tabs>
+
+---
+
+## Checkliste für den Abschluss der Einrichtung
+
+Herzlichen Glückwunsch! Wenn Sie alle oben genannten Schritte befolgt haben, sollte Ihre Analytics-Implementierung abgeschlossen sein. Verwenden Sie diese Checkliste, um zu überprüfen, ob alles korrekt konfiguriert ist:
+
+<Tip>
+Sobald dies alles erledigt ist, können Sie es an das Marketing-Team übergeben. Falls Sie Ihre Kollegen noch nicht zur Plattform hinzugefügt haben, finden Sie hier eine Anleitung dazu.
+</Tip>
+
+<AccordionGroup>
+<Accordion title="✅ Script-Integrations-Überprüfung">
+  - Analytics-Script ist im `<head>`-Bereich aller Seiten hinzugefügt
+  - Script enthält die korrekte `data-site` Kennung
+  - Script lädt erfolgreich (überprüft im Dashboard oder Network-Tab)
+  - Echtzeit-Seitenaufrufe erscheinen im Dashboard
+  - Script ist auf allen Subdomains/Seiten vorhanden, die Tracking benötigen
+</Accordion>
+
+<Accordion title="✅ Event-Tagging-Überprüfung">
+  - Wichtige Conversion-Punkte sind getaggt (CTAs, Formulare, Downloads)
+  - Event-Namen folgen konsistenten Benennungskonventionen
+  - Events werden beim Testen im Browser korrekt ausgelöst
+  - Events erscheinen im Echtzeit-Event-Stream des Dashboards
+</Accordion>
+
+<Accordion title="✅ Dashboard-Konfiguration">
+  - Teammitglieder haben entsprechenden Dashboard-Zugriff
+  - Wichtige Events sind als Conversion-Ziele markiert
+  - Benutzerdefinierte Benutzergruppen/Filter sind konfiguriert
+  - E-Mail-Berichte sind eingerichtet (demnächst verfügbar)
+</Accordion>
+</AccordionGroup>
+
+---
+
+## So sieht Ihre Analytics aus, wenn alles funktioniert
+
+Sobald Ihre Einrichtung abgeschlossen ist und Daten fließen, können Sie Folgendes in Ihrem Dashboard erwarten:
+
+<Frame caption="Echtzeit-Dashboard mit Live-Seitenaufrufen und Events">
+  <img src="/images/onboarding/dashboard-realtime.png" alt="Analytics-Dashboard zeigt Echtzeit-Besucheraktivität, aktuelle Seitenaufrufe und aktive Events" />
+</Frame>
+
+---
+
+## Benötigen Sie Hilfe?
+
+Kontaktieren Sie enterprise-support@yourcompany.com für Unterstützung.
