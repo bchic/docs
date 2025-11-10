@@ -46,8 +46,8 @@ Please keep in mind that this is only an additional resource to the in-product o
   <!-- Other head elements -->
   
   <!-- Analytics Script - Add before closing </head> -->
-  <script src="https://analytics.yourcompany.com/script.js" 
-          data-site="YOUR_SITE_ID" 
+  <script src="https://analytics.yourcompany.com/script.js"
+          data-website-id="YOUR_SITE_ID"
           defer></script>
 </head>
 <body>
@@ -66,8 +66,8 @@ Please keep in mind that this is only an additional resource to the in-product o
         <>
           <Head>
             <script 
-              src="https://analytics.yourcompany.com/script.js" 
-              data-site="YOUR_SITE_ID" 
+              src="https://analytics.yourcompany.com/script.js"
+      data-website-id="YOUR_SITE_ID"
               defer 
             />
           </Head>
@@ -81,8 +81,8 @@ Please keep in mind that this is only an additional resource to the in-product o
     Add this code to your theme's `header.php` file or use a plugin like "Insert Headers and Footers":
 ```html header.php
     <!-- Add before wp_head() or in the <head> section -->
-    <script src="https://analytics.yourcompany.com/script.js" 
-            data-site="YOUR_SITE_ID" 
+    <script src="https://analytics.yourcompany.com/script.js"
+            data-website-id="YOUR_SITE_ID"
             defer></script>
     <?php wp_head(); ?>
 ```
@@ -93,8 +93,8 @@ Please keep in mind that this is only an additional resource to the in-product o
     3. Set trigger to **All Pages**
     4. Publish your container
 ```html
-    <script src="https://analytics.yourcompany.com/script.js" 
-            data-site="YOUR_SITE_ID" 
+    <script src="https://analytics.yourcompany.com/script.js"
+            data-website-id="YOUR_SITE_ID"
             defer></script>
 ```
   </Tab>
@@ -284,7 +284,7 @@ Once all of this is done, you can hand over to the Marketing Team. If you have n
 <AccordionGroup>
 <Accordion title="✅ Script Integration Verification">
   - Analytics script is added to the `<head>` section of all pages
-  - Script includes the correct `data-site` identifier
+  - Script includes the correct `data-website-id` identifier
   - Script loads successfully (verified in Dashboard or Network Tab)
   - Real-time pageviews appear in the dashboard
   - Script is present on all subdomains/pages that need tracking

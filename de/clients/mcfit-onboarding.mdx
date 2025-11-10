@@ -47,7 +47,7 @@ Bitte beachten Sie, dass dies nur eine zusätzliche Ressource zum Onboarding im 
 
   <!-- Analytics Script - Vor dem schließenden </head> hinzufügen -->
   <script src="https://analytics.yourcompany.com/script.js"
-          data-site="YOUR_SITE_ID"
+          data-website-id="YOUR_SITE_ID"
           defer></script>
 </head>
 <body>
@@ -67,7 +67,7 @@ Bitte beachten Sie, dass dies nur eine zusätzliche Ressource zum Onboarding im 
           <Head>
             <script
               src="https://analytics.yourcompany.com/script.js"
-              data-site="YOUR_SITE_ID"
+      data-website-id="YOUR_SITE_ID"
               defer
             />
           </Head>
@@ -82,7 +82,7 @@ Bitte beachten Sie, dass dies nur eine zusätzliche Ressource zum Onboarding im 
 ```html header.php
     <!-- Vor wp_head() oder im <head>-Bereich hinzufügen -->
     <script src="https://analytics.yourcompany.com/script.js"
-            data-site="YOUR_SITE_ID"
+            data-website-id="YOUR_SITE_ID"
             defer></script>
     <?php wp_head(); ?>
 ```
@@ -94,7 +94,7 @@ Bitte beachten Sie, dass dies nur eine zusätzliche Ressource zum Onboarding im 
     4. Veröffentlichen Sie Ihren Container
 ```html
     <script src="https://analytics.yourcompany.com/script.js"
-            data-site="YOUR_SITE_ID"
+            data-website-id="YOUR_SITE_ID"
             defer></script>
 ```
   </Tab>
@@ -276,7 +276,7 @@ Sobald dies alles erledigt ist, können Sie es an das Marketing-Team übergeben.
 <AccordionGroup>
 <Accordion title="✅ Script-Integrations-Überprüfung">
   - Analytics-Script ist im `<head>`-Bereich aller Seiten hinzugefügt
-  - Script enthält die korrekte `data-site` Kennung
+  - Script enthält die korrekte `data-website-id` Kennung
   - Script lädt erfolgreich (überprüft im Dashboard oder Network-Tab)
   - Echtzeit-Seitenaufrufe erscheinen im Dashboard
   - Script ist auf allen Subdomains/Seiten vorhanden, die Tracking benötigen
