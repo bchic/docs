@@ -105,6 +105,108 @@ Der erste Schritt besteht darin, unser Analytics-Script in Ihre Website zu integ
 </Step>
 </Steps>
 
+
+## Events Anonymisieren (URL-Anonymisierung)
+
+Ein sehr wichtiger Teil der datenschutzkonformen Einrichtung ist die **URL-Anonymisierung**. Da wir keine personenbezogenen Daten erfassen dürfen, müssen URLs, die persönliche Identifier enthalten (z.B. eine User-ID, ein Name oder eine Bestellnummer), anonymisiert werden. So können wir das allgemeine Nutzerverhalten auf Seitentypen analysieren, ohne Rückschlüsse auf eine konkrete Person ziehen zu können.
+
+### Fallbeispiel: Anonymisierung einer dynamischen Profil-URL
+
+Stellen Sie sich vor, Ihre Website hat eine URL-Struktur wie: `https://beispiel-shop.de/profil/12345/bestellungen`. Hier ist `12345` eine eindeutige `userId` und somit ein personenbezogenes Datum, das nicht erfasst werden darf.
+
+### Lösung & Implementierung
+
+Fügen Sie das `data-anonymize-url`-Attribut zu Ihrem bestehenden Script-Tag hinzu.
+
+<CodeGroup>
+    ```html title="Vorher: Standard-Script"
+    <script
+        defer
+        src="https://analytics.bchic.de/script.js"
+        data-website-id="IHRE_WEBSITE_ID"
+    ></script>
+    ```
+    ```html title="Nachher: Script mit URL-Anonymisierung"
+    <script
+        defer
+        src="https://analytics.bchic.de/script.js"
+        data-website-id="IHRE_WEBSITE_ID"
+        data-anonymize-url="/profil/{userId}/*"
+    ></script>
+    ```
+</CodeGroup>
+
+<Info title="Was wird erfasst?">
+    Anstatt der vollständigen URL `https://beispiel-shop.de/profil/12345/bestellungen` wird in den Analytics nur die sichere und anonymisierte Version `/profil/{userId}/bestellungen` gespeichert.
+</Info>
+
+---
+
+### Funktionsweise und Syntax
+
+Das `data-anonymize-url`-Attribut ermöglicht es Ihnen, mit einer einfachen Mustersprache dynamische Teile Ihrer URLs zu maskieren. Unser Script erkennt diese Muster und ersetzt die entsprechenden Segmente, *bevor* die Daten an unsere Server gesendet werden.
+
+Folgende Syntaxelemente können Sie verwenden:
+
+- **`{platzhalter}`**: Geschweifte Klammern definieren einen dynamischen Teil der URL, der durch den Platzhalternamen (z.B. `{userId}`) ersetzt wird. Der Name dient nur der Lesbarkeit in Ihren Analytics-Berichten.
+- **`*` (Wildcard)**: Der Stern agiert als "Catch-all" und sorgt dafür, dass alle nachfolgenden URL-Segmente unverändert erfasst werden. Er ist besonders nützlich, wenn die URL-Struktur nach dem dynamischen Teil variieren kann (z.B. `/profil/12345/einstellungen` und `/profil/12345/bestellungen`).
+
+### Mehrere Regeln definieren
+
+Wenn Sie mehrere unterschiedliche URL-Strukturen anonymisieren müssen, können Sie die Regeln einfach **durch ein Komma getrennt** im selben Attribut angeben.
+
+**Beispiel:** Anonymisierung von Profil- und Bestell-Detailseiten.
+
+```html
+<script
+    defer
+    src="https://analytics.bchic.de/script.js"
+    data-website-id="IHRE_WEBSITE_ID"
+    data-anonymize-url="/profil/{userId}/*,/bestellungen/details/{orderId}"
+></script>
+```
+In diesem Fall werden zwei URL-Typen behandelt:
+1. Alle URLs, die mit `/profil/` beginnen und eine ID enthalten.
+2. URLs für Bestelldetails (z.B. `/bestellungen/details/98765`).
+
+---
+
+### Weitere Anwendungsfälle
+
+Hier sind einige weitere Beispiele, um die Flexibilität des Tools zu zeigen:
+
+<CardGroup>
+    <Card title="Fall 1: Anonymisierung eines öffentlichen Nutzernamens">
+        - **Original-URL:** `https://beispiel-community.de/user/max-mustermann`
+        - **Anonymisierte URL:** `/user/{username}`
+        - **Implementierung:** `data-anonymize-url="/user/{username}"`
+    </Card>
+    <Card title="Fall 2: Anonymisierung einer Bestell-ID in der URL">
+        - **Original-URL:** `https://beispiel-shop.de/checkout/success/order/B-1023-4567`
+        - **Anonymisierte URL:** `/checkout/success/order/{orderId}`
+        - **Implementierung:** `data-anonymize-url="/checkout/success/order/{orderId}"`
+    </Card>
+</CardGroup>
+
+---
+
+### Überprüfung und Best Practices
+
+#### Wie kann ich die Funktion testen?
+
+Am einfachsten können Sie die korrekte Funktion in den **Entwicklertools Ihres Browsers** überprüfen:
+1. Öffnen Sie die Entwicklertools (meist mit `F12` oder `Cmd+Option+I`).
+2. Wechseln Sie zum Tab **"Netzwerk"** (oder "Network").
+3. Laden Sie die Seite neu, die eine anonymisierte URL enthält.
+4. Suchen Sie in der Liste der Anfragen nach einem Aufruf, der an `analytics.bchic.de` geht (oft ein `POST`-Request).
+5. Klicken Sie auf diesen Aufruf und prüfen Sie die **Payload** (die gesendeten Daten). Das dort übermittelte `url`-Feld sollte bereits die anonymisierte Form aufweisen.
+
+<Info>
+    **Best Practices:**
+    - **Seien Sie proaktiv:** Gehen Sie die gängigsten URL-Strukturen Ihrer Webseite durch und prüfen Sie sie auf personenbezogene Daten. Typische Kandidaten sind Profilseiten, Bestellbestätigungen, Warenkörbe oder Seiten mit Session-IDs in der URL.
+    - **Beginnen Sie spezifisch:** Definieren Sie Regeln so genau wie nötig. Ein zu allgemeiner Wildcard (`*`) könnte versehentlich auch für die Analyse wichtige Informationen maskieren.
+</Info>
+
 ## Phase 2: Event-Tagging
 
 Nachdem das Script läuft, besteht der nächste Schritt darin, bestimmte Elemente auf Ihrer Website zu taggen, damit die Analytics-Plattform Benutzerinteraktionen wie Button-Klicks, Formularübermittlungen und benutzerdefinierte Events tracken kann.
@@ -279,14 +381,15 @@ Befolgen Sie diese Konventionen, um Ihre Event-Daten organisiert und aussagekrä
     </Tab>
 
     <Tab title="Datenschutz-Checkliste">
-        **Bevor Sie Payload-Daten hinzufügen, überprüfen Sie:**
+        **Bevor Sie Daten senden, überprüfen Sie, dass diese KEINE personenbezogenen Daten (PII) enthalten:**
 
         - Enthält KEINE E-Mail-Adressen
         - Enthält KEINE Namen oder Benutzernamen
         - Enthält KEINE Telefonnummern
         - Enthält KEINE Standortdaten, die spezifischer als Land/Region sind
-        - Enthält KEINE Benutzer-IDs oder Session-IDs
-        - Enthält KEINE IP-Adressen
+        - Enthält KEINE Benutzer-IDs oder Session-IDs in der **Event-Payload**
+        - **Erfasste URLs** enthalten KEINE persönlichen Identifier (User-IDs, Namen etc.)
+        - Enthält KEINE IP-Adressen (dies stellen wir serverseitig sicher)
         - Enthält NUR generische, aggregierbare Daten
 
         **Sichere Payload-Beispiele:**
@@ -312,6 +415,7 @@ Herzlichen Glückwunsch! Wenn Sie alle oben genannten Schritte befolgt haben, so
     <Accordion title="✅ Script-Integrations-Überprüfung">
         - Analytics-Script ist im `<head>`-Bereich aller Seiten hinzugefügt
         - Script enthält die korrekte `data-website-id` Kennung
+        - **URLs mit personenbezogenen Daten sind via `data-anonymize-url` anonymisiert**
         - Script lädt erfolgreich (überprüft im Dashboard oder Network-Tab)
         - Echtzeit-Seitenaufrufe erscheinen im Dashboard
         - Script ist auf allen Subdomains/Seiten vorhanden, die Tracking benötigen
@@ -346,4 +450,4 @@ Sobald Ihre Einrichtung abgeschlossen ist und Daten fließen, können Sie Folgen
 
 ## Benötigen Sie Hilfe?
 
-Kontaktieren Sie enterprise-support@yourcompany.com für Unterstützung.
+Kontaktieren Sie kontakt@bchic.studio für Unterstützung.
