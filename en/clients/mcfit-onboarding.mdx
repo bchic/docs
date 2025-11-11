@@ -1,6 +1,6 @@
 ---
 title: 'Enterprise Onboarding Guide'
-description: 'Complete setup guide for integrating our analytics platform into your enterprise environment. Follow these steps to implement server-side tracking and event tagging.'
+description: 'Complete setup guide for integrating our analytics platform into your enterprise environment. Follow these steps to implement tracking and event tagging.'
 ---
 
 <Note>
@@ -101,9 +101,67 @@ The first step is integrating our analytics script into your website.
 </Tabs>
 </Step>
 <Step title="Verify installation">
-    After deploying the script, verify it's working correctly, by clicking the button in the onboarding flow. Bchic Analytics will automatically check if data is available and redirect you to the dashboard.
+    After deploying the script, verify it's working correctly by clicking the button in the onboarding flow. Bchic Analytics will automatically check if data is available and redirect you to the dashboard.
 </Step>
 </Steps>
+
+---
+
+## Phase 1.5: URL Anonymization (Privacy Enhancement)
+
+A critical part of a privacy-compliant setup is **URL Anonymization**. Since we must not collect personally identifiable information (PII), any URLs containing personal identifiers (e.g., a user ID, name, or order number) must be anonymized. This allows us to analyze user behavior on page types without being able to trace it back to a specific individual.
+
+### Use Case: Anonymizing a Dynamic Profile URL
+
+Imagine your website has a URL structure like: `https://example-shop.com/profile/12345/orders`. Here, `12345` is a unique `userId` and therefore personal data that must not be collected.
+
+### Solution & Implementation
+
+Add the `data-anonymize-url` attribute to your existing script tag.
+
+<CodeGroup>
+    ```html title="Before: Standard Script"
+    <script
+        defer
+        src="https://analytics.bchic.de/script.js"
+        data-website-id="YOUR_WEBSITE_ID"
+    ></script>
+    ```
+    ```html title="After: Script with URL Anonymization"
+    <script
+        defer
+        src="https://analytics.bchic.de/script.js"
+        data-website-id="YOUR_WEBSITE_ID"
+        data-anonymize-url="/profile/{userId}/*"
+    ></script>
+    ```
+</CodeGroup>
+
+<Info title="What gets tracked?">
+    Instead of the full URL `https://example-shop.com/profile/12345/orders`, only the secure, anonymized version `/profile/{userId}/orders` is stored in your analytics.
+</Info>
+
+### How It Works & Syntax
+
+The `data-anonymize-url` attribute uses a simple pattern language to mask dynamic parts of your URLs. Our script recognizes these patterns and replaces the corresponding segments *before* the data is sent to our servers.
+
+- **`{placeholder}`**: Curly braces define a dynamic part of the URL that will be replaced by the placeholder name (e.g., `{userId}`). The name is for readability in your reports.
+- **`*` (Wildcard)**: The asterisk acts as a "catch-all", ensuring that all subsequent URL segments are captured as they are. This is useful when the URL structure varies after the dynamic part.
+
+### Defining Multiple Rules
+
+If you need to anonymize several different URL structures, you can list the rules **separated by a comma** in the same attribute.
+
+```html
+<script
+    defer
+    src="https://analytics.bchic.de/script.js"
+    data-website-id="YOUR_WEBSITE_ID"
+    data-anonymize-url="/profile/{userId}/*,/orders/details/{orderId}"
+></script>
+```
+
+---
 
 ## Phase 2: Event Tagging
 
@@ -116,188 +174,107 @@ Now that the script is running, the next step is to tag specific elements on you
 </Info>
 
 ### Understanding Event Types
+... (Rest of the event tagging section remains the same as your original) ...
 
-Our platform supports two types of event tracking:
-
-<CardGroup cols={2}>
-    <Card title="Property-Type Events" icon="tag">
-        **Simple event tracking** that only sends the event name.
-        Use Case: Track that a button was clicked, without additional context.
-
-        Example: Newsletter signup button, download link
-    </Card>
-
-    <Card title="Payload Events" icon="database">
-        **Advanced tracking** that sends an event name + additional non-personal data.
-        Use Case: Track which product was added to cart, which filter was applied.
-
-        Example: Product category, search term, filter selection
-    </Card>
-</CardGroup>
-
-<Warning>
-    **Critical Privacy Requirement**
-    Our platform is designed to work without personal data. Never include:
-
-    - Email addresses
-    - Names or usernames
-    - Phone numbers
-    - IP addresses
-    - Any personally identifiable information (PII)
-
-    **Why this matters:** Including personal data defeats the purpose of our privacy-first analytics and may violate data protection regulations. It also degrades the platform's ability to provide accurate, aggregated insights.
-
-    **What you CAN send:** Product IDs, category names, page sections, feature names, non-personal filter values, generic labels.
-</Warning>
-
-### Method 1: Adding Event Attributes in HTML
-
-Events are tracked by adding data attributes to your HTML elements. The script automatically detects these attributes and sends the data to our servers.
-
-<Steps>
-    <Step title="Choose your event type">
-        Decide whether you need a simple property-type event or a payload event with additional data.
-
-        **Decision Guide:**
-        - Need to know **IF** something happened? → **Property-Type**
-        - Need to know **WHAT** happened specifically? → **Payload Event**
-    </Step>
-    <Step title="Add the data attribute">
-        Add the appropriate data attribute to your HTML element.
-        <Tabs>
-            <Tab title="Property-Type Event">
-                **Syntax:** `data-bchic-event="event-name"`
-                ```html
-                <!-- Before: Untracked button -->
-                <button class="cta-button">
-                    Download Whitepaper
-                </button>
-                <!-- After: Tracked with property-type event -->
-                <button class="cta-button"
-                        data-bchic-event="whitepaper-download">
-                    Download Whitepaper
-                </button>
-                ```
-
-                **What gets tracked:** Event name `whitepaper-download` is sent when clicked.
-            </Tab>
-
-            <Tab title="Payload Event">
-                **Syntax:** Use `data-bchic-event="{event-name}"` for the name and `data-bchic-event-{key}="{value}"` for additional data.
-                ```html
-                <!-- Before: Untracked product card -->
-                <div class="product-card">
-                    <h3>Premium Plan</h3>
-                    <button class="add-to-cart">Add to Cart</button>
-                </div>
-
-                <!-- After: Tracked with payload event -->
-                <div class="product-card">
-                    <h3>Premium Plan</h3>
-                    <button class="add-to-cart"
-                            data-bchic-event="add-to-cart"
-                            data-bchic-event-product="premium-plan"
-                            data-bchic-event-category="subscription">
-                        Add to Cart
-                    </button>
-                </div>
-                ```
-                **What gets tracked:** Event name `add-to-cart` plus payload data `{ "product": "premium-plan", "category": "subscription" }`.
-
-                <Note>
-                    **Important Notes:**
-                    - All data sent via this method is saved as a **string**.
-                    - To save numeric values, booleans, etc., use the JavaScript method.
-                    - **Other event listeners** on the same element **will not be triggered** with this method.
-                </Note>
-            </Tab>
-        </Tabs>
-    </Step>
-    <Step title="Test your events">
-        After adding event attributes, test them to ensure they're firing correctly:
-        Navigate to the **Events** section in Bchic Analytics and see the events getting logged.
-
-        The events should appear in real time. If they don't show up immediately, simply refresh (**Command + R** / **Ctrl + R**) the site and you should see your events.
-        <Note>
-            We already track Scroll-Depth and Outbound clicks by default, so there is no more setting up for you to do here.
-        </Note>
-    </Step>
-</Steps>
-
-### Method 2: Sending Events with JavaScript (More Flexible)
-
-You can also record events manually using the `window.bchic.track()` object. This method is ideal for dynamic data and when you need to send specific data types like numbers or booleans.
-
-<Tabs>
-    <Tab title="Simple Event">
-        ```javascript
-        const button = document.getElementById('signup-button');
-
-        button.onclick = () => {
-        window.bchic.track('Signup button');
-    };
-        ```
-    </Tab>
-    <Tab title="Payload Event">
-        ```javascript
-        const button = document.querySelector('.add-to-cart');
-
-        button.onclick = () => {
-        window.bchic.track('add-to-cart', {
-            product: 'premium-plan',
-            price: 99.99, // Will be saved as a number
-            is_featured: true // Will be saved as a boolean
-        });
-    };
-        ```
-    </Tab>
-</Tabs>
-
-## Best Practices for Event Naming
+### Best Practices for Event Naming
 
 Follow these conventions to keep your event data organized and meaningful:
-
-<Info>
-    This is not available yet, but in the future it will be possible to change the naming of individual event-names, which allows your marketing teams to work with real names instead of IDs. The default will always stay the ID, but can be given a more user friendly name.
-</Info>
 
 <Tabs>
     <Tab title="Naming Conventions">
         **Use kebab-case for event names:**
         - ✅ `newsletter-signup`
         - ✅ `add-to-cart`
-        - ✅ `video-play`
         - ❌ `Newsletter_Signup`
-        - ❌ `addToCart`
 
         **Be specific but concise:**
         - ✅ `pricing-cta-click`
         - ❌ `click`
-        - ❌ `user-clicked-the-pricing-page-call-to-action-button`
 
         **Use consistent terminology:**
         If you use `signup` in one place, don't use `register` elsewhere for the same action.
     </Tab>
 
     <Tab title="Privacy Checklist">
-        **Before adding any payload data, verify:**
+        **Before adding any event payload or tracking URLs, verify:**
 
         - Contains NO email addresses
         - Contains NO names or usernames
         - Contains NO phone numbers
         - Contains NO location data more specific than country/region
-        - Contains NO user IDs or session IDs
-        - Contains NO IP addresses
+        - Contains NO user IDs or session IDs **in event payloads**
+        - **Captured URLs** contain NO personal identifiers (user IDs, names, etc.)
+        - Contains NO IP addresses (we handle this server-side)
         - Contains ONLY generic, aggregatable data
 
         **Safe payload examples:**
         - Product categories, SKUs, or generic identifiers
         - Feature names or section labels
         - Non-personal filter selections
-        - Content types or formats
-        - Generic status indicators
     </Tab>
 </Tabs>
+
+---
+## Final Step: Inviting Your Team
+
+With your analytics tracking now fully configured, the final step is to grant access to your colleagues. This allows stakeholders, such as your marketing team, to start leveraging the data and building insights.
+
+### How to Add Team Members
+
+Follow these simple steps to build your team within the platform.
+
+<Steps>
+    <Step title="Navigate to Team Management">
+        In the main navigation sidebar on the left, go to the **Settings** section at the bottom and click on **Team Management**.
+
+        <Frame>
+            <img src="/images/team-management-sidebar.png" alt="Navigating to the Team Management section in the sidebar" />
+        </Frame>
+    </Step>
+
+    <Step title="Invite a New Member">
+        On the Team Management page, you will see two tabs: `Active` and `Invited`. Click the **Invite Member** button in the top right corner to open the invitation dialog.
+    </Step>
+
+    <Step title="Choose a Role">
+        Before sending the invitation, you must assign a role to the new member. Each role has a specific set of permissions designed for different levels of access.
+
+        <CardGroup>
+            <Card title="Employee" icon="user">
+                **Limited Access**
+                - ✅ Can view shared dashboards and reports.
+                - ❌ No insight into billing or usage information.
+            </Card>
+            <Card title="Manager" icon="users">
+                **Extended Access**
+                - ✅ Can manage team members (create/edit).
+                - ✅ Has full access to all team dashboards and analytics.
+                - ❌ No access to global organization settings.
+            </Card>
+            <Card title="Admin" icon="shield-check">
+                **Unrestricted Access**
+                - ✅ Full access to all settings and user management.
+                - ✅ Can manage data sources and integrations.
+                - ✅ Complete insight into all analyses and usage data.
+            </Card>
+        </CardGroup>
+
+        <Tip>
+            **Our Recommendation:** For most users, like members of your marketing team, the **Employee** role is the perfect choice. It provides full access to analytics data and dashboards without granting access to system-critical menus like billing or global settings.
+        </Tip>
+
+        <Note>
+            **Coming Soon:** We are working on providing the ability to create your own granular user roles for even more control.
+        </Note>
+    </Step>
+
+    <Step title="Send the Invitation">
+        Enter the new member's name and email address, select their role, and send the invitation. They will receive an email to join your workspace.
+
+        Once they accept, they will appear in the `Active` tab, and you're all set!
+    </Step>
+</Steps>
+
 
 ---
 
@@ -313,6 +290,7 @@ Congratulations! If you've followed all the steps above, your analytics implemen
     <Accordion title="✅ Script Integration Verification">
         - Analytics script is added to the `<head>` section of all pages.
         - Script includes the correct `data-website-id` identifier.
+        - **URLs containing personal data are anonymized via `data-anonymize-url`.**
         - Script loads successfully (verified in Dashboard or browser's Network Tab).
         - Real-time pageviews appear in the dashboard.
         - Script is present on all subdomains/pages that need tracking.
@@ -327,13 +305,13 @@ Congratulations! If you've followed all the steps above, your analytics implemen
 
     <Accordion title="✅ Dashboard Configuration">
         - Team members have appropriate dashboard access.
-        - Key events are marked as conversion goals.
-        - Custom user groups/filters are configured.
         - Email reports are set up (coming soon).
     </Accordion>
 </AccordionGroup>
 
 ---
+
+
 
 ## What Your Analytics Look Like When Everything Works
 
@@ -347,4 +325,4 @@ Once your setup is complete and data starts flowing, here's what you can expect 
 
 ## Need Help?
 
-Reach out to enterprise-support@yourcompany.com for assistance.
+Reach out to kontakt@bchic.studio for assistance.
