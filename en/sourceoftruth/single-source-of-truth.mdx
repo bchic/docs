@@ -5,55 +5,88 @@ icon: 'database'
 ---
 
 <Note>
-    **System Instruction:**
-    This document is the **Single Source of Truth (SSOT)**. Use the tables below to map user questions to specific UI elements, filters, or data cards.
+    **SYSTEM INSTRUCTIONS & SCOPE (READ FIRST)**
+
+    You are the **AI Support Assistant for bchic Analytics**. Your goal is to help users navigate the dashboard, understand their data, and configure filters.
+
+    **Decision Logic:**
+    1.  **Check the Data:** specific UI elements, metrics, or filters defined in the tables below.
+    2.  **Construct a Solution:** If the user asks a complex question (e.g., "Who are my best users?"), look for a **Filter** or **Combination of Metrics** (e.g., "Use the 'Reader' filter") to answer it.
+    3.  **Out of Scope:** If the question requires data NOT tracked by bchic (e.g., "What is my user's email address?", "Why is my SEO ranking low?"), or asks for general knowledge unrelated to the tool, answer:
+    *   *"This specific data point is currently outside the scope of the bchic Analytics platform."* or
+    *   *"I can only assist with navigating and interpreting data within the bchic Dashboard."*
+
+    **Tone:** Professional, direct, and helpful. Do not invent features that are not listed below.
 </Note>
 
 ## 1. Global Interface & Navigation
 
 ### 1.1 Date & Time Controls
-Controls located at the top-left.
+Located at the top-left of the dashboard. persist across page navigations.
 
-| Element | Options/Description | Behavior |
+| Element | Options | Functionality |
 | :--- | :--- | :--- |
-| **Quick Select** | `24h`, `7d`, `30d`, `90d` | Instantly switches the view to the last X timeframe. |
-| **Presets** | Today, This Week, This Month, This Year | Standard calendar periods. |
-| **Comparison** | Previous Period | Compares current data vs. the specific previous timeframe (e.g., "This Week" vs "Last Week"). |
+| **Quick Select** | `24h`, `7d`, `30d`, `90d` | Instantly switches the view to the selected timeframe. |
+| **Date Dropdown** | • Today<br/>• This Week / Month / Year<br/>• Last 6 / 12 Months<br/>• All Time | Allows selection of standard calendar periods. |
+| **Custom Range** | "Custom Range" | Opens a calendar to pick specific start and end dates. |
+| **Comparison** | "Compare" (Toggle) | Overlays data from the previous matching period (e.g., "This Week" vs. "Last Week"). |
 
-### 1.2 Filter System Logic
-The filter sidebar (right side) allows complex data segmentation.
+### 1.2 Filter Sidebar (Right Side)
+Opened via the **Filter** button. This is the primary tool for data segmentation.
 
-| Filter Category | Specific Filters | Configuration / Special Logic |
+**A. Device Quick Selector (Top Icons)**
+Located at the very top of the sidebar for one-click filtering.
+
+| Icon | Device Type | Description |
 | :--- | :--- | :--- |
-| **Default Properties** | URL, Referrer, Page Title, Browser, Device, Country, Language, Host | Standard string/category matching. |
-| **Path Filters** | • **Entry Path** (Einstieg)<br/>• **Exit Path** (Ausstieg)<br/>• **Path Funnel** | "Path Funnel" is used to analyze specific user journeys sequences. |
-| **User Behavior** | • **"Reader" (Leser)**<br/>• **Bouncer (Abspringer)** | **Reader Logic:** Custom filter defined by `Min. Duration` (e.g., >60s) AND/OR `Min. Page Views`.<br/>**Negation:** Can be toggled to exclude these users. |
-| **Marketing** | • **UTM Campaigns**<br/>• **Channels** | Channels group traffic into: Organic, Paid, Direct, Social, Referral. |
-| **Technical** | • **Events**<br/>• **Scroll Depth** | Custom events tracked via script. |
+| 🖥️ | **Desktop** | Filters traffic from desktop computers. |
+| 💻 | **Laptop** | Filters traffic from laptops. |
+| 📱 | **Tablet** | Filters traffic from tablets. |
+| 📱 (Small) | **Mobile** | Filters traffic from smartphones. |
+
+**B. Filter Configuration Logic**
+Every filter added allows for precise logical operators.
+
+| Feature | Description |
+| :--- | :--- |
+| **Negation** | Every filter has a **"Negate" (Negieren)** toggle. Turning this ON excludes the selected data (e.g., "Country is NOT Germany"). |
+| **Operators** | Filters support "Is", "Contains", "Does not contain" logic depending on the data type. |
+| **Combination** | Multiple filters can be active simultaneously (AND logic). |
+
+**C. Filter Categories**
+
+| Category | Available Filters | Details |
+| :--- | :--- | :--- |
+| **Default Properties** | URL, Referrer, Page Title, Browser, Device, Country, Language, Host | Standard metrics available for every visit. |
+| **Path Filters** | • **Entry Path**<br/>• **Exit Path**<br/>• **Contains Path**<br/>• **Path Funnel** | **Entry:** First page of session.<br/>**Exit:** Last page of session.<br/>**Contains:** Filters sessions where a specific URL was visited *at any point*.<br/>**Funnel:** Analyzes specific navigation sequences. |
+| **User Behavior** | • **"Reader"** (Leser)<br/>• **Bouncer** (Abspringer) | **Reader:** Custom quality metric defined by `Min. Duration` AND/OR `Min. Page Views`.<br/>**Bouncer:** Sessions with 0 interaction/immediate exit. |
+| **Marketing** | • **UTM Campaigns**<br/>• **Channels** | **Channels:** Organic Search, Paid, Direct, Social, Referral, Email. |
+| **Technical** | • **Events**<br/>• **Scroll Depth**<br/>• **Tags (A/B Testing)** | Custom event tracking and technical segmentation. |
 
 ---
 
 ## 2. Dashboard Cards (Data Layout)
-The dashboard consists of 6 specific cards. Use this table to tell users **where** to find data.
+The main dashboard consists of 6 interactive cards.
 
-| Card ID | Name (DE/EN) | Key Metrics (Data Points) | Interactivity & Tabs |
+| Card | Title | Metrics (Data Points) | Interaction & Tabs |
 | :--- | :--- | :--- | :--- |
-| **Card 1** | **Main Overview**<br/>(Hauptübersicht) | • **Visitors** (Besucher)<br/>• **Views** (Aufrufe)<br/>• **Engagement Rate**<br/>• **Avg. Duration** | **Graph:** Line chart.<br/>**Action:** Click KPI to toggle visibility. Use dropdown arrow to swap metrics (e.g., switch Visitors to Sessions). |
-| **Card 2** | **Pages**<br/>(Seiten) | • URL / Path<br/>• Visitors<br/>• Views | **Tabs:**<br/>1. All Pages<br/>2. Entry Pages (Eingangs-seiten)<br/>3. Exit Pages (Ausgangs-seiten) |
-| **Card 3** | **Sources**<br/>(Quellen) | • Source Name<br/>• Visitor Count | **Tabs:**<br/>1. Sources (Specific URLs)<br/>2. Channels (High-level)<br/>3. UTM Tags<br/>4. Outbound Links |
-| **Card 4** | **Countries**<br/>(Länder) | • Country Name<br/>• Visitor Count | Map or List view visualization. |
-| **Card 5** | **Browsers** | • Browser Name<br/>• Version | Shows technical stack of users. |
-| **Card 6** | **Devices**<br/>(Geräte) | • Desktop<br/>• Laptop<br/>• Tablet<br/>• Mobile | Donut chart. Good for "Mobile vs. Desktop" analysis. |
+| **Card 1** | **Main Overview** | • **Visitors** (Besucher)<br/>• **Views** (Aufrufe)<br/>• **Engagement Rate**<br/>• **Avg. Duration** | **Graph:** Line chart showing trends.<br/>**Swap Metrics:** Click the arrow next to a metric to swap it (e.g., show "Sessions" instead of "Visitors"). |
+| **Card 2** | **Pages** | • Path (URL)<br/>• Visitors<br/>• Views | **Tabs:**<br/>1. **Pages:** General performance.<br/>2. **Entry Pages:** Top landing pages.<br/>3. **Exit Pages:** Top drop-off pages. |
+| **Card 3** | **Sources** | • Source Name<br/>• Visitors | **Tabs:**<br/>1. **Sources:** Specific domains (e.g., google.com).<br/>2. **Channels:** High-level groups (e.g., Organic).<br/>3. **UTM Sources:** Campaign tracking.<br/>4. **Outbound Links:** External links clicked. |
+| **Card 4** | **Countries** | • Country<br/>• Visitors | Breakdown by geography. |
+| **Card 5** | **Browsers** | • Browser<br/>• Visitors | Breakdown by browser type (Chrome, Safari, etc.). |
+| **Card 6** | **Devices** | • Device Type | Donut chart showing distribution (Mobile vs Desktop vs Tablet). |
 
 ---
 
-## 3. User Intent Mapping (Q&A Guide)
-How to translate natural language questions into Dashboard actions.
+## 3. AI Guide: User Intent Mapping
+Use these patterns to answer "How do I..." questions.
 
-| User Question Type | Target Element | Action / Instruction |
-| :--- | :--- | :--- |
-| *"How many people came from Google?"* | **Card 3 (Sources)** | Look at the "Quellen" tab, find "google.com". |
-| *"Did people read the article?"* | **Filter Sidebar** | Apply **"Reader" Filter** (Set time > 60s). Then look at **Card 2 (Pages)** for that specific article. |
-| *"Where do users leave my site?"* | **Card 2 (Pages)** | Click the **"Exit Pages"** (Ausgangs-seiten) tab. Sort by Views. |
-| *"Is my ad campaign working?"* | **Card 3 (Sources)** | Switch tab to **"UTM Sources"** or filter by specific Campaign Name. |
-| *"Compare Mobile vs Desktop traffic"* | **Card 6** OR **Filter** | View Card 6 for a quick ratio. For details, apply a "Device: Mobile" filter and check Card 1 metrics. |
+| User Goal | Action Path |
+| :--- | :--- |
+| **"Exclude internal traffic / specific country"** | Open Filter Sidebar -> Select **Country** (or Host) -> Select Value -> Enable **Negate Toggle**. |
+| **"See users who visited a specific page during their journey"** | Open Filter Sidebar -> **Path Filters** -> Select **"Contains Path"** -> Enter URL. |
+| **"Quickly filter for mobile users"** | Open Filter Sidebar -> Click the **Mobile Icon** (Small Phone) in the header row. |
+| **"Analyze high-quality traffic"** | Open Filter Sidebar -> User Behavior -> Select **"Reader"** -> Set Min. Duration (e.g., >60s). |
+| **"Find where users are leaving"** | Go to **Card 2 (Pages)** -> Click tab **"Exit Pages"** -> Sort by Views. |
+| **"Check Campaign Performance"** | Go to **Card 3 (Sources)** -> Click tab **"UTM Sources"**. |
