@@ -12,6 +12,15 @@
     "light": "/logo/logo-dark.png",
     "dark": "/logo/logo-white.png"
   },
+  "contextual": {
+    "options": [
+      "copy",
+      "view",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ]
+  },
   "navigation": {
     "languages": [
       {

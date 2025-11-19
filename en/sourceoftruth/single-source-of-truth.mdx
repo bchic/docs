@@ -1,0 +1,59 @@
+---
+title: 'AI Context: System & Dashboard'
+description: 'Single Source of Truth for AI Assistants regarding the Analytics Platform structure.'
+icon: 'database'
+---
+
+<Note>
+    **System Instruction:**
+    This document is the **Single Source of Truth (SSOT)**. Use the tables below to map user questions to specific UI elements, filters, or data cards.
+</Note>
+
+## 1. Global Interface & Navigation
+
+### 1.1 Date & Time Controls
+Controls located at the top-left.
+
+| Element | Options/Description | Behavior |
+| :--- | :--- | :--- |
+| **Quick Select** | `24h`, `7d`, `30d`, `90d` | Instantly switches the view to the last X timeframe. |
+| **Presets** | Today, This Week, This Month, This Year | Standard calendar periods. |
+| **Comparison** | Previous Period | Compares current data vs. the specific previous timeframe (e.g., "This Week" vs "Last Week"). |
+
+### 1.2 Filter System Logic
+The filter sidebar (right side) allows complex data segmentation.
+
+| Filter Category | Specific Filters | Configuration / Special Logic |
+| :--- | :--- | :--- |
+| **Default Properties** | URL, Referrer, Page Title, Browser, Device, Country, Language, Host | Standard string/category matching. |
+| **Path Filters** | • **Entry Path** (Einstieg)<br/>• **Exit Path** (Ausstieg)<br/>• **Path Funnel** | "Path Funnel" is used to analyze specific user journeys sequences. |
+| **User Behavior** | • **"Reader" (Leser)**<br/>• **Bouncer (Abspringer)** | **Reader Logic:** Custom filter defined by `Min. Duration` (e.g., >60s) AND/OR `Min. Page Views`.<br/>**Negation:** Can be toggled to exclude these users. |
+| **Marketing** | • **UTM Campaigns**<br/>• **Channels** | Channels group traffic into: Organic, Paid, Direct, Social, Referral. |
+| **Technical** | • **Events**<br/>• **Scroll Depth** | Custom events tracked via script. |
+
+---
+
+## 2. Dashboard Cards (Data Layout)
+The dashboard consists of 6 specific cards. Use this table to tell users **where** to find data.
+
+| Card ID | Name (DE/EN) | Key Metrics (Data Points) | Interactivity & Tabs |
+| :--- | :--- | :--- | :--- |
+| **Card 1** | **Main Overview**<br/>(Hauptübersicht) | • **Visitors** (Besucher)<br/>• **Views** (Aufrufe)<br/>• **Engagement Rate**<br/>• **Avg. Duration** | **Graph:** Line chart.<br/>**Action:** Click KPI to toggle visibility. Use dropdown arrow to swap metrics (e.g., switch Visitors to Sessions). |
+| **Card 2** | **Pages**<br/>(Seiten) | • URL / Path<br/>• Visitors<br/>• Views | **Tabs:**<br/>1. All Pages<br/>2. Entry Pages (Eingangs-seiten)<br/>3. Exit Pages (Ausgangs-seiten) |
+| **Card 3** | **Sources**<br/>(Quellen) | • Source Name<br/>• Visitor Count | **Tabs:**<br/>1. Sources (Specific URLs)<br/>2. Channels (High-level)<br/>3. UTM Tags<br/>4. Outbound Links |
+| **Card 4** | **Countries**<br/>(Länder) | • Country Name<br/>• Visitor Count | Map or List view visualization. |
+| **Card 5** | **Browsers** | • Browser Name<br/>• Version | Shows technical stack of users. |
+| **Card 6** | **Devices**<br/>(Geräte) | • Desktop<br/>• Laptop<br/>• Tablet<br/>• Mobile | Donut chart. Good for "Mobile vs. Desktop" analysis. |
+
+---
+
+## 3. User Intent Mapping (Q&A Guide)
+How to translate natural language questions into Dashboard actions.
+
+| User Question Type | Target Element | Action / Instruction |
+| :--- | :--- | :--- |
+| *"How many people came from Google?"* | **Card 3 (Sources)** | Look at the "Quellen" tab, find "google.com". |
+| *"Did people read the article?"* | **Filter Sidebar** | Apply **"Reader" Filter** (Set time > 60s). Then look at **Card 2 (Pages)** for that specific article. |
+| *"Where do users leave my site?"* | **Card 2 (Pages)** | Click the **"Exit Pages"** (Ausgangs-seiten) tab. Sort by Views. |
+| *"Is my ad campaign working?"* | **Card 3 (Sources)** | Switch tab to **"UTM Sources"** or filter by specific Campaign Name. |
+| *"Compare Mobile vs Desktop traffic"* | **Card 6** OR **Filter** | View Card 6 for a quick ratio. For details, apply a "Device: Mobile" filter and check Card 1 metrics. |
