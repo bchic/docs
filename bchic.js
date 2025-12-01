@@ -1,5 +1,3 @@
-// This is the entire content of bchic.js
-
 (function() {
     // Create a new script element
     var script = document.createElement('script');
