@@ -1,0 +1,57 @@
+---
+title: 'Mintlify Integration'
+description: 'So integrierst du bchic Analytics in deine Mintlify Dokumentation.'
+icon: 'book-open-cover'
+---
+
+Da Mintlify aktuell noch keine native Plugin-Integration anbietet, binden wir das Tracking über ein kleines, benutzerdefiniertes Skript ein. Das ist in wenigen Minuten erledigt.
+
+<Steps>
+    <Step title="Website ID abrufen">
+        Zuerst benötigst du die **Website ID** deiner Dokumentation aus deinem bchic Dashboard.
+
+        1. Öffne die **Einstellungen** (Zahnrad-Icon unten links).
+        2. Navigiere zum Menüpunkt **Organisation**.
+        3. Öffne den Bereich "Verknüpfte Website URLs" über das Pfeil-Icon.
+
+        <img src="/images/integration/mintlify/step1.jpeg" alt="Einstellungen Organisation Dashboard" />
+
+        Füge hier nun die URL deiner Dokumentation hinzu (z. B. `docs.deine-firma.de`) und klicke auf das Plus-Symbol:
+
+        <img src="/images/integration/mintlify/step2.jpeg" alt="URL zur Organisation hinzufügen" />
+
+        Klicke anschließend neben der neu erstellten URL auf den **Installations-Button** (das Code-Icon). Kopiere dir aus dem angezeigten Code-Schnipsel deine ID heraus. Du findest sie im Attribut `data-website-id`.
+
+        <img src="/images/integration/mintlify/step3.jpeg" alt="Website ID kopieren" />
+    </Step>
+
+    <Step title="Tracking-Datei erstellen">
+        Erstelle nun in deinem Dokumentations-Projekt eine neue Datei. Wir empfehlen, diese im Hauptverzeichnis (dort wo auch deine `docs.json` liegt) zu speichern.
+
+        Nenne die Datei: `bchic.js`
+
+        Füge den folgenden Code in diese Datei ein. **Wichtig:** Ersetze `YOUR-ID-HERE` mit der ID, die du im ersten Schritt kopiert hast.
+
+        ```javascript bchic.js
+        (function() {
+        // Create a new script element
+        var script = document.createElement('script');
+
+        // Set the source and defer attributes
+        script.src = 'https://analytics.bchic.de/script.js';
+        script.defer = true;
+
+        // Set your custom data-website-id attribute
+        script.setAttribute('data-website-id', 'YOUR-ID-HERE');
+
+        // Append the script to the head of the document to start loading it
+        document.head.appendChild(script);
+    })();
+        ```
+    </Step>
+
+</Steps>
+
+## Überprüfung
+
+Sobald du diese Änderungen gepusht hast, wird das Skript automatisch auf allen Seiten deiner Dokumentation geladen. Du kannst die Installation überprüfen, indem du deine Docs besuchst und im bchic Dashboard schaust, ob der erste Besucher (du selbst) getrackt wird.

@@ -54,6 +54,15 @@
             ]
           },
           {
+            "tab": "Integration",
+            "groups": [
+              {
+                "group": "Plattformen",
+                "pages": ["de/integration/mintlify"]
+              }
+            ]
+          },
+          {
             "tab": "Filter",
             "groups": [
               {
@@ -125,6 +134,15 @@
               {
                 "group": "UTM",
                 "pages": ["en/plattform/pages/utm"]
+              }
+            ]
+          },
+          {
+            "tab": "Integrations",
+            "groups": [
+              {
+                "group": "Platform",
+                "pages": ["en/integration/mintlify"]
               }
             ]
           },
