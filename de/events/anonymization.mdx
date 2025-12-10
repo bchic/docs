@@ -1,0 +1,103 @@
+---
+title: 'URL Anonymisierung'
+description: 'So maskierst du personenbezogene Daten in URLs.'
+icon: 'user-shield'
+---
+
+Ein sehr wichtiger Teil der datenschutzkonformen Einrichtung ist die **URL-Anonymisierung**. Da wir keine personenbezogenen Daten (PII) erfassen, müssen URLs, die persönliche Identifier enthalten (z.B. eine User-ID, ein Name oder eine Bestellnummer), maskiert werden.
+
+So können wir das allgemeine Nutzerverhalten auf Seitentypen analysieren, ohne Rückschlüsse auf eine konkrete Person ziehen zu können.
+
+## Fallbeispiel
+
+Stell dir vor, deine Website hat eine URL-Struktur wie:
+`https://beispiel-shop.de/profil/12345/bestellungen`
+
+Hier ist `12345` eine eindeutige `userId` und somit ein personenbezogenes Datum. Dies darf laut DSGVO oft nicht im Klartext an Analytics-Tools gesendet werden.
+
+### Die Lösung
+
+Füge das `data-anonymize-url`-Attribut zu deinem bestehenden Script-Tag hinzu.
+
+<CodeGroup>
+    ```html Vorher (Standard)
+    <script
+        defer
+        src="https://analytics.bchic.de/script.js"
+        data-website-id="DEINE_WEBSITE_ID"
+    ></script>
+    ```
+
+    ```html Nachher (Anonymisiert)
+    <script
+        defer
+        src="https://analytics.bchic.de/script.js"
+        data-website-id="DEINE_WEBSITE_ID"
+        data-anonymize-url="/profil/{userId}/*"
+    ></script>
+    ```
+</CodeGroup>
+
+<Info>
+    **Was passiert hier?**
+    Anstatt der vollständigen URL `/profil/12345/bestellungen` sendet das Skript nun `/profil/userId/bestellungen` an das Dashboard. Deine Statistiken bleiben sauber gruppiert, aber die User-ID verlässt niemals den Browser des Besuchers.
+</Info>
+
+## Funktionsweise & Syntax
+
+Das `data-anonymize-url`-Attribut nutzt eine einfache Mustersprache, um dynamische Teile zu maskieren. Unser Script ersetzt die entsprechenden Segmente, *bevor* die Daten gesendet werden.
+
+| Symbol | Funktion |
+| :--- | :--- |
+| `{platzhalter}` | Geschweifte Klammern definieren einen dynamischen Teil. Der Inhalt (z.B. `{userId}`) wird als Text in den Berichten angezeigt. |
+| `*` | Die Wildcard ("Catch-all"). Alles, was an dieser Stelle oder danach kommt, wird ignoriert bzw. maskiert. |
+
+### Mehrere Regeln definieren
+
+Wenn du mehrere unterschiedliche URL-Strukturen hast, kannst du die Regeln einfach **durch ein Komma getrennt** auflisten.
+
+```html
+<script
+    defer
+    src="https://analytics.bchic.de/script.js"
+    data-website-id="DEINE_ID"
+    data-anonymize-url="/profil/{userId}/*, /bestellungen/details/{orderId}"
+></script>
+```
+
+In diesem Fall werden zwei URL-Typen behandelt:
+1. Alle URLs, die mit `/profil/` beginnen (User-IDs werden maskiert).
+2. URLs für Bestelldetails (z.B. `/bestellungen/details/98765`).
+
+## Beispiele aus der Praxis
+
+<CardGroup cols={1}>
+    <Card title="Öffentliche Nutzernamen maskieren" icon="user">
+        Original: `beispiel.de/user/max-mustermann`
+
+        **Regel:** `data-anonymize-url="/user/{username}"`
+
+        Ergebnis im Dashboard: `/user/{username}`
+    </Card>
+    <Card title="Bestell-IDs im Checkout" icon="cart-shopping">
+        Original: `shop.de/checkout/success/order/B-1023-4567`
+
+        **Regel:** `data-anonymize-url="/checkout/success/order/{orderId}"`
+
+        Ergebnis im Dashboard: `/checkout/success/order/{orderId}`
+    </Card>
+</CardGroup>
+
+## Überprüfung & Testing
+
+Woher weißt du, ob es funktioniert? Prüfe es direkt im Browser.
+
+1. Öffne die **Entwicklertools** deines Browsers (F12).
+2. Wechsle zum Tab **Netzwerk** (Network).
+3. Lade eine Seite deiner Website, die eine solche URL enthält.
+4. Suche nach der Anfrage an `analytics.bchic.de`.
+5. Klicke auf den Request und schaue dir den **Payload** an.
+
+<Check>
+    Das Feld `url` im Payload sollte bereits die anonymisierte Form (z.B. `/profil/userId/...`) enthalten. Ist das der Fall, werden keine persönlichen Daten übertragen.
+</Check>

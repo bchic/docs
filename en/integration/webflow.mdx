@@ -1,0 +1,72 @@
+---
+title: 'Webflow Integration'
+description: 'How to integrate bchic Analytics into your Webflow website.'
+---
+
+<video
+    controls
+    className="w-full aspect-video rounded-xl shadow-sm border border-gray-200 dark:border-gray-800"
+    src="/videos/webflow-guide.mp4"
+></video>
+
+<br />
+
+Integration into Webflow is done via the global project settings. You need a Webflow plan that supports **Custom Code** (Site Plan or Workspace Plan).
+
+<Steps>
+    <Step title="Copy Tracking Script">
+        Copy your tracking script from the bchic Dashboard (Settings -> Website).
+
+        The code looks something like this:
+
+        ```html
+        <script defer src="https://analytics.bchic.de/script.js" data-website-id="YOUR-ID-HERE"></script>
+        ```
+    </Step>
+
+    <Step title="Open Project Settings">
+        1. Open your Webflow Dashboard.
+        2. Click on the **three dots (...)** next to your project and select **Settings**.
+        3. Navigate to the **Custom Code** tab in the top tab bar.
+    </Step>
+
+    <Step title="Paste Code">
+        Paste your bchic script into the **Head Code** field.
+
+        <Warning>
+            Make sure **not** to put the code in the Footer Code so that tracking starts as early as possible.
+        </Warning>
+
+        Then click the green **Save Changes** button.
+    </Step>
+
+    <Step title="Publish">
+        Custom Code in Webflow only becomes active once the site has been published.
+
+        Click **Publish** in the top right and select your domains. Once the publish process is complete, bchic is active.
+    </Step>
+</Steps>
+
+## Custom Events in Webflow (Track Buttons)
+
+In Webflow, you can easily track interactions (like clicks on important buttons) without making the button itself "dirty". We use **IDs** for this.
+
+1. Select your button in the **Webflow Designer**.
+2. Go to the **Settings (gear icon)** on the right.
+3. Give the button a unique name in the **ID** field, e.g., `cta-button-header`.
+
+Now go back to the **Page Settings** (or global Custom Code) in the **Before &lt;/body&gt; tag** area and insert this snippet:
+
+```html
+<script>
+  var btn = document.getElementById('cta-button-header');
+
+  if (btn) {
+    btn.addEventListener('click', function() {
+      if(window.bchic) {
+        bchic('track', 'signup_click', { position: 'header' });
+      }
+    });
+  }
+</script>
+```

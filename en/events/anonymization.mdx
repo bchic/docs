@@ -1,0 +1,103 @@
+---
+title: 'URL Anonymization'
+description: 'How to mask personal data in URLs.'
+icon: 'user-shield'
+---
+
+A very important part of a GDPR-compliant setup is **URL Anonymization**. Since we do not collect personally identifiable information (PII), URLs containing personal identifiers (e.g., a User ID, a name, or an order number) must be masked.
+
+This allows us to analyze general user behavior on page types without being able to draw conclusions about a specific person.
+
+## Example Scenario
+
+Imagine your website has a URL structure like:
+`https://example-shop.com/profile/12345/orders`
+
+Here, `12345` is a unique `userId` and thus personal data. According to GDPR, this often must not be sent in plain text to analytics tools.
+
+### The Solution
+
+Add the `data-anonymize-url` attribute to your existing script tag.
+
+<CodeGroup>
+    ```html Before (Standard)
+    <script
+        defer
+        src="https://analytics.bchic.de/script.js"
+        data-website-id="YOUR_WEBSITE_ID"
+    ></script>
+    ```
+
+    ```html After (Anonymized)
+    <script
+        defer
+        src="https://analytics.bchic.de/script.js"
+        data-website-id="YOUR_WEBSITE_ID"
+        data-anonymize-url="/profile/{userId}/*"
+    ></script>
+    ```
+</CodeGroup>
+
+<Info>
+    **What is happening here?**
+    Instead of the full URL `/profile/12345/orders`, the script now sends `/profile/userId/orders` to the dashboard. Your statistics remain cleanly grouped, but the User ID never leaves the visitor's browser.
+</Info>
+
+## Functionality & Syntax
+
+The `data-anonymize-url` attribute uses a simple pattern language to mask dynamic parts. Our script replaces the corresponding segments *before* the data is sent.
+
+| Symbol | Function |
+| :--- | :--- |
+| `{placeholder}` | Curly braces define a dynamic part. The content (e.g., `{userId}`) is displayed as text in the reports. |
+| `*` | The wildcard ("catch-all"). Everything at this position or after is ignored or masked. |
+
+### Defining Multiple Rules
+
+If you have several different URL structures, you can simply list the rules **separated by a comma**.
+
+```html
+<script
+    defer
+    src="https://analytics.bchic.de/script.js"
+    data-website-id="YOUR_ID"
+    data-anonymize-url="/profile/{userId}/*, /orders/details/{orderId}"
+></script>
+```
+
+In this case, two URL types are handled:
+1. All URLs starting with `/profile/` (User IDs are masked).
+2. URLs for order details (e.g., `/orders/details/98765`).
+
+## Real-world Examples
+
+<CardGroup cols={1}>
+    <Card title="Mask Public Usernames" icon="user">
+        Original: `example.com/user/max-mustermann`
+
+        **Rule:** `data-anonymize-url="/user/{username}"`
+
+        Result in Dashboard: `/user/{username}`
+    </Card>
+    <Card title="Order IDs in Checkout" icon="cart-shopping">
+        Original: `shop.com/checkout/success/order/B-1023-4567`
+
+        **Rule:** `data-anonymize-url="/checkout/success/order/{orderId}"`
+
+        Result in Dashboard: `/checkout/success/order/{orderId}`
+    </Card>
+</CardGroup>
+
+## Verification & Testing
+
+How do you know if it works? Check it directly in the browser.
+
+1. Open your browser's **Developer Tools** (F12).
+2. Switch to the **Network** tab.
+3. Load a page on your website that contains such a URL.
+4. Look for the request to `analytics.bchic.de`.
+5. Click on the request and look at the **Payload**.
+
+<Check>
+    The `url` field in the payload should already contain the anonymized form (e.g., `/profile/userId/...`). If this is the case, no personal data is being transmitted.
+</Check>

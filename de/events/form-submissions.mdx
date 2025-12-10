@@ -1,0 +1,104 @@
+---
+title: 'Formulare tracken'
+description: 'So misst du Kontaktanfragen, Newsletter-Anmeldungen und Leads.'
+icon: 'envelope-open-text'
+---
+
+Formulare sind oft der wichtigste Konversionspunkt einer Website. Egal ob Newsletter, Kontaktanfrage oder Lead-Gen – du willst wissen, wie oft sie ausgefüllt werden.
+
+## Methode 1: Die "Danke-Seite" (Empfohlen)
+
+Der zuverlässigste Weg, eine **erfolgreiche** Übermittlung zu messen, ist die Weiterleitung auf eine separate Bestätigungsseite (z.B. `/danke` oder `/success`).
+
+**Warum ist das besser?**
+- Du misst nur *echte* Absendungen (keine Validierungsfehler).
+- Es gibt keine technischen Probleme mit dem Neuladen der Seite.
+
+<Steps>
+    <Step title="Weiterleitung einrichten">
+        Konfiguriere dein Formular-Plugin oder dein CMS so, dass der Nutzer nach dem Absenden auf `/danke` geleitet wird.
+    </Step>
+    <Step title="Event auslösen">
+        Füge auf dieser Danke-Seite ein kleines Skript ein, das beim Laden feuert.
+
+        ```html
+        <script>
+            // Wartet, bis Seite geladen ist
+            window.addEventListener('load', function() {
+            if (window.bchic) {
+            bchic('track', 'form_submit_success', { form_id: 'contact_page' });
+        }
+        });
+        </script>
+        ```
+    </Step>
+</Steps>
+
+## Methode 2: HTML-Attribute (Der schnelle Weg)
+
+Wenn du keine Danke-Seite hast oder das Formular via AJAX (ohne Neuladen) versendet wird, kannst du das Absende-Element direkt taggen.
+
+Füge einfach das `data-bchic-event` Attribut deinem **Submit-Button** hinzu.
+
+```html
+<form action="/submit" method="POST">
+  <input type="email" name="email" placeholder="Deine E-Mail" />
+
+  <!-- Das Tracking sitzt auf dem Button -->
+  <button type="submit"
+          data-bchic-event="newsletter_signup_click">
+    Anmelden
+  </button>
+</form>
+```
+
+<Warning>
+    **Achtung:** Dies trackt den **Klick** auf den Button. Es zählt auch, wenn der Nutzer auf den Button klickt, aber das Formular wegen fehlender Daten (z.B. ungültige E-Mail) gar nicht abgesendet wird.
+</Warning>
+
+## Methode 3: JavaScript (Präzise Kontrolle)
+
+Für volle Kontrolle (z.B. erst tracken, wenn die Validierung erfolgreich war) nutzt du JavaScript.
+
+```javascript
+const form = document.getElementById('my-form');
+
+form.addEventListener('submit', (e) => {
+  // 1. Hier optional Validierung prüfen
+
+  // 2. Tracking senden
+  bchic('track', 'contact_form_submit', {
+      category: 'sales_request' // Beispiel Payload
+  });
+
+  // Formular wird danach normal weiterverarbeitet
+});
+```
+
+## Formular-Daten im Payload? (Datenschutz!)
+
+Du möchtest vielleicht wissen, **was** im Formular ausgewählt wurde (z.B. der Betreff der Anfrage). Das ist möglich, aber du musst extrem vorsichtig sein.
+
+<CodeGroup>
+    ```javascript ✅ Erlaubt (Generisch)
+    // Auswahl in einem Dropdown tracken
+    const subject = document.getElementById('subject_select').value;
+
+    bchic('track', 'form_submit', {
+    topic: subject // z.B. "Support" oder "Sales"
+});
+    ```
+
+    ```javascript ❌ Verboten (PII)
+    // NIEMALS persönliche Daten tracken!
+    const email = document.getElementById('email_field').value;
+
+    bchic('track', 'form_submit', {
+    user_email: email // Das verstößt gegen die DSGVO
+});
+    ```
+</CodeGroup>
+
+<Info>
+    **Regel:** Sende niemals Daten, die einen Nutzer identifizieren könnten (E-Mail, Name, Telefon, Adresse). Beschränke dich auf generische Auswahlfelder (Kategorie, Abteilung, Produkt-Interesse).
+</Info>

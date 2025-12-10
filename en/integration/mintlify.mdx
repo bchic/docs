@@ -1,32 +1,31 @@
 ---
 title: 'Mintlify Integration'
 description: 'How to integrate bchic Analytics into your Mintlify documentation.'
-icon: 'book-open-cover'
 ---
 
-Since Mintlify currently doesn't offer a native plugin integration, we'll set up tracking using a small custom script. It only takes a few minutes.
+Since Mintlify currently does not offer a native plugin integration, we embed the tracking via a small, custom script. This is done in just a few minutes.
 
 <Steps>
-    <Step title="Get your Website ID">
-        First, you need the **Website ID** for your documentation from your bchic dashboard.
+    <Step title="Retrieve Website ID">
+        First, you need the **Website ID** of your documentation from your bchic Dashboard.
 
         1. Open **Settings** (gear icon bottom left).
-        2. Navigate to **Organization**.
-        3. Expand the "Linked Website URLs" section using the arrow icon.
+        2. Navigate to the **Organization** menu item.
+        3. Open the "Linked Website URLs" area via the arrow icon.
 
         <img src="/images/integration/mintlify/step1.jpeg" alt="Settings Organization Dashboard" />
 
-        Add the URL of your documentation here (e.g., `docs.your-company.com`) and click the plus symbol:
+        Now add the URL of your documentation here (e.g., `docs.your-company.com`) and click on the plus symbol:
 
-        <img src="/images/integration/mintlify/step2.jpeg" alt="Add URL to organization" />
+        <img src="/images/integration/mintlify/step2.jpeg" alt="Add URL to Organization" />
 
-        Then, click the **Installation button** (the code icon) next to the newly created URL. Copy your ID from the code snippet displayed. You can find it in the `data-website-id` attribute.
+        Then click on the **Installation Button** (the code icon) next to the newly created URL. Copy your ID from the displayed code snippet. You can find it in the `data-website-id` attribute.
 
         <img src="/images/integration/mintlify/step3.jpeg" alt="Copy Website ID" />
     </Step>
 
     <Step title="Create Tracking File">
-        Now create a new file in your documentation project. We recommend saving it in the root directory (where your `docs.json` is located).
+        Now create a new file in your documentation project. We recommend saving this in the root directory (where your `docs.json` is located).
 
         Name the file: `bchic.js`
 
@@ -54,4 +53,4 @@ Since Mintlify currently doesn't offer a native plugin integration, we'll set up
 
 ## Verification
 
-Once you have pushed these changes, the script will automatically load on all pages of your documentation. You can verify the installation by visiting your docs and checking the bchic dashboard to see if the first visitor (yourself) is being tracked.
+Once you have pushed these changes, the script will automatically load on all pages of your documentation. You can verify the installation by visiting your docs and checking the bchic Dashboard to see if the first visitor (yourself) is being tracked.

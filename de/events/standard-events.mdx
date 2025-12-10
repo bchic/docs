@@ -1,0 +1,44 @@
+---
+title: 'Standard Events'
+description: 'Interaktionen, die bchic automatisch für dich erfasst.'
+icon: 'wand-magic-sparkles'
+---
+
+Nicht jede Interaktion muss mühsam manuell eingerichtet werden. Unser Tracking-Skript ist intelligent genug, um wichtige Standard-Metriken automatisch zu erkennen und als Events in dein Dashboard zu senden.
+
+Aktuell sind folgende Standard-Events "out-of-the-box" aktiv:
+
+## Outbound Links (Ausgehende Links)
+
+bchic erkennt automatisch, wenn ein Besucher auf einen Link klickt, der deine Website verlässt (z.B. zu Social Media Profilen, Partnern oder externen Quellen).
+
+*   **Event Name:** `Outbound Link: Click`
+*   **Payload:** Die URL der Zielseite.
+
+**Warum ist das wichtig?**
+Du siehst sofort, welche deiner Partnerschaften oder Social-Media-Kanäle am meisten Traffic von deiner Seite erhalten, ohne dass du jeden einzelnen externen Link manuell taggen musst.
+
+## Scroll Tiefe (Scroll Depth)
+
+Besucher landen auf deiner Seite – aber lesen sie auch deine Inhalte? Das Scroll-Tracking misst, wie viel Prozent einer Seite vom Nutzer tatsächlich gesehen wurden.
+
+Das Skript feuert Events, sobald bestimmte Marken erreicht werden (z.B. wenn der Nutzer das Ende eines Artikels erreicht).
+
+*   **Nutzen:** Identifiziere Blogartikel, die zwar oft geklickt, aber nicht zu Ende gelesen werden (hohe Bounce Rate, geringe Scroll Tiefe).
+
+---
+
+## Demnächst verfügbar (Roadmap)
+
+Wir erweitern die automatische Erfassung stetig. Folgende Metriken werden in Kürze automatisch verfügbar sein:
+
+<CardGroup cols={2}>
+    <Card title="Dead Clicks" icon="skull">
+        **"Wut-Klicks" erkennen.**
+        Wir erkennen, wenn Nutzer frustriert mehrfach auf Elemente klicken, die nicht reagieren (z.B. kaputte Buttons oder Bilder, die wie Links aussehen). So findest du UX-Probleme in Sekunden.
+    </Card>
+    <Card title="Performance (Web Vitals)" icon="gauge-high">
+        **Ladezeiten verstehen.**
+        Wir messen automatisch die **Core Web Vitals** (LCP, CLS, FID/INP). Damit siehst du nicht nur, wie viele Besucher du hast, sondern auch, ob deine Seite schnell genug lädt, um sie zu halten.
+    </Card>
+</CardGroup>

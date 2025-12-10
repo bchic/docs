@@ -1,0 +1,156 @@
+---
+title: 'Custom Events'
+description: 'Erfasse Klicks, Käufe und Interaktionen manuell.'
+icon: 'code-branch'
+---
+
+Nachdem das Basis-Skript läuft, ist der nächste Schritt das "Tagging". Damit erfasst du Benutzerinteraktionen wie Button-Klicks, Formular-Absendungen oder Käufe, die nicht automatisch getrackt werden können.
+
+<Info>
+    **Grundregeln**
+    - **Zeichenlimit:** Event-Namen sind auf 50 Zeichen begrenzt.
+    - **Name erforderlich:** Events können nicht ohne Namen gesendet werden.
+</Info>
+
+## Event-Typen verstehen
+
+Wir unterscheiden zwei Arten von Events:
+
+<CardGroup cols={2}>
+    <Card title="Property-Type Events" icon="tag">
+        **Einfaches Tracking.** Sendet nur den Namen der Aktion.
+
+        *Beispiel:* "Button geklickt", "Menü geöffnet".
+    </Card>
+
+    <Card title="Payload Events" icon="database">
+        **Erweitertes Tracking.** Sendet den Namen plus zusätzliche Daten (Kontext).
+
+        *Beispiel:* "Produkt in Warenkorb" (inkl. Produktname, Preis, Kategorie).
+    </Card>
+</CardGroup>
+
+<Warning>
+    **Kritischer Datenschutz-Hinweis**
+    bchic ist so konzipiert, dass es komplett ohne personenbezogene Daten (PII) funktioniert.
+
+    Verwende **niemals** folgende Daten in deinen Events:
+    - E-Mail-Adressen
+    - Namen oder Benutzernamen
+    - Telefonnummern
+    - IP-Adressen
+    - User-IDs (in Klarschrift)
+
+    **Erlaubt sind:** Produkt-IDs, Kategorien, Preise, generische Status-Meldungen (z.B. "Plan: Pro").
+</Warning>
+
+## Methode 1: HTML-Attribute (No-Code)
+
+Dies ist die einfachste Methode. Du fügst deinen HTML-Elementen lediglich Attribute hinzu – unser Skript erledigt den Rest automatisch.
+
+<Steps>
+    <Step title="Event-Typ wählen">
+        Entscheide, ob du nur wissen willst, **OB** etwas passiert ist (Property), oder **WAS** genau passiert ist (Payload).
+    </Step>
+    <Step title="Attribute hinzufügen">
+        Füge dem HTML-Element das `data-bchic-event` Attribut hinzu.
+
+        <Tabs>
+            <Tab title="Einfaches Event">
+                **Syntax:** `data-bchic-event="NAME"`
+
+                ```html
+                <!-- Vorher -->
+                <button class="btn">Download</button>
+
+                <!-- Nachher -->
+                <button class="btn" data-bchic-event="whitepaper-download">
+                    Download
+                </button>
+                ```
+            </Tab>
+
+            <Tab title="Event mit Daten (Payload)">
+                **Syntax:**
+                - Name: `data-bchic-event="NAME"`
+                - Daten: `data-bchic-event-{KEY}="{VALUE}"`
+
+                ```html
+                <button class="add-to-cart"
+                        data-bchic-event="add-to-cart"
+                        data-bchic-event-product="premium-plan"
+                        data-bchic-event-price="29.99">
+                    In den Warenkorb
+                </button>
+                ```
+
+                **Ergebnis:** Sendet das Event `add-to-cart` mit den Daten `{ product: 'premium-plan', price: '29.99' }`.
+
+                <Note>
+                    **Hinweis:** Daten über HTML-Attribute werden immer als **Text (String)** übertragen. Für echte Zahlen oder Booleans nutze Methode 2 (JavaScript).
+                </Note>
+            </Tab>
+        </Tabs>
+    </Step>
+    <Step title="Testen">
+        Klicke auf das Element und schaue in dein bchic Dashboard. Das Event sollte sofort erscheinen. Falls nicht, lade das Dashboard einmal neu.
+    </Step>
+</Steps>
+
+## Methode 2: JavaScript (Für Entwickler)
+
+Für volle Flexibilität oder dynamische Anwendungen nutzt du den Funktionsaufruf `bchic()`. Diese Methode ist ideal, wenn du Daten aus einer API hast oder Datentypen (Zahlen, Booleans) wichtig sind.
+
+<Tabs>
+    <Tab title="Einfach">
+        ```javascript
+        const button = document.getElementById('signup-button');
+
+        button.addEventListener('click', () => {
+        // Sendet nur den Namen
+        bchic('track', 'signup_click');
+    });
+        ```
+    </Tab>
+    <Tab title="Mit Payload">
+        ```javascript
+        const button = document.querySelector('.add-to-cart');
+
+        button.addEventListener('click', () => {
+        bchic('track', 'add-to-cart', {
+            product: 'premium-plan',
+            price: 99.99,     // Wird als Zahl gespeichert
+            currency: 'EUR',  // Wichtig für Umsatz-Statistiken
+            is_featured: true // Wird als Boolean gespeichert
+        });
+    });
+        ```
+    </Tab>
+</Tabs>
+
+## Best Practices
+
+Damit deine Daten sauber bleiben, empfehlen wir folgende Konventionen:
+
+<AccordionGroup>
+    <Accordion title="Benennung (Naming)">
+        **Nutze Kebab-Case:**
+        - ✅ `newsletter-signup`
+        - ❌ `Newsletter Signup`
+
+        **Sei spezifisch:**
+        - ✅ `pricing-cta-click`
+        - ❌ `click`
+
+        **Konsistenz:**
+        Nutze nicht `signup` auf Seite A und `register` auf Seite B für die gleiche Aktion.
+    </Accordion>
+
+    <Accordion title="Checkliste Datenschutz">
+        Bevor du ein Event implementierst, stelle dir folgende Fragen:
+
+        1. Steht eine E-Mail-Adresse im Payload? ❌ (Verboten)
+        2. Ist eine User-ID enthalten? ❌ (Nur gehasht oder als interne ID erlaubt)
+        3. Sind die Daten allgemein genug? ✅ (z.B. Produktkategorie statt Nutzername)
+    </Accordion>
+</AccordionGroup>

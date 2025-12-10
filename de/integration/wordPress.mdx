@@ -1,0 +1,78 @@
+---
+title: 'WordPress Integration'
+description: 'So integrierst du bchic Analytics in deine WordPress Website.'
+---
+
+Die Integration in WordPress ist unkompliziert. Wir empfehlen die Nutzung eines einfachen Code-Snippet-Plugins, damit das Tracking auch erhalten bleibt, wenn du dein Theme wechselst oder aktualisierst.
+
+<Steps>
+    <Step title="Tracking-Skript kopieren">
+        Hole dir zunächst dein Skript aus dem Dashboard.
+
+        Gehe in die **Einstellungen** deiner Website im bchic Dashboard und kopiere den HTML-Code. Er sieht ungefähr so aus:
+
+        ```html
+        <script defer src="https://analytics.bchic.de/script.js" data-website-id="DEINE-ID-HIER"></script>
+        ```
+    </Step>
+
+    <Step title="Plugin installieren">
+        Um den Code sicher einzufügen, nutze das kostenlose Plugin **WPCode** (früher "Insert Headers and Footers").
+
+        1. Logge dich in dein WordPress-Admin-Panel ein.
+        2. Gehe zu **Plugins > Installieren**.
+        3. Suche nach `WPCode`.
+        4. Installiere und aktiviere das Plugin von "WPCode".
+    </Step>
+
+    <Step title="Skript einfügen">
+        Nach der Aktivierung findest du links im Menü den Punkt **Code Snippets**.
+
+        1. Gehe zu **Code Snippets > Header & Footer**.
+        2. Füge dein bchic-Skript in das erste Feld **Header** ein.
+        3. Klicke oben rechts auf **Save Changes**.
+
+        <img src="/images/integration/wordpress/header-footer.jpeg" alt="WPCode Header Bereich" />
+
+        Das war's! Leere ggf. deinen Cache, und bchic trackt ab sofort alle Besucher.
+    </Step>
+
+</Steps>
+
+## Wichtiger Hinweis zu Caching-Plugins
+
+WordPress-Seiten nutzen oft aggressive Caching- oder Optimierungs-Plugins (wie WP Rocket, Autoptimize, SiteGround Optimizer).
+
+Diese Plugins versuchen oft, JavaScript-Dateien zusammenzufassen (minify/combine). Das kann dazu führen, dass unser Skript nicht mehr korrekt funktioniert.
+
+**Die Lösung:**
+Stelle sicher, dass unser Skript von der "Minification" oder "Combination" ausgeschlossen ist. Suche in deinem Caching-Plugin nach einer Einstellung wie "Exclude External Scripts" oder "Ignorierte URLs" und füge folgende Domain hinzu:
+
+`analytics.bchic.de/script.js`
+
+## Fortgeschritten: Autoren tracken (Custom Events)
+
+Möchtest du wissen, welche Autoren auf deinem Blog am meisten gelesen werden? Du kannst dies über ein **Custom Event** in deiner `functions.php` lösen.
+
+Füge folgenden Code in die `functions.php` deines Child-Themes oder in ein Code-Snippet-Plugin ein (als PHP-Snippet):
+
+```php
+function add_bchic_author_tracking() {
+    // Führe Code nur auf einzelnen Beiträgen aus
+    if (is_single()) {
+        $author_nickname = get_the_author_meta('nickname');
+        ?>
+        <script>
+            window.addEventListener('load', function() {
+                if(window.bchic) {
+                    // Sendet ein Event "author_view" mit dem Namen des Autors als Payload
+                    bchic('track', 'author_view', {
+                        author: '<?php echo esc_js($author_nickname); ?>'
+                    });
+                }
+            });
+        </script>
+        <?php
+    }
+}
+add_action('wp_footer', 'add_bchic_author_tracking');

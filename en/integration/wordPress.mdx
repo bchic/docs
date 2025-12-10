@@ -1,0 +1,78 @@
+---
+title: 'WordPress Integration'
+description: 'How to integrate bchic Analytics into your WordPress website.'
+---
+
+Integration into WordPress is straightforward. We recommend using a simple Code Snippet plugin so that tracking remains intact even if you change or update your theme.
+
+<Steps>
+    <Step title="Copy Tracking Script">
+        First, get your script from the dashboard.
+
+        Go to the **Settings** of your website in the bchic Dashboard and copy the HTML code. It looks something like this:
+
+        ```html
+        <script defer src="https://analytics.bchic.de/script.js" data-website-id="YOUR-ID-HERE"></script>
+        ```
+    </Step>
+
+    <Step title="Install Plugin">
+        To safely insert the code, use the free plugin **WPCode** (formerly "Insert Headers and Footers").
+
+        1. Log in to your WordPress Admin Panel.
+        2. Go to **Plugins > Add New**.
+        3. Search for `WPCode`.
+        4. Install and activate the plugin by "WPCode".
+    </Step>
+
+    <Step title="Insert Script">
+        After activation, you will find the item **Code Snippets** in the menu on the left.
+
+        1. Go to **Code Snippets > Header & Footer**.
+        2. Paste your bchic script into the first field **Header**.
+        3. Click **Save Changes** in the top right.
+
+        <img src="/images/integration/wordpress/header-footer.jpeg" alt="WPCode Header Area" />
+
+        That's it! Clear your cache if necessary, and bchic will track all visitors from now on.
+    </Step>
+</Steps>
+
+## Important Note on Caching Plugins
+
+WordPress sites often use aggressive caching or optimization plugins (like WP Rocket, Autoptimize, SiteGround Optimizer).
+
+These plugins often try to combine JavaScript files (minify/combine). This can cause our script to stop working correctly.
+
+**The Solution:**
+Make sure our script is excluded from "Minification" or "Combination". Look for a setting like "Exclude External Scripts" or "Ignored URLs" in your caching plugin and add the following domain:
+
+`analytics.bchic.de/script.js`
+
+## Advanced: Track Authors (Custom Events)
+
+Do you want to know which authors are read the most on your blog? You can solve this via a **Custom Event** in your `functions.php`.
+
+Paste the following code into the `functions.php` of your child theme or into a Code Snippet plugin (as a PHP snippet):
+
+```php
+function add_bchic_author_tracking() {
+    // Execute code only on single posts
+    if (is_single()) {
+        $author_nickname = get_the_author_meta('nickname');
+        ?>
+        <script>
+            window.addEventListener('load', function() {
+                if(window.bchic) {
+                    // Sends an event "author_view" with the author's name as payload
+                    bchic('track', 'author_view', {
+                        author: '<?php echo esc_js($author_nickname); ?>'
+                    });
+                }
+            });
+        </script>
+        <?php
+    }
+}
+add_action('wp_footer', 'add_bchic_author_tracking');
+```

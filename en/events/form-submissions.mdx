@@ -1,0 +1,104 @@
+---
+title: 'Track Forms'
+description: 'How to measure contact requests, newsletter signups, and leads.'
+icon: 'envelope-open-text'
+---
+
+Forms are often the most important conversion point of a website. Whether newsletter, contact request, or lead gen – you want to know how often they are filled out.
+
+## Method 1: The "Thank You Page" (Recommended)
+
+The most reliable way to measure a **successful** submission is redirection to a separate confirmation page (e.g., `/thank-you` or `/success`).
+
+**Why is this better?**
+- You only measure *real* submissions (no validation errors).
+- There are no technical issues with page reloading.
+
+<Steps>
+    <Step title="Setup Redirection">
+        Configure your form plugin or CMS so that the user is redirected to `/thank-you` after submission.
+    </Step>
+    <Step title="Trigger Event">
+        Insert a small script on this thank you page that fires upon loading.
+
+        ```html
+        <script>
+            // Waits until page is loaded
+            window.addEventListener('load', function() {
+            if (window.bchic) {
+            bchic('track', 'form_submit_success', { form_id: 'contact_page' });
+        }
+        });
+        </script>
+        ```
+    </Step>
+</Steps>
+
+## Method 2: HTML Attributes (The Fast Way)
+
+If you don't have a thank you page or the form is sent via AJAX (without reloading), you can tag the submit element directly.
+
+Simply add the `data-bchic-event` attribute to your **submit button**.
+
+```html
+<form action="/submit" method="POST">
+  <input type="email" name="email" placeholder="Your Email" />
+
+  <!-- Tracking sits on the button -->
+  <button type="submit"
+          data-bchic-event="newsletter_signup_click">
+    Sign Up
+  </button>
+</form>
+```
+
+<Warning>
+    **Attention:** This tracks the **click** on the button. It also counts if the user clicks the button but the form is not sent due to missing data (e.g., invalid email).
+</Warning>
+
+## Method 3: JavaScript (Precise Control)
+
+For full control (e.g., only track if validation was successful), use JavaScript.
+
+```javascript
+const form = document.getElementById('my-form');
+
+form.addEventListener('submit', (e) => {
+  // 1. Check validation here optionally
+
+  // 2. Send tracking
+  bchic('track', 'contact_form_submit', {
+      category: 'sales_request' // Example Payload
+  });
+
+  // Form is processed normally afterwards
+});
+```
+
+## Form Data in Payload? (Privacy!)
+
+You might want to know **what** was selected in the form (e.g., the subject of the request). This is possible, but you must be extremely careful.
+
+<CodeGroup>
+    ```javascript ✅ Allowed (Generic)
+    // Track selection in a dropdown
+    const subject = document.getElementById('subject_select').value;
+
+    bchic('track', 'form_submit', {
+    topic: subject // e.g. "Support" or "Sales"
+});
+    ```
+
+    ```javascript ❌ Forbidden (PII)
+    // NEVER track personal data!
+    const email = document.getElementById('email_field').value;
+
+    bchic('track', 'form_submit', {
+    user_email: email // This violates GDPR
+});
+    ```
+</CodeGroup>
+
+<Info>
+    **Rule:** Never send data that could identify a user (email, name, phone, address). Limit yourself to generic selection fields (category, department, product interest).
+</Info>

@@ -1,0 +1,50 @@
+---
+title: 'Rechnungen'
+description: 'Verstehe, wie sich deine Rechnungen zusammensetzen und wie Upgrades verrechnet werden.'
+icon: 'file-invoice-dollar'
+---
+
+> Unsere Rechnungen werden automatisch über unser Abrechnungsportal (Stripe) erstellt. Zu Beginn jedes Abrechnungszyklus erhältst du eine Rechnung für das gebuchte Paket des kommenden Zeitraums.
+
+## Wie funktionieren unsere Rechnungen?
+
+Da unser Preismodell auf Datenvolumen und nicht auf Sitzplätzen basiert, ist deine Rechnung in der Regel sehr einfach: Du zahlst einen festen Betrag für dein gewähltes Paket.
+
+Komplexer sieht die Rechnung nur aus, wenn du **mitten im Monat ein Upgrade durchführst** (z.B. Wechsel vom "Starter"-Paket auf das "Business"-Paket). In diesem Fall verrechnet unser System automatisch die ungenutzte Zeit des alten Pakets mit der Laufzeit des neuen Pakets.
+
+### Beispielrechnung bei einem Upgrade
+
+Angenommen, du wechselst am 16. August dein Paket. Deine nächste Rechnung am 1. September würde dann so aussehen:
+
+| **Beschreibung**                                      | **Betrag**  |
+| ----------------------------------------------------- | ----------- |
+| **Korrekturen (16. Aug - 1. Sep)**                    |             |
+| Verbleibende Zeit für "Business Paket" nach 16. Aug   | €100.00     |
+| Ungenutzte Zeit für "Starter Paket" nach 16. Aug      | -€50.00     |
+| **Kommender Monat (1. Sep - 1. Okt)**                 |             |
+| Business Paket (Monatlich)                            | €200.00     |
+|                                                       |             |
+| Zwischensumme                                         | €250.00     |
+| MwSt. (19%)                                           | €47.50      |
+| **Gesamtsumme**                                       | **€297.50** |
+
+### Erklärung der Positionen
+
+Eine Rechnung nach einem Wechsel besteht oft aus zwei Teilen:
+
+#### 1. Der kommende Monat
+Dies ist der Standardteil. Du zahlst im Voraus für den nächsten vollen Monat deines neuen Pakets (im Beispiel das "Business Paket" für €200).
+
+#### 2. Korrekturen des vorherigen Monats (Prorating)
+Dieser Abschnitt erscheint nur, wenn du Änderungen vorgenommen hast. Das System rechnet minutengenau ab:
+
+*   **Ungenutzte Zeit (Gutschrift):** Da du das alte "Starter Paket" für den ganzen Monat im Voraus bezahlt hattest, es aber ab dem 16. nicht mehr genutzt hast, wird dir dieser Betrag **gutgeschrieben** (im Beispiel -€50).
+*   **Verbleibende Zeit (Nachzahlung):** Du hast ab dem 16. August bereits die Leistungen des "Business Pakets" genutzt. Dieser Teilbetrag wird dir nun **berechnet** (im Beispiel €100).
+
+Die Differenz aus diesen beiden Beträgen bildet die Nachzahlung für das Upgrade im vergangenen Monat.
+
+### Zusammenfassung
+
+**Gesamtbetrag = (Anteilige Kosten des neuen Plans - Anteilige Erstattung des alten Plans) + Neuer Plan für nächsten Monat**
+
+Dieses Verfahren stellt sicher, dass du immer genau für die Leistung zahlst, die dir zu jedem Zeitpunkt zur Verfügung stand – nicht mehr und nicht weniger.

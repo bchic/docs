@@ -1,0 +1,114 @@
+---
+title: 'Squarespace Integration'
+description: 'So integrierst du bchic Analytics in deine Squarespace Website.'
+---
+
+Die Integration in Squarespace ist dank "Code Injection" sehr einfach.
+
+<Steps>
+    <Step title="Tracking-Skript kopieren">
+        Kopiere dein Tracking-Skript aus dem bchic Dashboard (Einstellungen -> Website).
+
+        Es sieht ungefähr so aus:
+
+        ```html
+        <script defer src="https://analytics.bchic.de/script.js" data-website-id="DEINE-ID-HIER"></script>
+        ```
+    </Step>
+
+    <Step title="Website-Tools öffnen">
+        Logge dich in dein Squarespace-Konto ein.
+
+        1. Gehe im Hauptmenü auf **Website**.
+        2. Scrolle ganz nach unten zu **Website-Tools** (oder unter "Dienstprogramme").
+        3. Klicke auf **Code-Einschleusung** (Code Injection).
+    </Step>
+
+    <Step title="Code einfügen">
+        Füge dein bchic-Skript in das oberste Textfeld **Kopfzeile (Header)** ein.
+
+        Klicke oben links auf **Speichern**. Ab jetzt werden alle Besucher deiner Website getrackt.
+    </Step>
+
+</Steps>
+
+## E-Commerce Tracking (Käufe erfassen)
+
+Wenn du den Squarespace Online-Shop nutzt, kannst du Käufe und den Umsatz automatisch tracken. Der Code muss auf der "Bestellbestätigungs-Seite" eingefügt werden.
+
+1. Gehe wieder zu **Website-Tools** -> **Code-Einschleusung**.
+2. Scrolle runter zum Feld **Bestellbestätigungs-Seite** (Order Status Page).
+3. Füge dort folgenden Code ein:
+
+```html
+<script>
+  window.addEventListener('load', function() {
+    if(window.bchic) {
+      // {orderGrandTotalCents} ist eine Variable von Squarespace
+      bchic('track', 'purchase', {
+        value: {orderGrandTotalCents},
+        currency: 'EUR' // Optional, falls deine Währung immer Euro ist
+      });
+    }
+  });
+</script>
+```
+
+Damit wird bei jedem erfolgreichen Kauf ein Event `purchase` mit dem Umsatz in Cents an dein Dashboard gesendet.
+
+## Formulare tracken
+
+Standardmäßig senden Squarespace-Formulare keine Events. Der zuverlässigste Weg, Formular-Einsendungen zu messen, ist die Weiterleitung auf eine "Danke-Seite".
+
+1. **Erstelle eine Danke-Seite:** Lege eine neue Seite an (z.B. `/danke`), die der Nutzer nach dem Absenden sehen soll.
+2. **Skript auf Danke-Seite einfügen:**
+- Öffne die Einstellungen der Danke-Seite (Zahnrad-Icon).
+- Gehe auf **Erweitert** (Advanced).
+- Füge dort folgenden Code ein:
+
+```html
+<script>
+  window.addEventListener('load', function() {
+    if(window.bchic) {
+      bchic('track', 'form_submit');
+    }
+  });
+</script>
+   ```
+
+3. **Formular umleiten:**
+- Bearbeite dein Kontaktformular auf der Website.
+- Gehe in den Formular-Einstellungen auf **Post-Submit** (Nach dem Absenden).
+- Wähle **Redirect** (Umleitung) und gib den Link zu deiner Danke-Seite an (z.B. `/danke`).
+
+## Buchungen tracken (Squarespace Scheduling / Acuity)
+
+Da das Buchungssystem (ehemals Acuity) oft in einem iFrame oder separat läuft, muss das Tracking dort gesondert hinterlegt werden.
+
+1. Gehe im Hauptmenü auf **Terminplanung** (Scheduling).
+2. Wähle in der Leiste links **Integrationen**.
+3. Klicke auf **Analytics & Conversion Tracking**.
+4. Füge im Feld **HTML Tracking Code** das folgende Snippet ein.
+
+<Warning>**Wichtig:** Da dies ein isolierter Bereich ist, muss das Haupt-Skript hier *nochmal* geladen werden. Ersetze `DEINE-ID-HIER` mit deiner echten ID.</Warning>
+
+```html
+<!-- 1. bchic laden -->
+<script defer src="https://analytics.bchic.de/script.js" data-website-id="DEINE-ID-HIER"></script>
+
+<!-- 2. Event feuern -->
+<script>
+  window.addEventListener('load', function() {
+    // %price% ist eine Platzhalter-Variable von Squarespace Scheduling
+    var priceInCents = %price% * 100;
+
+    if(window.bchic) {
+      bchic('track', 'booking_confirmed', {
+        value: priceInCents
+      });
+    }
+  });
+</script>
+   ```
+
+5. Klicke auf **Einstellungen speichern**.

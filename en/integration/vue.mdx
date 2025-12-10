@@ -1,0 +1,107 @@
+---
+title: 'Vue.js Integration'
+description: 'How to integrate bchic Analytics into your Vue.js application.'
+---
+
+Integration into Vue.js (Vite or CLI) is very simple. Since bchic automatically detects modern History API events, you don't need to configure anything extra for tracking page changes (via Vue Router).
+
+<Steps>
+    <Step title="Prepare Tracking Script">
+        Copy your script from the bchic settings. It should include your `data-website-id`.
+
+        ```html
+        <script defer src="https://analytics.bchic.de/script.js" data-website-id="YOUR-ID-HERE"></script>
+        ```
+    </Step>
+
+    <Step title="Insert into index.html">
+        Search for the `index.html` file in your project folder (in Vite projects, this is usually directly in the root directory or under `/public`).
+
+        Insert the script into the `<head>` area:
+
+        ```html index.html
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8" />
+            <link rel="icon" href="/favicon.ico" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <title>My Vue App</title>
+
+            <!-- bchic Analytics -->
+            <script defer src="https://analytics.bchic.de/script.js" data-website-id="YOUR-ID-HERE"></script>
+        </head>
+        <body>
+        <div id="app"></div>
+        <script type="module" src="/src/main.js"></script>
+        </body>
+        </html>
+        ```
+    </Step>
+
+    <Step title="Deploy & Test">
+        Once you publish your app (or start it locally), bchic starts tracking automatically. Click through your routes to ensure every page change is counted as a visit.
+    </Step>
+</Steps>
+
+## Custom Events (TypeScript-safe)
+
+If you call `window.bchic` directly in the code, you often get TypeScript or ESLint errors ("Property 'bchic' does not exist on type 'Window'").
+
+We therefore recommend the following best practice approach with a type definition and a composable.
+
+### 1. Create Type Definition
+
+Create a file `src/bchic.d.ts` so TypeScript knows the `bchic` object.
+
+```typescript src/bchic.d.ts
+export {};
+
+declare global {
+interface Window {
+    bchic: (command: string, eventName: string, payload?: Record<string, any>) => void;
+}
+}
+```
+
+### 2. Create Composable (Optional but recommended)
+
+To make access even easier, create a composable under `src/composables/useTracking.ts`:
+
+```typescript src/composables/useTracking.ts
+export function useTracking() {
+const trackEvent = (eventName: string, payload?: Record<string, any>) => {
+    // Security check for SSR and loading state
+    if (typeof window !== 'undefined' && window.bchic) {
+        window.bchic('track', eventName, payload);
+    } else {
+        console.warn('Tracking not loaded yet');
+    }
+};
+
+return { trackEvent };
+}
+```
+
+### 3. Usage in Components
+
+Now you can use tracking cleanly in every component:
+
+```vue src/components/SignupButton.vue
+<script setup lang="ts">
+    import { useTracking } from '@/composables/useTracking';
+
+    // Use Composable
+    const { trackEvent } = useTracking();
+
+    const handleSignup = () => {
+    // Your logic...
+
+    // Fire event
+    trackEvent('signup_click', { plan: 'pro_monthly' });
+};
+</script>
+
+<template>
+    <button @click="handleSignup">Start now</button>
+</template>

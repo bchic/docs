@@ -1,0 +1,116 @@
+---
+title: 'Squarespace Integration'
+description: 'How to integrate bchic Analytics into your Squarespace website.'
+---
+
+Integration into Squarespace is very simple thanks to "Code Injection".
+
+<Steps>
+    <Step title="Copy Tracking Script">
+        Copy your tracking script from the bchic Dashboard (Settings -> Website).
+
+        It looks something like this:
+
+        ```html
+        <script defer src="https://analytics.bchic.de/script.js" data-website-id="YOUR-ID-HERE"></script>
+        ```
+    </Step>
+
+    <Step title="Open Website Tools">
+        Log in to your Squarespace account.
+
+        1. Go to **Website** in the main menu.
+        2. Scroll all the way down to **Website Tools** (or under "Utilities").
+        3. Click on **Code Injection**.
+    </Step>
+
+    <Step title="Paste Code">
+        Paste your bchic script into the top text field **Header**.
+
+        Click **Save** in the top left. From now on, all visitors to your website will be tracked.
+    </Step>
+
+</Steps>
+
+## E-Commerce Tracking (Capture Purchases)
+
+If you use the Squarespace Online Store, you can automatically track purchases and revenue. The code must be inserted on the "Order Confirmation Page".
+
+1. Go back to **Website Tools** -> **Code Injection**.
+2. Scroll down to the **Order Status Page** field.
+3. Paste the following code there:
+
+ ```html
+ <script>
+   window.addEventListener('load', function() {
+     if(window.bchic) {
+       // {orderGrandTotalCents} is a Squarespace variable
+       bchic('track', 'purchase', {
+         value: {orderGrandTotalCents},
+         currency: 'EUR' // Optional, if your currency is always Euro
+       });
+     }
+   });
+ </script>
+    ```
+
+This sends a `purchase` event with the revenue in cents to your dashboard for every successful purchase.
+
+## Track Forms
+
+By default, Squarespace forms do not send events. The most reliable way to measure form submissions is redirection to a "Thank You Page".
+
+1. **Create a Thank You Page:** Create a new page (e.g., `/thank-you`) that the user should see after submitting.
+2. **Insert script on Thank You Page:**
+ *   Open the settings of the Thank You Page (gear icon).
+ *   Go to **Advanced**.
+ *   Paste the following code there:
+
+ ```html
+ <script>
+   window.addEventListener('load', function() {
+     if(window.bchic) {
+       bchic('track', 'form_submit');
+     }
+   });
+ </script>
+    ```
+
+3. **Redirect Form:**
+ *   Edit your contact form on the website.
+ *   Go to **Post-Submit** in the form settings.
+ *   Select **Redirect** and enter the link to your Thank You Page (e.g., `/thank-you`).
+
+## Track Bookings (Squarespace Scheduling / Acuity)
+
+Since the booking system (formerly Acuity) often runs in an iFrame or separately, tracking must be set up there separately.
+
+1. Go to **Scheduling** in the main menu.
+2. Select **Integrations** in the bar on the left.
+3. Click on **Analytics & Conversion Tracking**.
+4. Paste the following snippet in the **HTML Tracking Code** field.
+
+<Warning>
+    **Important:** Since this is an isolated area, the main script must be loaded *again* here. Replace `YOUR-ID-HERE` with your real ID.
+</Warning>
+
+ ```html
+ <!-- 1. Load bchic -->
+ <script defer src="https://analytics.bchic.de/script.js" data-website-id="YOUR-ID-HERE"></script>
+
+ <!-- 2. Fire event -->
+ <script>
+   window.addEventListener('load', function() {
+     // %price% is a placeholder variable from Squarespace Scheduling
+     var priceInCents = %price% * 100;
+
+     if(window.bchic) {
+       bchic('track', 'booking_confirmed', {
+         value: priceInCents
+       });
+     }
+   });
+ </script>
+    ```
+
+5. Click on **Save Settings**.

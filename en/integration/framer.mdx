@@ -1,0 +1,43 @@
+---
+title: 'Framer Integration'
+description: 'How to integrate bchic Analytics into your Framer website.'
+---
+
+Framer websites work as "Single Page Applications" (SPA). This means that the page does not reload completely when navigating. However, the bchic integration detects these page changes automatically.
+
+<Steps>
+    <Step title="Copy Tracking Script">
+        Copy your tracking script from the bchic Dashboard.
+
+        If you have just created your site, the code is displayed directly. Alternatively, you can find it at any time in the **Settings** under your website.
+
+        The code looks something like this (make sure your **Data-Website-ID** is included):
+
+        ```html
+        <script defer src="https://analytics.bchic.de/script.js" data-website-id="YOUR-ID-HERE"></script>
+        ```
+    </Step>
+
+    <Step title="Paste into Framer">
+        Now go to your Framer project:
+
+        1. Click on the **gear icon** (Settings) or on the name of your project in the top bar.
+        2. Select **General** under "Site Settings" in the left menu.
+        3. Scroll down to the **Custom Code** section.
+        4. Find the text field **Start of &lt;head&gt; tag**.
+
+        Paste your copied code into this field.
+
+        <img src="/images/integration/framer/framer.jpeg" alt="Framer Custom Code Settings" />
+    </Step>
+
+    <Step title="Publish">
+        To make the code active, you must push your changes live:
+
+        1. Click the blue **Publish** button in the top right.
+        2. Wait briefly until the site has updated.
+
+        Now visit your live website. Since bchic automatically supports SPAs, you don't need to make any further settings. Your visits should appear immediately in the dashboard.
+    </Step>
+
+</Steps>

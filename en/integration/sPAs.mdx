@@ -1,0 +1,26 @@
+---
+title: 'Other Frameworks / SPAs'
+description: 'Integration in React, Angular, Svelte, and other Single Page Applications.'
+---
+
+Our standard tracking code is "SPA-Aware". This means it automatically detects when the URL changes in your application, even without the page reloading (soft navigation).
+
+This works via the browser's native **History API** (`pushState`, `popState`), which is used by almost all modern routers (React Router, Vue Router, Angular Router, etc.).
+
+<Steps>
+    <Step title="Insert Global Script">
+        Since SPAs are usually controlled via a central `index.html` or a root layout component (e.g., `layout.tsx` in Next.js or `root.svelte` in SvelteKit), you only need to insert the script **once**.
+
+        Place the code as high up as possible in the `<head>` section of your main file.
+
+        ```html
+        <script defer src="https://analytics.bchic.de/script.js" data-website-id="YOUR-ID-HERE"></script>
+        ```
+    </Step>
+
+    <Step title="Testing">
+        Start your application and open the browser console (F12 -> Network).
+
+        Navigate through your app. You should see that a request is sent to `analytics.bchic.de` with every link click, even though the page does not reload.
+    </Step>
+</Steps>

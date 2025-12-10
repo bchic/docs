@@ -27,29 +27,58 @@
         "language": "de",
         "tabs": [
           {
-            "tab": "Plattform",
+            "tab": "Dokumentation",
             "groups": [
               {
                 "group": "Erste Schritte",
-                "pages": ["de/index", "de/plattform/erste-schritte/schnellstart", "de/plattform/erste-schritte/dashboard-tour"]
+                "pages": [
+                  "de/index"
+                ]
               },
               {
-                "group": "Startseite",
-                "pages": ["de/plattform/pages/dashboard"]
-              },
-
-              {
-                "group": "Ereignisse Seiten",
-                "pages": ["de/plattform/pages/events/übersicht", "de/plattform/pages/events/outbound-link", "de/plattform/pages/events/scroll-depth"]
-              },
-
-              {
-                "group": "Pfade",
-                "pages": ["de/plattform/pages/user-journey"]
+                "group": "Funktionen",
+                "pages": [
+                  "de/plattform/pages/dashboard",
+                  {
+                    "group": "Filter",
+                    "pages": ["de/filter/introduction","de/filter/aufbau-der-leiste", "de/filter/filter-erstellen-und-speichern"
+                    ]
+                  }
+                ]
               },
               {
-                "group": "UTM",
-                "pages": ["de/plattform/pages/utm"]
+                "group": "Intent Analyse",
+                "pages": [
+                  "de/intent/sitemap-config",
+                  "de/intent/usergroups"]
+              },
+              {
+                "group": "Einstellungen & Konfiguration",
+                "pages": [
+                  "de/settings/account-settings",
+                  "de/settings/organisation-settings"
+                ]
+              },
+              {
+                "group": "Admin Settings",
+                "anchor": "Dokumentation",
+                "pages": [
+                  {
+                    "group": "Abrechnung & Konto",
+                    "pages": [
+                      "de/settings/admin/pricing",
+                      "de/settings/admin/subscription",
+                      "de/settings/admin/invoices"
+                    ]
+                  },
+                  {
+                    "group": "Compliance & Governance",
+                    "pages": [
+                      "de/compliance/usage",
+                      "de/compliance/links"
+                    ]
+                  }
+                ]
               }
             ]
           },
@@ -58,29 +87,16 @@
             "groups": [
               {
                 "group": "Plattformen",
-                "pages": ["de/integration/mintlify"]
-              }
-            ]
-          },
-          {
-            "tab": "Filter",
-            "groups": [
-              {
-                "group": "Grundlagen",
-                "pages": ["de/filter/introduction", "de/filter/aufbau-der-leiste"]
+                "pages": ["de/integration/integrationen" ,"de/integration/mintlify", "de/integration/framer" , "de/integration/wordPress" , "de/integration/webflow" , "de/integration/wix" , "de/integration/vue" , "de/integration/squareSpace" , "de/integration/sPAs"]
               },
               {
                 "group": "Anwendung",
-                "pages": ["de/filter/filter-erstellen-und-speichern"]
-              },
-              {
-                "group": "Filter-Referenz",
-                "pages": ["de/filter/spezialfilter-details"]
+                "pages": ["de/events/standard-events" , "de/events/anonymization" , "de/events/custom-events" , "de/events/form-submissions"]
               }
             ]
           },
           {
-            "tab": "Ressourcen",
+            "tab": "Lernen",
             "groups": [
               {
                 "group": "Daten richtig interpretieren",
@@ -111,60 +127,76 @@
         "language": "en",
         "tabs": [
           {
-            "tab": "Platform",
+            "tab": "Docs",
             "groups": [
               {
-                "group": "Getting Started",
-                "pages": ["en/index", "en/plattform/erste-schritte/schnellstart", "en/plattform/erste-schritte/dashboard-tour"]
+                "group": "Get Started",
+                "pages": [
+                  "en/index"
+                ]
               },
               {
-                "group": "Dashboard",
-                "pages": ["en/plattform/pages/dashboard"]
-              },
-
-              {
-                "group": "Events",
-                "pages": ["en/plattform/pages/events/übersicht", "en/plattform/pages/events/outbound-link", "en/plattform/pages/events/scroll-depth"]
-              },
-
-              {
-                "group": "Paths",
-                "pages": ["en/plattform/pages/user-journey"]
+                "group": "Tools",
+                "pages": [
+                  "en/plattform/pages/dashboard",
+                  {
+                    "group": "Filter",
+                    "pages": ["en/filter/introduction","en/filter/aufbau-der-leiste", "en/filter/filter-erstellen-und-speichern"
+                    ]
+                  }
+                ]
               },
               {
-                "group": "UTM",
-                "pages": ["en/plattform/pages/utm"]
+                "group": "Intent Analytics",
+                "pages": [
+                  "en/intent/sitemap-config",
+                  "en/intent/usergroups"]
+              },
+              {
+                "group": "Settings & Configuration",
+                "pages": [
+                  "en/settings/account-settings",
+                  "en/settings/organisation-settings"
+                ]
+              },
+              {
+                "group": "Admin Settings",
+                "anchor": "Dokumentation",
+                "pages": [
+                  {
+                    "group": "Billing & Account",
+                    "pages": [
+                      "en/settings/admin/pricing",
+                      "en/settings/admin/subscription",
+                      "en/settings/admin/invoices"
+                    ]
+                  },
+                  {
+                    "group": "Compliance & Governance",
+                    "pages": [
+                      "en/compliance/usage",
+                      "en/compliance/links"
+                    ]
+                  }
+                ]
               }
             ]
           },
           {
-            "tab": "Integrations",
+            "tab": "Integration",
             "groups": [
               {
-                "group": "Platform",
-                "pages": ["en/integration/mintlify"]
+                "group": "Platforms",
+                "pages": ["en/integration/integrationen" ,"en/integration/mintlify", "en/integration/framer" , "en/integration/wordPress" , "en/integration/webflow" , "en/integration/wix" , "en/integration/vue" , "en/integration/squareSpace" , "en/integration/sPAs"]
+              },
+              {
+                "group": "Application",
+                "pages": ["en/events/standard-events" , "en/events/anonymization" , "en/events/custom-events" , "en/events/form-submissions"]
               }
             ]
           },
           {
-            "tab": "Filter",
-            "groups": [
-              {
-                "group": "Basics",
-                "pages": ["en/filter/introduction", "en/filter/aufbau-der-leiste"]
-              },
-              {
-                "group": "Usage",
-                "pages": ["en/filter/filter-erstellen-und-speichern"]
-              },
-              {
-                "group": "Filter Reference",
-                "pages": ["en/filter/spezialfilter-details"]
-              }
-            ]
-          },
-          {
-            "tab": "Resources",
+            "tab": "Learn",
             "groups": [
               {
                 "group": "Interpreting Data",
@@ -175,7 +207,7 @@
                 "pages": ["en/ressourcen/benchmarks/informativ", "en/ressourcen/benchmarks/kommerziell", "en/ressourcen/benchmarks/landing-pages"]
               },
               {
-                "group": "Tips & Tricks",
+                "group": "Tipps &  Tricks",
                 "pages": ["en/ressourcen/tipps/handlungsempfehlungen"]
               }
             ]

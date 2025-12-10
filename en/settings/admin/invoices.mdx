@@ -1,0 +1,50 @@
+---
+title: 'Invoices'
+description: 'Understand how your invoices are composed and how upgrades are billed.'
+icon: 'file-invoice-dollar'
+---
+
+> Our invoices are generated automatically via our billing portal (Stripe). At the beginning of every billing cycle, you receive an invoice for the booked package of the upcoming period.
+
+## How do our invoices work?
+
+Since our pricing model is based on data volume and not on seats, your invoice is usually very simple: You pay a fixed amount for your chosen package.
+
+The invoice only looks more complex if you **perform an upgrade in the middle of the month** (e.g., switching from the "Starter" package to the "Business" package). In this case, our system automatically offsets the unused time of the old package against the runtime of the new package.
+
+### Example calculation for an upgrade
+
+Suppose you switch your package on August 16th. Your next invoice on September 1st would look like this:
+
+| **Description**                                       | **Amount**  |
+| ----------------------------------------------------- | ----------- |
+| **Adjustments (Aug 16 - Sep 1)**                      |             |
+| Remaining time on "Business Package" after Aug 16     | €100.00     |
+| Unused time on "Starter Package" after Aug 16         | -€50.00     |
+| **Upcoming Month (Sep 1 - Oct 1)**                    |             |
+| Business Package (Monthly)                            | €200.00     |
+|                                                       |             |
+| Subtotal                                              | €250.00     |
+| VAT (19%)                                             | €47.50      |
+| **Total**                                             | **€297.50** |
+
+### Explanation of line items
+
+An invoice after a switch often consists of two parts:
+
+#### 1. The upcoming month
+This is the standard part. You pay in advance for the next full month of your new package (in the example, the "Business Package" for €200).
+
+#### 2. Adjustments for the previous month (Proration)
+This section appears only if you have made changes. The system calculates billing down to the minute:
+
+*   **Unused time (Credit):** Since you paid for the old "Starter Package" for the whole month in advance but stopped using it as of the 16th, this amount is **credited** to you (in the example -€50).
+*   **Remaining time (Charge):** You have already used the services of the "Business Package" starting from August 16th. This partial amount is now **charged** to you (in the example €100).
+
+The difference between these two amounts forms the additional payment for the upgrade in the past month.
+
+### Summary
+
+**Total Amount = (Pro-rated cost of new plan - Pro-rated refund of old plan) + New plan for next month**
+
+This process ensures that you always pay exactly for the service available to you at any given time – no more, no less.

@@ -1,0 +1,66 @@
+---
+title: 'Wix Integration'
+description: 'How to integrate bchic Analytics into your Wix website.'
+---
+
+Integration into Wix is done via the Dashboard in the "Custom Code" area.
+
+<Steps>
+    <Step title="Copy Tracking Script">
+        Copy your tracking script from the bchic settings.
+
+        ```html
+        <script defer src="https://analytics.bchic.de/script.js" data-website-id="YOUR-ID-HERE"></script>
+        ```
+    </Step>
+
+    <Step title="Open Settings">
+        Go to your Wix Dashboard (not the editor, but the management area).
+
+        1. Click **Settings** in the bottom left.
+        2. Scroll down in the "Advanced" section (at the very bottom) to **Custom Code**.
+    </Step>
+
+    <Step title="Add Code">
+        1. Click **+ Add Custom Code** in the top right.
+        2. Paste your bchic script into the **Paste code snippet here** text box.
+        3. Give the entry a name, e.g., `bchic Analytics`.
+        4. Under **Add Code to Pages**:
+        - Select **All pages**.
+        - Important: Select **Load code once** in the dropdown, as bchic automatically detects page changes.
+        5. Under **Place Code in**: **Head**.
+    </Step>
+
+    <Step title="Save & Publish">
+        Click **Apply**. The code is active immediately.
+
+        Visit your live site (not the preview in the editor) to check if the first page view arrives in the dashboard.
+    </Step>
+</Steps>
+
+## Custom Events in Wix (Velo)
+
+In Wix, it is difficult to target HTML elements directly by ID because Wix generates IDs dynamically. The easiest way for conversion tracking (e.g., contact form) is to use a **Thank You Page**.
+
+### Method: Thank You Page (Recommended)
+
+1. Create a new page in Wix (e.g., "Thank You").
+2. Set your contact form to redirect to this page after submission.
+3. Go back to **Settings > Custom Code**.
+4. Add a **new** code snippet:
+
+```html
+<script>
+  // Waits until bchic is loaded
+  window.addEventListener('load', function() {
+    if (window.bchic) {
+      bchic('track', 'form_submit');
+    }
+  });
+</script>
+```
+
+5. Under **Add Code to Pages**, select **Choose specific pages** this time and check **only** your Thank You page.
+6. Placement: **Body - end**.
+
+Every time someone lands on the Thank You page, the `form_submit` event is counted.

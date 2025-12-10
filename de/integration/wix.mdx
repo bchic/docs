@@ -1,0 +1,67 @@
+---
+title: 'Wix Integration'
+description: 'So integrierst du bchic Analytics in deine Wix Website.'
+---
+
+Die Integration in Wix erfolgt über das Dashboard im Bereich "Benutzerdefinierter Code".
+
+<Steps>
+    <Step title="Tracking-Skript kopieren">
+        Kopiere dein Tracking-Skript aus den bchic Einstellungen.
+
+        ```html
+        <script defer src="https://analytics.bchic.de/script.js" data-website-id="DEINE-ID-HIER"></script>
+        ```
+    </Step>
+
+    <Step title="Einstellungen öffnen">
+        Gehe in dein Wix-Dashboard (nicht den Editor, sondern die Verwaltung).
+
+        1. Klicke links unten auf **Einstellungen**.
+        2. Scrolle im Bereich "Erweitert" (ganz unten) zum Punkt **Benutzerdefinierter Code**.
+    </Step>
+
+    <Step title="Code hinzufügen">
+        1. Klicke oben rechts auf **+ Benutzerdefinierten Code hinzufügen**.
+        2. Füge dein bchic-Skript in das Textfeld **Code hier eingeben** ein.
+        3. Gib dem Eintrag einen Namen, z.B. `bchic Analytics`.
+        4. Wähle bei **Code zu Seiten hinzufügen**:
+        - **Alle Seiten** auswählen.
+        - Wichtig: Wähle im Dropdown **Code einmal laden** (Load code once), da bchic Seitenwechsel automatisch erkennt.
+        5. Wähle bei **Code platzieren in**: **Kopfzeile (Head)**.
+    </Step>
+
+    <Step title="Speichern & Veröffentlichen">
+        Klicke auf **Anwenden**. Der Code ist sofort aktiv.
+
+        Besuche deine Live-Seite (nicht die Vorschau im Editor), um zu prüfen, ob der erste Pageview im Dashboard ankommt.
+    </Step>
+
+</Steps>
+
+## Custom Events in Wix (Velo)
+
+In Wix ist es schwierig, HTML-Elemente direkt per ID anzusprechen, da Wix die IDs dynamisch generiert. Der einfachste Weg für Conversion-Tracking (z.B. Kontaktformular) ist die Nutzung einer **Danke-Seite**.
+
+### Methode: Danke-Seite (Empfohlen)
+
+1. Erstelle eine neue Seite in Wix (z.B. „Vielen Dank“).
+2. Stelle dein Kontaktformular so ein, dass es nach dem Absenden auf diese Seite weiterleitet.
+3. Gehe wieder zu **Einstellungen > Benutzerdefinierter Code**.
+4. Füge einen **neuen** Code-Schnipsel hinzu:
+
+```html
+<script>
+  // Wartet, bis bchic geladen ist
+  window.addEventListener('load', function() {
+    if (window.bchic) {
+      bchic('track', 'form_submit');
+    }
+  });
+</script>
+```
+
+5. Wähle bei **Code zu Seiten hinzufügen** diesmal **Seiten auswählen** und hake **nur** deine Danke-Seite an.
+6. Platzierung: **Body - Ende**.
+
+Jedes Mal, wenn nun jemand auf der Danke-Seite landet, wird das Event `form_submit` gezählt.

@@ -1,0 +1,44 @@
+---
+title: 'Standard Events'
+description: 'Interactions that bchic automatically captures for you.'
+icon: 'wand-magic-sparkles'
+---
+
+Not every interaction needs to be tediously set up manually. Our tracking script is intelligent enough to automatically detect important standard metrics and send them as events to your dashboard.
+
+Currently, the following standard events are active "out-of-the-box":
+
+## Outbound Links
+
+bchic automatically detects when a visitor clicks on a link that leaves your website (e.g., to social media profiles, partners, or external sources).
+
+*   **Event Name:** `Outbound Link: Click`
+*   **Payload:** The URL of the target page.
+
+**Why is this important?**
+You instantly see which of your partnerships or social media channels receive the most traffic from your site, without having to manually tag every single external link.
+
+## Scroll Depth
+
+Visitors land on your page – but do they actually read your content? Scroll tracking measures what percentage of a page was actually seen by the user.
+
+The script fires events once certain markers are reached (e.g., when the user reaches the end of an article).
+
+*   **Benefit:** Identify blog articles that are clicked often but not read to the end (high bounce rate, low scroll depth).
+
+---
+
+## Coming Soon (Roadmap)
+
+We are constantly expanding automatic capture. The following metrics will be available automatically soon:
+
+<CardGroup cols={2}>
+    <Card title="Dead Clicks" icon="skull">
+        **Detect "Rage Clicks".**
+        We detect when users frustratedly click multiple times on elements that don't react (e.g., broken buttons or images that look like links). This helps you find UX issues in seconds.
+    </Card>
+    <Card title="Performance (Web Vitals)" icon="gauge-high">
+        **Understand load times.**
+        We automatically measure **Core Web Vitals** (LCP, CLS, FID/INP). This allows you to see not just how many visitors you have, but also whether your site loads fast enough to keep them.
+    </Card>
+</CardGroup>
