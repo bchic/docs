@@ -15,21 +15,23 @@
 })();*/
 
 
-// bchic.js (Temporärer Test-Code)
+// bchic.js (Kugelsichere Test-Version mit Event-Queue)
 
 (function() {
-    // --- START: Code zum Testen der Mintlify Events ---
+    // --- START: Robuster Code zum Abfangen der Events ---
 
-    // 1. Sicherstellen, dass das `bchic` Objekt auf dem window existiert.
-    window.bchic = window.bchic || {};
+    // 1. Erstelle eine Platzhalter-Funktion und eine Event-Warteschlange.
+    // Dies stellt sicher, dass window.bchic.event von Anfang an existiert.
+    window.bchic = window.bchic || function() {
+        (window.bchic.q = window.bchic.q || []).push(arguments);
+    };
 
-    // 2. Die Event-Funktion definieren, die Mintlify aufrufen wird.
-    //    Wir fangen das Event ab und loggen es in die Konsole.
+    // 2. Wir weisen die "event" Methode direkt zu, um sie abzufangen.
     window.bchic.event = function(eventPayload) {
         console.log('[bchic Test] Mintlify Event empfangen:', eventPayload);
     };
 
-    // --- ENDE: Code zum Testen ---
+    // --- ENDE: Robuster Code ---
 
     // Dein ursprünglicher Code zum Laden des Haupt-Analytics-Skripts
     var script = document.createElement('script');
