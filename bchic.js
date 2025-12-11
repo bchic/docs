@@ -15,30 +15,25 @@
 })();*/
 
 
-// bchic.js (Kugelsichere Test-Version mit Event-Queue)
+// bchic.js (Finaler Test-Code für localhost und Deployment)
+
+console.log("✅ bchic.js wurde geladen und wird jetzt ausgeführt!");
 
 (function() {
-    // --- START: Robuster Code zum Abfangen der Events ---
-
-    // 1. Erstelle eine Platzhalter-Funktion und eine Event-Warteschlange.
-    // Dies stellt sicher, dass window.bchic.event von Anfang an existiert.
+    // Robuster Code zum Abfangen der Events
     window.bchic = window.bchic || function() {
         (window.bchic.q = window.bchic.q || []).push(arguments);
     };
 
-    // 2. Wir weisen die "event" Methode direkt zu, um sie abzufangen.
     window.bchic.event = function(eventPayload) {
         console.log('[bchic Test] Mintlify Event empfangen:', eventPayload);
     };
-
-    // --- ENDE: Robuster Code ---
 
     // Dein ursprünglicher Code zum Laden des Haupt-Analytics-Skripts
     var script = document.createElement('script');
     script.src = 'https://analytics.bchic.de/script.js';
     script.defer = true;
 
-    // WICHTIG: Füge hier deine tatsächliche Website-ID ein!
     script.setAttribute('data-website-id', 'ee491184-2c23-4d95-85bf-0dd28f37635a');
 
     document.head.appendChild(script);
