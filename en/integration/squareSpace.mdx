@@ -45,7 +45,7 @@ If you use the Squarespace Online Store, you can automatically track purchases a
    window.addEventListener('load', function() {
      if(window.bchic) {
        // {orderGrandTotalCents} is a Squarespace variable
-       bchic.track('track', 'purchase', {
+       bchic.track( 'purchase', {
          value: {orderGrandTotalCents},
          currency: 'EUR' // Optional, if your currency is always Euro
        });
@@ -70,7 +70,7 @@ By default, Squarespace forms do not send events. The most reliable way to measu
  <script>
    window.addEventListener('load', function() {
      if(window.bchic) {
-       bchic.track('track', 'form_submit');
+       bchic.track('form_submit');
      }
    });
  </script>
@@ -105,7 +105,7 @@ Since the booking system (formerly Acuity) often runs in an iFrame or separately
      var priceInCents = %price% * 100;
 
      if(window.bchic) {
-       bchic.track('track', 'booking_confirmed', {
+       bchic.track('booking_confirmed', {
          value: priceInCents
        });
      }

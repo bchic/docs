@@ -108,7 +108,7 @@ Für volle Flexibilität oder dynamische Anwendungen nutzt du den Funktionsaufru
 
         button.addEventListener('click', () => {
         // Sendet nur den Namen
-        bchic.track('name', 'signup_click');
+        bchic.track('signup_click');
     });
         ```
     </Tab>
@@ -117,7 +117,7 @@ Für volle Flexibilität oder dynamische Anwendungen nutzt du den Funktionsaufru
         const button = document.querySelector('.add-to-cart');
 
         button.addEventListener('click', () => {
-        bchic.track('name', 'add-to-cart', {
+        bchic.track('add-to-cart', {
             product: 'premium-plan',
             price: 99.99,     // Wird als Zahl gespeichert
             currency: 'EUR',  // Wichtig für Umsatz-Statistiken
