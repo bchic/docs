@@ -66,7 +66,7 @@ Gehe nun zurück in die **Page Settings** (oder globalen Custom Code) in den Ber
   if (btn) {
     btn.addEventListener('click', function() {
       if(window.bchic) {
-        bchic('track', 'signup_click', { position: 'header' });
+        bchic.track('track', 'signup_click', { position: 'header' });
       }
     });
   }

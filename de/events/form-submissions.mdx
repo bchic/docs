@@ -26,7 +26,7 @@ Der zuverlässigste Weg, eine **erfolgreiche** Übermittlung zu messen, ist die 
             // Wartet, bis Seite geladen ist
             window.addEventListener('load', function() {
             if (window.bchic) {
-            bchic('track', 'form_submit_success', { form_id: 'contact_page' });
+            bchic.track('track', 'form_submit_success', { form_id: 'contact_page' });
         }
         });
         </script>
@@ -67,7 +67,7 @@ form.addEventListener('submit', (e) => {
   // 1. Hier optional Validierung prüfen
 
   // 2. Tracking senden
-  bchic('track', 'contact_form_submit', {
+  bchic.track('track', 'contact_form_submit', {
       category: 'sales_request' // Beispiel Payload
   });
 
@@ -84,7 +84,7 @@ Du möchtest vielleicht wissen, **was** im Formular ausgewählt wurde (z.B. der 
     // Auswahl in einem Dropdown tracken
     const subject = document.getElementById('subject_select').value;
 
-    bchic('track', 'form_submit', {
+    bchic.track('track', 'form_submit', {
     topic: subject // z.B. "Support" oder "Sales"
 });
     ```
@@ -93,7 +93,7 @@ Du möchtest vielleicht wissen, **was** im Formular ausgewählt wurde (z.B. der 
     // NIEMALS persönliche Daten tracken!
     const email = document.getElementById('email_field').value;
 
-    bchic('track', 'form_submit', {
+    bchic.track('track', 'form_submit', {
     user_email: email // Das verstößt gegen die DSGVO
 });
     ```

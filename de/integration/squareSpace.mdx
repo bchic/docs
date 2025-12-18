@@ -45,7 +45,7 @@ Wenn du den Squarespace Online-Shop nutzt, kannst du Käufe und den Umsatz autom
   window.addEventListener('load', function() {
     if(window.bchic) {
       // {orderGrandTotalCents} ist eine Variable von Squarespace
-      bchic('track', 'purchase', {
+      bchic.track('track', 'purchase', {
         value: {orderGrandTotalCents},
         currency: 'EUR' // Optional, falls deine Währung immer Euro ist
       });
@@ -70,7 +70,7 @@ Standardmäßig senden Squarespace-Formulare keine Events. Der zuverlässigste W
 <script>
   window.addEventListener('load', function() {
     if(window.bchic) {
-      bchic('track', 'form_submit');
+      bchic.track('track', 'form_submit');
     }
   });
 </script>
@@ -103,7 +103,7 @@ Da das Buchungssystem (ehemals Acuity) oft in einem iFrame oder separat läuft, 
     var priceInCents = %price% * 100;
 
     if(window.bchic) {
-      bchic('track', 'booking_confirmed', {
+      bchic.track('track', 'booking_confirmed', {
         value: priceInCents
       });
     }

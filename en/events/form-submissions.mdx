@@ -26,7 +26,7 @@ The most reliable way to measure a **successful** submission is redirection to a
             // Waits until page is loaded
             window.addEventListener('load', function() {
             if (window.bchic) {
-            bchic('track', 'form_submit_success', { form_id: 'contact_page' });
+            bchic.track('track', 'form_submit_success', { form_id: 'contact_page' });
         }
         });
         </script>
@@ -67,7 +67,7 @@ form.addEventListener('submit', (e) => {
   // 1. Check validation here optionally
 
   // 2. Send tracking
-  bchic('track', 'contact_form_submit', {
+  bchic.track('track', 'contact_form_submit', {
       category: 'sales_request' // Example Payload
   });
 
@@ -84,7 +84,7 @@ You might want to know **what** was selected in the form (e.g., the subject of t
     // Track selection in a dropdown
     const subject = document.getElementById('subject_select').value;
 
-    bchic('track', 'form_submit', {
+    bchic.track('track', 'form_submit', {
     topic: subject // e.g. "Support" or "Sales"
 });
     ```
@@ -93,7 +93,7 @@ You might want to know **what** was selected in the form (e.g., the subject of t
     // NEVER track personal data!
     const email = document.getElementById('email_field').value;
 
-    bchic('track', 'form_submit', {
+    bchic.track('track', 'form_submit', {
     user_email: email // This violates GDPR
 });
     ```

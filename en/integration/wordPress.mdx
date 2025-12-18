@@ -65,7 +65,7 @@ function add_bchic_author_tracking() {
             window.addEventListener('load', function() {
                 if(window.bchic) {
                     // Sends an event "author_view" with the author's name as payload
-                    bchic('track', 'author_view', {
+                    bchic.track('track', 'author_view', {
                         author: '<?php echo esc_js($author_nickname); ?>'
                     });
                 }

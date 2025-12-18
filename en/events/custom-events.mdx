@@ -108,7 +108,7 @@ For full flexibility or dynamic applications, use the function call `bchic()`. T
 
         button.addEventListener('click', () => {
         // Sends only the name
-        bchic('track', 'signup_click');
+        bchic.track('track', 'signup_click');
     });
         ```
     </Tab>
@@ -117,7 +117,7 @@ For full flexibility or dynamic applications, use the function call `bchic()`. T
         const button = document.querySelector('.add-to-cart');
 
         button.addEventListener('click', () => {
-        bchic('track', 'add-to-cart', {
+        bchic.track('track', 'add-to-cart', {
             product: 'premium-plan',
             price: 99.99,     // Saved as number
             currency: 'EUR',  // Important for revenue statistics
