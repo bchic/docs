@@ -36,14 +36,19 @@
                 ]
               },
               {
-                "group": "Funktionen",
+                "group": "Plattform",
                 "pages": [
                   "de/plattform/pages/dashboard",
                   {
                     "group": "Filter",
-                    "pages": ["de/filter/introduction","de/filter/aufbau-der-leiste", "de/filter/filter-erstellen-und-speichern"
-                    ]
-                  }
+                    "pages": ["de/filter/introduction","de/filter/aufbau-der-leiste", "de/filter/filter-erstellen-und-speichern"]
+                  },
+                  {
+                    "group": "UTM",
+                    "pages": ["de/plattform/pages/utm","de/plattform/pages/ai-visibility","de/plattform/pages/conversions"]
+                  },
+                  "de/plattform/pages/funnels",
+                  "de/plattform/pages/user-journey"
                 ]
               },
               {
@@ -136,14 +141,28 @@
                 ]
               },
               {
-                "group": "Tools",
+                "group": "Platform",
                 "pages": [
                   "en/plattform/pages/dashboard",
                   {
                     "group": "Filter",
-                    "pages": ["en/filter/introduction","en/filter/aufbau-der-leiste", "en/filter/filter-erstellen-und-speichern"
+                    "pages": [
+                      "en/filter/introduction",
+                      "en/filter/aufbau-der-leiste",
+                      "en/filter/filter-erstellen-und-speichern"
                     ]
-                  }
+                  },
+                  {
+                    "group": "UTM",
+                    "pages": [
+                      "en/plattform/pages/utm",
+                      "en/plattform/pages/ai-visibility",
+                      "en/plattform/pages/conversions"
+
+                    ]
+                  },
+                  "en/plattform/pages/funnels",
+                  "en/plattform/pages/user-journey"
                 ]
               },
               {

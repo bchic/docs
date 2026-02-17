@@ -1,0 +1,87 @@
+---
+title: 'Funnel Analyse'
+description: 'Miss wie viele Besucher einen definierten Pfad auf deiner Website durchlaufen – und erkenne genau wo sie abspringen.'
+icon: 'filter'
+---
+
+![Funnel Analyse Übersicht](../../../images/funnels/funnels-overview.jpeg)
+
+## Übersicht
+
+Die Funnel Analyse zeigt dir, wie viele Besucher jeden Schritt eines definierten Conversion-Pfads durchlaufen. Im Gegensatz zur Pfad Analyse – die zeigt was Nutzer tatsächlich tun – definierst du beim Funnel selbst, welche Schritte du messen möchtest. Das Ergebnis ist eine klare Schritt-für-Schritt Ansicht mit Conversion- und Abbruchrate für jeden Übergang.
+
+---
+
+## Funnel erstellen
+
+Öffne **Funnel Analyse** und klicke auf **Neuer Funnel**. Fülle die folgenden Felder aus:
+
+- **Name** — z.B. `Pricing Checkout Q1`
+- **Beschreibung** — optional, hilft bei mehreren Funnels den Überblick zu behalten
+- **Zeitfenster (Minuten)** — maximale Zeit zwischen den Schritten für eine gültige Conversion. Standard: 30 Minuten. Ein Nutzer der Schritt 1 um 10:00 Uhr und Schritt 2 um 10:35 Uhr durchläuft, würde bei diesem Setting **nicht** als Conversion gewertet.
+- **Trichter aktiv** — inaktive Funnels werden in der Übersichtsliste ausgeblendet
+
+> Passe das Zeitfenster an deinen typischen Kaufprozess an. Ein SaaS-Signup dauert oft unter 5 Minuten – ein B2B-Angebot kann Tage brauchen. Für letzteres empfehlen sich 1440 Minuten (24h) oder mehr.
+
+Definiere anschließend die Schritte deines Funnels. Jeder Schritt kann entweder ein **Seitenaufruf** oder ein **Ereignis** sein:
+
+| Schritttyp | Eingabe | Wann verwenden |
+| ---------------- | ------------------- | ----------------------------------------- |
+| **Seitenaufruf** | `path/to/page` | Besucher hat eine bestimmte URL aufgerufen |
+| **Ereignis** | `event_name` | Besucher hat eine Aktion ausgeführt |
+
+Jedem Schritt kannst du einen optionalen Namen geben sowie **Erweiterte Optionen** aufklappen für zusätzliche Filterbedingungen. Klicke auf **+ Weiteren Schritt hinzufügen** um den Pfad zu verlängern, dann auf **Trichter erstellen**.
+
+---
+
+## Die Kennzahlen verstehen
+
+Jeder gespeicherte Funnel zeigt in der Übersicht direkt die wichtigsten Zahlen:
+
+- **Conversion Rate** — Anteil der Besucher, die alle Schritte abgeschlossen haben
+- **Einträge** — Gesamtzahl der Sessions, die den ersten Schritt erreicht haben
+
+Öffnest du einen Funnel, siehst du vier übergeordnete Metriken:
+
+| Kennzahl | Bedeutung |
+| --------------------------- | --------------------------------------------------------- |
+| **Gesamte Konversionsrate** | Anteil der Sessions die den kompletten Funnel durchlaufen haben |
+| **Abgeschlossene Sitzungen** | Absolute Anzahl erfolgreicher Durchläufe |
+| **Durchschnittliche Dauer** | Wie lange Nutzer im Schnitt vom ersten bis zum letzten Schritt brauchen |
+| **Größter Abbruch** | Der Schritt mit dem höchsten prozentualen Verlust |
+
+---
+
+## Trichter Visualisierung
+
+Die **Trichter Visualisierung** zeigt jeden Schritt als horizontalen Balken. Die Breite des blauen Balkens entspricht dem Anteil der Sessions, die diesen Schritt erreicht haben – relativ zum Start.
+
+Für jeden Schritt siehst du:
+- **Sitzungen** — absolute Anzahl und prozentuale Rate vom Start
+- **Durchschnittliche Verweildauer** — wie lange Nutzer auf diesem Schritt verbringen
+- **Verlust** — prozentualer Abbruch gegenüber dem vorherigen Schritt (orange hervorgehoben)
+
+> Der größte Abbruch wird automatisch orange markiert – das ist dein wichtigstes Optimierungssignal.
+
+---
+
+## Trend Analyse
+
+Wechsle auf den Tab **Trend Analyse** um die Conversions im Zeitverlauf als Liniendiagramm zu sehen. So erkennst du ob sich deine Conversion Rate über Zeit verbessert, verschlechtert oder ob es punktuelle Ausreißer gibt.
+
+Du kannst zwischen der Ansicht **Sitzungen** und **Conversion Rate** wechseln.
+
+---
+
+## Typische Analysen
+
+**Größten Abbruchpunkt optimieren**
+Schau dir den Schritt mit dem höchsten Verlust an. Kombiniere die Funnel Analyse mit der [Pfad Analyse](/de/plattform/pages/journeys), um zu verstehen was Nutzer tun die an diesem Punkt abbrechen.
+
+**Conversion Rate über Zeit beobachten**
+Nutze die Trend Analyse nach größeren Änderungen an deiner Website – z.B. nach einem Redesign oder einer neuen Kampagne – um den Effekt direkt zu messen.
+
+**Verschiedene Pfade vergleichen**
+Erstelle mehrere Funnels für unterschiedliche Conversion-Pfade (z.B. Blog → Pricing → Signup vs. Homepage → Pricing → Signup) und vergleiche welcher Weg die höhere Conversion Rate hat.
+
+> Kombiniere Funnels mit [Nutzergruppen](/de/intent/usergroups) um den Pfad transaktioneller Nutzer isoliert zu analysieren.

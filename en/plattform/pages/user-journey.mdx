@@ -1,52 +1,81 @@
 ---
-title: 'User Flows (User Journeys)'
-description: 'Track your visitors’ navigation paths step-by-step to understand how they interact with your website, where they drop off, and which content is most engaging.'
+title: 'Path Analysis'
+description: "Track your visitors navigation paths step by step – see where they enter, where they go, and where they drop off."
+icon: 'route'
 ---
 
-### The Path Visualization: A Step-by-Step Look at the User Journey
+![Path Analysis Overview](../../../images/journeys/journeys-overview.jpeg)
 
-The "User Flows" page (also known as User Journeys or path analysis) visualizes the most common paths visitors take on your website. The visualization is a Sankey diagram that shows the sequence of pages visited from left to right.
+## Overview
 
-The diagram is divided into columns, each representing an interaction step:
+Path Analysis visualizes the most common navigation routes of your visitors as a Sankey diagram. Each column represents one interaction step – from the entry page to several clicks deep into the session. The connecting lines between columns show how visitors flow from one page to the next.
 
-*   **Column 1:** Shows the visitors' entry pages. These are the first pages viewed in a session.
-*   **Column 2, 3, etc.:** Each subsequent column represents the user's next click. The lines between the columns visualize the flow of visitors from one page to the next.
-
-**What the numbers mean:**
-
-*   **Numbers in the boxes:** The number in each box (e.g., `174` on `/blog-posts/dfb-pokal-ter...`) indicates how many visitors reached this specific page at this step.
-*   **Header of each column:** Above each column, you'll find the total number of visitors who reached that step (e.g., `174 visitors` in step 1), as well as the percentage change from the previous step. A negative value (e.g., `-74%`) represents the **drop-off rate** between steps—the percentage of visitors who ended their session after the previous step.
-
-### Interactive Analysis of User Paths
-
-The graph is designed to be interactive, allowing for in-depth analysis.
-
-**Highlighting and Focusing on Paths:**
-
-Click on any page box in a column to isolate the path to and from that page. The diagram will then focus on the specific journeys that pass through your selection. This is especially useful for understanding:
-
-*   Where do visitors who land on your `/tickets` page come from?
-*   Where do visitors go after reading a specific blog post?
-*   Which paths most often lead to a goal in the `/shop`?
-
-For example, in the screenshot above, you could click on `/` in the first column to see only the paths that start on the homepage.
-
-### Key Use Cases
-
-Analyzing user flows helps you answer important questions about user behavior:
-
-*   **Identify drop-off points:** A large percentage drop between two steps shows where users are leaving the site. Is the transition unclear? Is a call-to-action missing?
-*   **Optimize conversion paths:** Track the user's path to important goal pages (e.g., `/tickets` or `/contact`). Are there unexpected detours or drop-offs you can fix?
-*   **Validate your content strategy:** See which content (e.g., blog posts) encourages visitors to browse further on your site and which ones tend to lead to an exit.
+At a glance you can see: where users enter, which paths lead to conversion, and where sessions drop off.
 
 ---
 
-### FAQ
+## Reading the Diagram
 
-**Why are some paths not displayed?**
+Each box in a column represents a page and shows three metrics:
 
-To maintain the clarity of the graph, only the most common paths are shown. Infrequent navigation paths are often grouped into an "(other)" category or hidden by default for performance reasons.
+| Metric | Meaning |
+|---|---|
+| **Number top right** | Number of sessions that reached this page at this step |
+| **Clock icon** | Average time spent on this page |
+| **Arrow icon** | Bounce rate for this page |
 
-**Can I change the starting point of the analysis?**
+Above each column you'll see the total session count for that step and the percentage loss compared to the previous step. A loss of **52.7%** between step 1 and step 2 means more than half of all visitors ended their session after the first step.
 
-Yes. By default, the report shows paths starting from any page. However, you can use the filters at the top of the page to limit the analysis to sessions that started on a specific page (e.g., a campaign landing page).
+> A **Loop** label on a page means visitors returned to it multiple times within the same session – a signal of either disorientation or active re-engagement with important content.
+
+---
+
+## Controls & Views
+
+![Path Analysis Controls](../../../images/journeys/journeys-controls.jpeg)
+
+The toolbar in the top right gives you four levers for your analysis:
+
+**View Mode**
+
+Switch between three views:
+- **Overview** — All paths in the standard display
+- **Losses** — Highlights pages with high drop-off rates (shown in orange)
+- **Loops** — Shows only pages that users return to multiple times (shown in purple)
+
+**Analysis Depth**
+
+Choose between 3 and 7 steps. More steps reveal longer sessions but can reduce clarity. 5 steps is a good starting point for most websites.
+
+**Number of Paths**
+
+Control how many pages are shown per column: 100, 250, 500, or 1,000 paths. Less common paths are grouped into a **"X more pages..."** summary by default.
+
+**Path Configuration**
+
+Define a specific start and end point for the analysis:
+- **Start point** — e.g. `/pricing` to see only paths that begin on the pricing page
+- **Target page** — e.g. `/checkout` to work backwards and see which routes lead to checkout
+
+---
+
+## Expanding Grouped Pages
+
+When a column contains many low-traffic pages, they are combined into a **"X more pages..."** box. Click **Details** to expand the full list and see all grouped URLs with their session counts.
+
+Individual URLs can be unpinned directly from the group – they'll then appear as their own box in the diagram.
+
+---
+
+## Common Analyses
+
+**Finding drop-off points**
+A high loss between two steps shows where sessions end. Is the transition unclear? Is a call-to-action missing? Combine the Losses view with a filter to directly address the affected pages.
+
+**Reconstructing conversion paths**
+Set your checkout or thank-you page as the target in Path Configuration. The diagram will show you in reverse which routes users actually take to convert.
+
+**Understanding loop behavior**
+Loops on navigation pages (e.g. `/`) are a warning sign – users aren't finding what they're looking for. Loops on content pages can be positive, indicating high relevance.
+
+> Combine Path Analysis with User Groups to view conversion paths of transactional users in isolation.

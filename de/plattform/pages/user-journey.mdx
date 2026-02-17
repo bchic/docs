@@ -1,53 +1,81 @@
 ---
-title: 'Nutzerflüsse (User Journeys)'
-description: 'Verfolgen Sie die Navigationspfade Ihrer Besucher Schritt für Schritt, um zu verstehen, wie sie mit Ihrer Website interagieren, wo sie abspringen und welche Inhalte am meisten fesseln.'
+title: 'Pfad Analyse'
+description: 'Verfolge die Navigationspfade deiner Besucher Schritt für Schritt – sieh wo sie einsteigen, wohin sie gehen und wo sie abspringen.'
+icon: 'route'
 ---
 
-### Die Pfad-Visualisierung: Schritt für Schritt durch die User Journey
+![Pfad Analyse Übersicht](../../../images/journeys/journeys-overview.jpeg)
 
-Die Seite "Nutzerflüsse" (oft auch als User Journeys oder Pfadanalyse bezeichnet) visualisiert die häufigsten Wege, die Besucher auf Ihrer Website einschlagen. Die Darstellung erfolgt in Form eines Sankey-Diagramms, das von links nach rechts die Abfolge der besuchten Seiten zeigt.
+## Übersicht
 
+Die Pfad Analyse visualisiert die häufigsten Navigationswege deiner Besucher als Sankey-Diagramm. Jede Spalte entspricht einem Interaktionsschritt – von der Einstiegsseite bis zu mehreren Klicks tief in die Session. Die Verbindungslinien zwischen den Spalten zeigen, wie Besucher von einer Seite zur nächsten fließen.
 
-Das Diagramm ist in Spalten unterteilt, die jeweils einen Interaktionsschritt darstellen:
-
-*   **Spalte 1:** Zeigt die Einstiegsseiten der Besucher. Dies sind die ersten Seiten, die in einer Sitzung aufgerufen wurden.
-*   **Spalte 2, 3, etc.:** Jede weitere Spalte repräsentiert den nächsten Klick des Nutzers. Die Linien zwischen den Spalten visualisieren den Fluss der Besucher von einer Seite zur nächsten.
-
-**Was die Zahlen bedeuten:**
-
-*   **Zahlen in den Boxen:** Die Zahl in jeder Box (z.B. `174` bei `/blog-posts/dfb-pokal-ter...`) gibt an, wie viele Besucher diese spezifische Seite in diesem Schritt erreicht haben.
-*   **Kopfzeile jeder Spalte:** Über jeder Spalte finden Sie die Gesamtanzahl der Besucher, die diesen Schritt erreicht haben (z.B. `174 besucher` in Schritt 1), sowie die prozentuale Veränderung zum vorherigen Schritt. Ein negativer Wert (z.B. `-74%`) stellt die Absprungrate zwischen den Schritten dar – also den Anteil der Besucher, die ihre Sitzung nach dem vorherigen Schritt beendet haben.
-
-### Interaktive Analyse von Nutzerpfaden
-
-Der Graph ist interaktiv gestaltet, um Ihnen eine tiefgehende Analyse zu ermöglichen.
-
-**Pfade hervorheben und fokussieren:**
-
-Klicken Sie auf eine beliebige Seiten-Box in einer Spalte, um den Pfad zu dieser und von dieser Seite zu isolieren. Das Diagramm fokussiert sich dann auf die spezifischen Journeys, die durch Ihre Auswahl verlaufen. Dies ist besonders nützlich, um zu verstehen:
-
-*   Woher kommen die Besucher, die auf Ihrer `/tickets`-Seite landen?
-*   Wohin gehen die Besucher, nachdem sie einen bestimmten Blogartikel gelesen haben?
-*   Welche Wege führen am häufigsten zu einem Ziel im `/fanshop`?
-
-Im obigen Screenshot könnten Sie zum Beispiel auf `/` in der ersten Spalte klicken, um nur die Pfade zu sehen, die auf der Startseite beginnen.
-
-### Wichtige Anwendungsfälle
-
-Die Analyse der Nutzerflüsse hilft Ihnen, wichtige Fragen über das Nutzerverhalten zu beantworten:
-
-*   **Absprungpunkte identifizieren:** Ein hoher prozentualer Abfall zwischen zwei Schritten zeigt, an welcher Stelle Nutzer die Seite verlassen. Ist der Übergang unklar? Fehlt ein Call-to-Action?
-*   **Conversion-Pfade optimieren:** Verfolgen Sie den Weg der Nutzer zu wichtigen Zielseiten (z.B. `/tickets` oder `/kontakt`). Gibt es unerwartete Umwege oder Abbrüche, die Sie beheben können?
-*   **Content-Strategie validieren:** Sehen Sie, welche Inhalte (z.B. Blog-Posts) Besucher dazu anregen, weiter auf Ihrer Seite zu stöbern und welche eher zu einem Absprung führen.
+So erkennst du auf einen Blick: Wo steigen Nutzer ein, welche Wege führen zur Conversion, und an welchen Stellen brechen Sessions ab.
 
 ---
 
-### FAQ
+## Das Diagramm lesen
 
-**Warum werden manche Pfade nicht angezeigt?**
+Jede Box in einer Spalte repräsentiert eine Seite und zeigt drei Kennzahlen:
 
-Um die Übersichtlichkeit des Graphen zu wahren, werden nur die häufigsten Pfade dargestellt. Sehr seltene Navigationswege werden oft in einer "(other)"-Kategorie zusammengefasst oder aus Gründen der Performance standardmäßig ausgeblendet.
+| Kennzahl | Bedeutung |
+|---|---|
+| **Zahl oben rechts** | Anzahl der Sitzungen, die diese Seite in diesem Schritt erreicht haben |
+| **Uhr-Symbol** | Durchschnittliche Verweildauer auf dieser Seite |
+| **Pfeil-Symbol** | Absprungrate dieser Seite |
 
-**Kann ich den Startpunkt der Analyse ändern?**
+Über jeder Spalte siehst du die Gesamtzahl der Sitzungen in diesem Schritt sowie den prozentualen Verlust gegenüber dem vorherigen Schritt. Ein Verlust von **52,7%** zwischen Schritt 1 und 2 bedeutet, dass mehr als die Hälfte der Besucher nach dem ersten Schritt die Session beendet hat.
 
-Ja. Standardmäßig zeigt der Report Pfade, die mit einer beliebigen Seite beginnen. Sie können jedoch die Filter am oberen Rand der Seite nutzen, um die Analyse auf Sitzungen zu beschränken, die auf einer bestimmten Seite (z.B. einer Kampagnen-Landingpage) gestartet sind.
+> Ein **Loop**-Label auf einer Seite bedeutet, dass Besucher diese Seite in derselben Session mehrfach aufgerufen haben – ein Hinweis auf Orientierungslosigkeit oder aktives Wiederkehren zu einem wichtigen Inhalt.
+
+---
+
+## Steuerung & Ansicht
+
+![Pfad Analyse Controls](../../../images/journeys/journeys-controls.jpeg)
+
+Die Toolbar oben rechts gibt dir vier Hebel zur Analyse:
+
+**Ansichtsmodus**
+
+Wechsle zwischen drei Ansichten:
+- **Übersicht** — Alle Pfade in der Standarddarstellung
+- **Verluste** — Hebt Seiten mit hohen Absprungraten hervor (orange markiert)
+- **Loops** — Zeigt nur Seiten, auf die Nutzer mehrfach zurückkehren (lila markiert)
+
+**Tiefe der Analyse**
+
+Wähle zwischen 3 und 7 Schritten. Mehr Schritte zeigen längere Sessions, können aber unübersichtlicher werden. Für die meisten Websites sind 5 Schritte ein guter Ausgangspunkt.
+
+**Anzahl der Pfade**
+
+Steuere wie viele Seiten pro Spalte angezeigt werden: 100, 250, 500 oder 1.000 Pfade. Seltene Pfade werden standardmäßig in **„X weitere Seiten..."** gruppiert.
+
+**Pfad Konfiguration**
+
+Definiere einen spezifischen Start- und Endpunkt für die Analyse:
+- **Startpunkt** — z.B. `/pricing` um nur Pfade zu sehen, die auf der Preisseite beginnen
+- **Zielseite** — z.B. `/checkout` um rückwärts zu analysieren, welche Wege zum Checkout führen
+
+---
+
+## Gruppierte Seiten aufschlüsseln
+
+Wenn eine Spalte viele seltene Seiten enthält, werden sie in einer **„X weitere Seiten..."** Box zusammengefasst. Klicke auf **Details**, um die vollständige Liste aufzuklappen und alle gruppierten URLs mit ihren Sitzungszahlen zu sehen.
+
+Einzelne URLs kannst du direkt aus der Gruppe lösen — sie erscheinen dann als eigene Box im Diagramm.
+
+---
+
+## Typische Analysen
+
+**Absprungpunkte finden**
+Ein hoher Verlust zwischen zwei Schritten zeigt wo Sessions enden. Ist der Übergang unklar? Fehlt ein Call-to-Action? Kombiniere die Verlust-Ansicht mit dem Filter, um betroffene Seiten direkt anzugehen.
+
+**Conversion-Pfade rekonstruieren**
+Setze deine Checkout- oder Danke-Seite als Zielseite in der Pfad Konfiguration. Das Diagramm zeigt dir rückwärts, über welche Wege Nutzer tatsächlich konvertieren.
+
+**Loop-Verhalten verstehen**
+Loops auf Navigationsseiten (z.B. `/`) sind ein Warnsignal – Nutzer finden nicht was sie suchen. Loops auf Inhaltsseiten können positiv sein und auf hohe Relevanz hindeuten.
+
+> Kombiniere die Pfad Analyse mit Nutzergruppen, um Conversion-Pfade von transaktionellen Nutzern isoliert zu betrachten.

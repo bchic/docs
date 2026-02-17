@@ -1,44 +1,86 @@
 ---
 title: 'User Groups'
-description: 'Automatically segment your visitors based on their success.'
+description: 'Understand the purchase intent of your visitors – bchic Analytics automatically classifies every session as informational, commercial, or transactional.'
 icon: 'users-viewfinder'
 ---
 
-> User groups help you understand how visitors who were successful behave compared to those who dropped off.
+![User Groups Overview](../../images/usergroups/usergroups-overview.jpeg)
 
-When you open the **Websites > User Groups** area for the first time, you will be greeted by a popup asking for a "Conversion Goal". For the system to work, we must first define this goal.
+## Overview
 
-## Step 1: What is a Conversion Goal?
+User Groups automatically classify every visitor session based on the highest purchase intent shown during that session. The result is three clearly distinct groups:
 
-A conversion goal is the **ultimate moment of success** on your website. This is usually an event that is "irreversible" and represents the conclusion of a journey.
+| Group | Meaning |
+|---|---|
+| **Informational** | The visitor consumed purely informational content |
+| **Commercial** | The visitor viewed pages with commercial intent (e.g. Pricing, Features, Comparisons) |
+| **Transactional** | The visitor triggered the defined conversion goal |
 
-Typical examples:
-*   A completed purchase (`Event: Purchase`)
-*   A successful registration (`URL: /thank-you-signup`)
-*   Booking an appointment
+A visitor who browses a pricing page and then completes a purchase is classified as **transactional** – only the highest intent level reached in a session counts.
 
-## Step 2: Create the Goal
+> [!NOTE]
+> User Groups require two things to be set up first: a completed **Sitemap Classification** and a defined **Conversion Goal**. Both are configured once – the steps below walk you through the process.
 
-Since we haven't defined this goal yet, we need to create it using the filter function.
+---
 
-1.  **Open filter bar:** Click the `Filter` button in the top right to open the menu.
-2.  **Select criteria:** Now select exactly the conditions that describe your goal (e.g., *Event is "Purchase"* or *Page path is "/order-thank-you"*).
-3.  **Save:** Once you have set the filter, click on the **floppy disk icon** (Save) at the bottom right of the filter bar.
+## Prerequisite: Sitemap Classification
 
-## Step 3: Categorize as Conversion Goal
+The foundation for all User Groups is your Sitemap Classification. This is where you define which pages on your website are considered informational or commercial. bchic Analytics uses these assignments to automatically score every session.
 
-This is the most important step. In the save dialog, you need to give the filter a name and choose the correct category.
+---
 
-*   **Filter Name:** Enter a unique name (e.g., "Purchase Completed").
-*   **Category:** In the dropdown menu, be sure to select the option `Conversion Goal` (or `Conversion Ziel`). Only then will this filter appear later in the User Groups popup.
+## Step 1: Define a Conversion Goal
 
-Click on **Save Filter**.
+The conversion goal marks the transactional endpoint – the moment a visitor becomes a customer or lead.
 
-## Step 4: Generate Groups
+Common examples:
 
-Now return to the **User Groups** page.
+- A completed purchase (`Event: purchase`)
+- A successful registration (`URL: /thank-you-signup`)
+- A booking confirmation (`Event: booking_confirmed`)
 
-1.  In the popup (or if you click on "Create User Intent Filter"), you can now select your newly created filter under **Conversion Goal**.
-2.  Click on **Generate Groups**.
+> [!TIP]
+> Choose a goal that is unambiguous and irreversible. Visiting a product page doesn't count – completing a purchase does.
 
-The system will now retroactively analyze your visitor data and divide them into groups (e.g., users who purchased vs. users who only browsed). This subsequently allows you to make detailed comparisons between successful and unsuccessful visitors.
+---
+
+## Step 2: Create a Filter for the Conversion Goal
+
+The conversion goal is created via the Filter function.
+
+1. **Open the filter bar** — Click `Filter` in the top right.
+2. **Set your criteria** — Define the condition that describes your goal, e.g. *Event is "purchase"* or *Page path is "/order-thank-you"*.
+3. **Save** — Click the **floppy disk icon** in the bottom right of the filter bar.
+
+In the save dialog:
+
+- **Filter name** — e.g. `Purchase completed`
+- **Category** — Make sure to select `Conversion Goal`
+
+> [!WARNING]
+> Without the `Conversion Goal` category, the filter won't appear in the next step. You can edit the category at any time by reopening the filter.
+
+---
+
+## Step 3: Generate Groups
+
+Open **User Groups** and select your newly created filter under **Conversion Goal** in the popup. Click **Generate Groups**.
+
+bchic Analytics will now retroactively evaluate all sessions and assign each one the highest intent level reached.
+
+![Generate Groups](../../images/usergroups/usergroups-generate-en.jpeg)
+
+---
+
+## Reading the Results
+
+After generation, you'll see your sessions split by intent level. For each group you can analyze:
+
+- Which channels did these visitors come from?
+- Which entry pages did they use?
+- How long did they stay on the website?
+
+The direct comparison between **commercial** and **transactional** is particularly valuable: it shows you which visitors were close to converting – but didn't.
+
+> [!TIP]
+> Combine User Groups with Funnel Analysis to pinpoint exactly where commercial visitors drop off in the conversion path.

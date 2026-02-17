@@ -1,56 +1,73 @@
 ---
 title: 'UTM Campaigns'
-description: 'Measure the effectiveness of your marketing activities by creating trackable links and analyzing their performance directly in the Campaigns dashboard.'
+description: 'Measure the effectiveness of your marketing activities – create trackable links and analyze performance directly in the campaign dashboard.'
+icon: 'chart-line'
 ---
 
-The "UTM Campaigns" feature allows you to precisely track the performance of your external marketing initiatives. Create dedicated links for newsletters, social media posts, or ads, and see exactly how many clicks and sessions each individual campaign has generated.
+![UTM Campaigns Overview](../../../images/utm/utm-overview.jpeg)
 
-### Filtering and Customizing
+## Overview
 
-The bar at the top of the page gives you full control over the data displayed:
+UTM Campaigns let you precisely measure the success of your external marketing efforts. Create trackable links for newsletters, social media posts, or ads and see exactly how many clicks and sessions each campaign generates – broken down by source, medium, and campaign name.
 
-*   **Select Date Range:** Define the analysis period using predefined options like `Last 24 hours` or `Last 7 days`. You can select a custom date range via `More`.
-*   **Filter by Campaign Type:** Segment your campaigns using the `All`, `Paid`, or `Organic` toggles to quickly differentiate between various marketing tactics.
-*   **Create a New Link:** The `+ Create New UTM Link` button is your direct shortcut to the link builder for starting a new campaign.
-
-### The Analysis Widgets
-
-Below the filter bar, you'll find a detailed breakdown of your campaign performance:
-
-*   **Source Cards:** At the top, you'll see a summary per traffic source (e.g., `Whatsapp`, `chat.openai.com`). Each card shows the total clicks from that source and also provides a quick way to create a new UTM link via the link icon.
-*   **Top Campaigns:** This widget lists your individual campaigns by name, sorted by the number of clicks. This allows you to see your most successful initiatives at a glance. The colored dots correspond to the lines in the graph.
-*   **Campaign Visualization:** The interactive graph shows the performance of your top campaigns over time, measured in clicks (or `Sessions`, switchable in the top-right). This lets you see exactly when a campaign generated traffic—ideal for analyzing time-sensitive promotions.
-
-### Creating a New UTM Link
-
-Creating a trackable link is straightforward. To open the link builder, either click the `+ Create New UTM Link` button in the top filter bar or click the link icon on one of the source cards.
-
-Fill in the following fields to configure your link:
-
-1.  **Campaign Source (`utm_source`):** The platform where the link will be placed. This is the top-level origin of the traffic.
-    *   *Examples: `google`, `facebook`, `newsletter`*
-2.  **Campaign Medium (`utm_medium`):** The type of link. This describes how the user gets to you.
-    *   *Examples: `cpc` (Cost-per-Click), `email`, `social`, `banner`*
-3.  **Campaign Name (`utm_campaign`):** The specific name of your marketing initiative. This is the most important parameter for distinguishing between different initiatives.
-    *   *Examples: `summer-sale-2024`, `cup-final-announcement`*
-
-The **generated link** is displayed in real-time. Copy it with a click and use it in your marketing materials. Every click on this link will be automatically recorded in the dashboard and attributed to the correct campaign.
+> Your system automatically captures all incoming links with UTM parameters. The link builder additionally ensures consistent and error-free parameters.
 
 ---
 
-### FAQ
+## The Dashboard
 
-**What's the difference between Source, Medium, and Campaign?**
+### Source Cards
 
-Think of it like an address:
-*   `Source`: The city (Where from? e.g., Facebook)
-*   `Medium`: The street (How? e.g., Paid Ad)
-*   `Campaign`: The reason for the visit (Why? e.g., Winter Sale Promotion)
+At the top you'll see one card per traffic source (e.g. LinkedIn, Google, Perplexity). Each card shows:
+
+- **Total clicks** from this source
+- **Top campaign** — the most successful individual campaign from this source
+- **Marked UTM links** — number of manually created links for this source
+
+Click **Show all X sources** to expand the full list.
+
+### Top Campaigns
+
+Lists all campaigns sorted by clicks. The colored dots correspond directly to the lines in the Campaign Visualization chart on the right.
+
+### Campaign Visualization
+
+The interactive chart shows the click volume of your top campaigns over time. In the top right you can toggle between **Clicks** and **Sessions**. Use **Show top campaigns** to control how many campaigns are displayed simultaneously in the chart.
+
+---
+
+## Filter Bar
+
+The toolbar at the top gives you three controls:
+
+- **Time range** — predefined options (24h, 7d, 30d, 90d) or a custom date range
+- **Campaign type** — filter between `All`, `Paid` and `Organic` to compare different marketing tactics
+- **+ Create new UTM link** — opens the link builder
+
+---
+
+## Creating a UTM Link
+
+Click **+ Create new UTM link** in the toolbar. Fill in the following fields:
+
+**Required fields:**
+
+| Parameter | Description | Example |
+| -------------------- | -------------------------------------------- | ----------------------- |
+| `utm_source` | Where is the traffic coming from? | `linkedin`, `google` |
+| `utm_medium` | How is the traffic arriving? | `cpc`, `email`, `social` |
+| `utm_campaign` | Which campaign is it? | `enterprise_leadgen` |
+
+> Think of UTM parameters like an address: **Source** is the city (where from), **Medium** is the street (how), **Campaign** is the reason for the visit (why).
+
+The generated link is shown to you in real time. Copy it with one click and use it in your marketing materials – every click is automatically captured and attributed to the correct campaign.
+
+---
+
+## FAQ
 
 **Why do I see "Unnamed Campaign" in the dashboard?**
-
-This happens when a visitor arrives from a link that contains UTM parameters for `utm_source` or `utm_medium`, but the `utm_campaign` parameter is missing or empty.
+This happens when an incoming link contains `utm_source` or `utm_medium` but `utm_campaign` is missing or empty. Make sure all three parameters are set.
 
 **Do I have to create every link with this tool?**
-
-No. Our system automatically captures all incoming links that have UTM parameters. However, the link builder is a useful tool to ensure consistent, error-free links and to simplify the process.
+No. UTM parameters in incoming links are automatically detected and captured. The link builder helps you maintain consistent naming – for example always using `linkedin` instead of sometimes `LinkedIn` or `linked-in`.

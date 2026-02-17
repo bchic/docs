@@ -1,44 +1,86 @@
 ---
 title: 'Nutzergruppen'
-description: 'Segmentiere deine Besucher automatisch basierend auf ihrem Erfolg.'
+description: 'Verstehe die Kaufabsicht deiner Besucher – bchic Analytics teilt jede Session automatisch in informativ, kommerziell oder transaktionell ein.'
 icon: 'users-viewfinder'
 ---
 
-> Nutzergruppen helfen dir zu verstehen, wie sich Besucher verhalten, die erfolgreich waren, im Vergleich zu denen, die abgebrochen haben.
+![Nutzergruppen Übersicht](../../images/usergroups/usergroups-overview.jpeg)
 
-Wenn du den Bereich **Webseiten > Nutzergruppen** zum ersten Mal öffnest, wirst du von einem Popup begrüßt, das dich nach einem "Conversion-Ziel" fragt. Damit das System arbeiten kann, müssen wir dieses Ziel zuerst definieren.
+## Übersicht
 
-## Schritt 1: Was ist ein Conversion-Ziel?
+Nutzergruppen klassifizieren jede Besuchersession automatisch nach der höchsten Kaufabsicht, die ein Nutzer in dieser Session gezeigt hat. Das Ergebnis sind drei klar trennbare Gruppen:
 
-Ein Conversion-Ziel ist der **ultimative Erfolgsmoment** auf deiner Website. Das ist meistens ein Ereignis, das "nicht umkehrbar" ist und den Abschluss einer Reise darstellt.
+| Gruppe | Bedeutung |
+|---|---|
+| **Informativ** | Der Nutzer hat ausschließlich informative Inhalte konsumiert |
+| **Kommerziell** | Der Nutzer hat Seiten mit kommerziellem Intent besucht (z.B. Pricing, Features, Vergleiche) |
+| **Transaktionell** | Der Nutzer hat das definierte Conversion-Ziel ausgelöst |
+
+Ein Nutzer, der in einer Session erst eine Preisseite besucht und dann kauft, wird als **transaktionell** eingestuft – es zählt immer die höchste erreichte Stufe der Session.
+
+> [!NOTE]
+> Nutzergruppen setzen zwei Dinge voraus: eine abgeschlossene **Sitemap-Klassifizierung** und ein definiertes **Conversion-Ziel**. Beides muss einmalig eingerichtet werden – die folgenden Schritte führen dich durch den Prozess.
+
+---
+
+## Voraussetzung: Sitemap-Klassifizierung
+
+Die Basis für alle Nutzergruppen ist deine Sitemap-Klassifizierung. Dort legst du fest, welche Seiten deiner Website als informativ oder kommerziell eingestuft werden. bchic Analytics nutzt diese Zuordnung, um jede Session automatisch zu bewerten.
+
+---
+
+## Schritt 1: Conversion-Ziel definieren
+
+Das Conversion-Ziel markiert den transaktionellen Endpunkt – der Moment, an dem ein Besucher zu einem Kunden oder Lead wird.
 
 Typische Beispiele:
-*   Ein getätigter Kauf (`Event: Purchase`)
-*   Eine erfolgreiche Registrierung (`URL: /thank-you-signup`)
-*   Eine Buchung eines Termins
 
-## Schritt 2: Das Ziel erstellen
+- Ein getätigter Kauf (`Event: purchase`)
+- Eine erfolgreiche Registrierung (`URL: /thank-you-signup`)
+- Eine Terminbuchung (`Event: booking_confirmed`)
 
-Da wir dieses Ziel noch nicht definiert haben, müssen wir es über die Filter-Funktion anlegen.
+> [!TIP]
+> Wähle ein Ziel, das eindeutig und nicht umkehrbar ist. Eine Produktseite aufrufen zählt nicht – ein Kauf abschließen schon.
 
-1.  **Filterleiste öffnen:** Klicke oben rechts auf den Button `Filter`, um das Menü zu öffnen.
-2.  **Kriterien wählen:** Wähle nun genau die Bedingungen aus, die dein Ziel beschreiben (z.B. *Ereignis ist "Kauf"* oder *Seitenpfad ist "/bestellung-vielen-dank"*).
-3.  **Speichern:** Wenn du den Filter gesetzt hast, klicke unten rechts in der Filterleiste auf das **Disketten-Symbol** (Speichern).
+---
 
-## Schritt 3: Als Conversion-Ziel kategorisieren
+## Schritt 2: Filter für das Conversion-Ziel erstellen
 
-Dies ist der wichtigste Schritt. Im Speichern-Dialog musst du dem Kind einen Namen geben und die richtige Kategorie wählen.
+Das Conversion-Ziel wird über die Filter-Funktion angelegt.
 
-*   **Filtername:** Gib einen eindeutigen Namen ein (z.B. "Kauf abgeschlossen").
-*   **Kategorie:** Wähle im Dropdown-Menü **unbedingt** die Option `Conversion Ziel` (oder `Conversion Goal`) aus. Nur so taucht dieser Filter später im Nutzergruppen-Popup auf.
+1. **Filterleiste öffnen** — Klicke oben rechts auf `Filter`.
+2. **Kriterien wählen** — Definiere die Bedingung, die dein Ziel beschreibt, z.B. *Ereignis ist "purchase"* oder *Seitenpfad ist "/bestellung-vielen-dank"*.
+3. **Speichern** — Klicke auf das **Disketten-Symbol** unten rechts in der Filterleiste.
 
-Klicke auf **Filter speichern**.
+Im Speichern-Dialog:
 
-## Schritt 4: Gruppen generieren
+- **Filtername** — z.B. `Kauf abgeschlossen`
+- **Kategorie** — Wähle zwingend `Conversion Ziel` aus
 
-Kehre nun zur Seite **Nutzergruppen** zurück.
+> [!WARNING]
+> Ohne die Kategorie `Conversion Ziel` erscheint der Filter im nächsten Schritt nicht. Du kannst die Kategorie jederzeit nachträglich im Filter bearbeiten.
 
-1.  Im Popup (oder wenn du auf "Nutzerintentions Filter Erstellen" klickst) kannst du nun unter **Conversion-Ziel** deinen eben erstellten Filter auswählen.
-2.  Klicke auf **Gruppen generieren**.
+---
 
-Das System analysiert nun rückwirkend deine Besucherdaten und teilt sie in Gruppen ein (z.B. Nutzer, die gekauft haben vs. Nutzer, die nur geschaut haben). Dies ermöglicht dir im Anschluss detaillierte Vergleiche zwischen erfolgreichen und nicht erfolgreichen Besuchern.
+## Schritt 3: Gruppen generieren
+
+Öffne **Nutzergruppen** und wähle im Popup unter **Conversion-Ziel** deinen soeben erstellten Filter aus. Klicke auf **Gruppen generieren**.
+
+bchic Analytics wertet nun rückwirkend alle Sessions aus und weist jeder Session die höchste erreichte Intent-Stufe zu.
+
+![Gruppen generieren](../../images/usergroups/usergroups-generate-de.jpeg)
+
+---
+
+## Die Ergebnisse lesen
+
+Nach der Generierung siehst du deine Sessions aufgeteilt nach Intent-Stufe. Für jede Gruppe kannst du analysieren:
+
+- Über welche Kanäle kamen diese Nutzer?
+- Welche Einstiegsseiten haben sie genutzt?
+- Wie lange waren sie auf der Website?
+
+Der direkte Vergleich zwischen **kommerziell** und **transaktionell** ist besonders wertvoll: Er zeigt dir, welche Nutzer kurz vor dem Abschluss stehen – aber noch nicht konvertiert haben.
+
+> [!TIP]
+> Kombiniere Nutzergruppen mit der Funnel Analyse, um den genauen Absprungpunkt kommerzieller Nutzer im Conversion-Pfad zu identifizieren.
