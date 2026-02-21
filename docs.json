@@ -58,6 +58,11 @@
                   "de/intent/usergroups"]
               },
               {
+                "group": "Business Intelligence (BI)",
+                "pages": [
+                  "de/plattform/pages/change-impact"]
+              },
+              {
                 "group": "Einstellungen & Konfiguration",
                 "pages": [
                   "de/settings/account-settings",
@@ -170,6 +175,11 @@
                 "pages": [
                   "en/intent/sitemap-config",
                   "en/intent/usergroups"]
+              },
+              {
+                "group": "Business Intelligence (BI)",
+                "pages": [
+                  "en/plattform/pages/change-impact"]
               },
               {
                 "group": "Settings & Configuration",

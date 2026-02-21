@@ -1,0 +1,115 @@
+---
+title: 'Change Impact Analyse'
+description: 'Miss den exakten Einfluss von Änderungen (Deployments, Marketing, Content) auf deine wichtigsten KPIs.'
+icon: 'chart-line'
+---
+
+![Change Impact Dashboard](../../../images/bi/dashboard-overview.jpeg)
+
+## Übersicht
+
+Die Change Impact Analyse (CIA) beantwortet die wichtigste Frage nach jeder Änderung: **"Was hat uns das gebracht?"**
+
+Anstatt manuell Zeiträume zu vergleichen oder zu raten, ob ein Anstieg der Besucherzahlen mit deinem Newsletter oder einem Zufall zusammenhängt, quantifiziert die CIA den Effekt exakt. Du markierst einen Zeitpunkt (z.B. ein Deployment oder den Start einer Kampagne) und bchic Analytics berechnet die Veränderung der Metriken im Vorher-Nachher-Vergleich.
+
+Dies ist besonders wertvoll für:
+- **Product Teams:** Messung des ROI von neuen Features.
+- **Marketing:** Analyse der Nachhaltigkeit von Kampagnen-Traffic.
+- **Engineering:** Überwachung von Performance-Metriken (z.B. Ladezeit) nach Updates.
+
+---
+
+## Impact-Events erstellen
+
+Um eine Analyse zu starten, definierst du ein **Change Event**. Das ist der "Nullpunkt", ab dem die Messung beginnt.
+
+![Event Erstellung Modal](../../../images/bi/create-event-modal.jpeg)
+
+Klicke in der Übersicht auf `+ Änderung hinzufügen` und fülle die Details aus:
+
+- **Titel & Beschreibung:** Was wurde geändert? (z.B. "Homepage Redesign v2").
+- **Kategorie:** Wähle aus `Technical`, `Marketing`, `Content`, `Design` oder `Experiment`. Dies hilft später beim Filtern.
+- **Zeitpunkt:** Das exakte Datum und die Uhrzeit, wann die Änderung live ging.
+
+> **Tipp:** Sei beim Zeitpunkt so präzise wie möglich. Je genauer der Startpunkt definiert ist, desto schärfer ist die Trennung zwischen "Vorher" und "Nachher" in den Daten.
+
+---
+
+## Die Analyse-Karte
+
+Sobald ein Event angelegt ist, generiert das System eine Impact-Karte ("Scorecard") unterhalb des Hauptgraphen. Diese Karte ist das Herzstück der Auswertung.
+
+![Impact Scorecards](../../../images/bi/scorecards.jpeg)
+
+Jede Karte zeigt dir auf einen Blick:
+
+1.  **Prozentuale Veränderung:** Die große Zahl (z.B. `+8.6%`) zeigt die Differenz der gewählten Metrik im Vergleich zum vorherigen Zeitraum.
+2.  **Trend-Graph:** Die weiße Linie zeigt die tatsächliche Performance nach dem Event. Die graue Linie visualisiert den Trend *vor* dem Event zum Vergleich.
+3.  **Total & Average:**
+- **Daily Avg:** Der durchschnittliche Tageswert (Vorher vs. Nachher).
+- **Total:** Die absolute Summe der Interaktionen in den verglichenen Zeiträumen.
+
+---
+
+## Schnellstart mit Templates
+
+Um den Einrichtungsaufwand zu minimieren, bietet die CIA vorgefertigte Templates für die häufigsten Anwendungsfälle. Klicke beim Hinzufügen einer Änderung auf eines der Templates:
+
+### Intervall-Template
+*„Wie entwickeln sich meine Metriken im Zeitverlauf?“*
+Generiert automatisch wiederkehrende Marker (z.B. alle X Tage, wöchentlich oder monatlich).
+**Einsatzzweck:** Ideal für kontinuierliches Monitoring oder wöchentliche Reporting-Zyklen, ohne Events manuell pflegen zu müssen.
+
+### Kampagnen-Template
+*„Hat meine letzte Kampagne wirklich messbaren Erfolg gebracht?“*
+Analysiert historische UTM-Daten des letzten Jahres und erkennt Kampagnen automatisch. Wähle die gewünschten Kampagnen aus der Liste aus und das System erstellt die passenden Impact-Marker.
+**Einsatzzweck:** Nachträgliche und sofortige Auswertung von Marketing-Aktivitäten. Filterbar nach `Paid`, `Organic` und `Min. Clicks`.
+
+---
+
+## Goal-Vergleich & A/B-Testing
+
+Neben allgemeinen Metriken (wie Besucher oder Aufrufe) kannst du messen, wie sich Änderungen auf spezifische Conversion-Ziele auswirken. Über das Dropdown **„Goal-Vergleich“** lassen sich zudem zwei Ziele direkt nebeneinanderlegen (A/B-Vergleich).
+
+**So richtest du einen Goal-Vergleich ein:**
+1. **Ziel definieren:** Öffne die allgemeine Filterleiste (`Y`) oben rechts und konfiguriere die Filter, die dein Conversion-Ziel beschreiben (z.B. *Besuchte Seite = /checkout/success*).
+2. **Ziel speichern:** Klicke auf das Speichern-Icon und wähle beim Speichern die Kategorie „Conversion-Ziel“.
+3. **Vergleichen:** Wähle dein gespeichertes Ziel im CIA-Dashboard aus dem Dropdown.
+
+**Einsatzzweck:** A/B-Tests. Lege zwei unterschiedliche Conversion-Pfade oder Nutzergruppen nebeneinander. So siehst du nach einem Event sofort, ob Variante A oder Variante B stärker profitiert hat.
+
+---
+
+## Messmethoden: Intervall vs. Kumulativ
+
+Die Wahl der Methode bestimmt, wie der Zeitraum abgegrenzt und verglichen wird:
+
+### Intervall (Phasen-Vergleich)
+Betrachtet exakt die Phase vom **Start der Änderung bis zur nächsten Änderung** (oder bis heute, falls keine weitere folgt).
+*   **Vergleich:** Dieser Zeitraum wird gegen die **doppelte Zeitspanne davor** verglichen.
+*   **Ziel:** Isoliert den Effekt einer spezifischen Version oder Kampagne, bevor der nächste Einflussfaktor (nächster Marker) eintritt. Ideal, um die Stabilität zwischen zwei Deployments zu prüfen.
+
+### Kumulativ (Gesamtwirkung)
+Summiert den Effekt seit dem Startzeitpunkt kontinuierlich auf, ohne durch nachfolgende Marker unterbrochen zu werden.
+*   **Ziel:** Zeigt die absolute "Ausbeute" (z.B. totale zusätzliche Conversions) über die gesamte Laufzeit hinweg.
+
+---
+
+## Vergleichszeiträume & Filter
+
+Die vertikalen, gestrichelten Linien markieren deine Change Events. Wenn du eine Impact-Karte unten anklickst, wird der zugehörige Zeitraum im Hauptgraphen hervorgehoben. So siehst du sofort, ob eine Änderung mit globalen Trends korreliert oder eine isolierte Auswirkung hatte.
+
+Nutze die **Kategorien-Filter** (rechts über den Karten), um z.B. nur `Marketing`-Events anzuzeigen und technische Deployments auszublenden.
+
+---
+
+## Typische Analysen
+
+**Hat das Redesign die Nutzerbindung verbessert?**
+Erstelle ein Event der Kategorie `Design`. Wähle als Metrik "Engagement-Rate" oder "Durchschn. Besuchszeit". Ein positiver grüner Wert bestätigt, dass das neue UI Nutzer länger hält.
+
+**Lohnt sich die bezahlte Kampagne?**
+Markiere den Start der Ads als `Marketing`-Event. Schalte auf "Kumulativ" und beobachte die Metrik "Besucher". Vergleiche den Zuwachs ("Total") mit deinen Ad-Spendings, um den CPA (Cost per Acquisition) grob abzuschätzen.
+
+**Performance nach Deployment überwachen**
+Lege nach jedem Release ein `Technical`-Event an. Beobachte die Metriken "Bounce Rate" und "Aufrufe". Ein plötzlicher Anstieg der Bounce Rate direkt nach dem Event deutet oft auf technische Fehler oder 404-Probleme hin.
