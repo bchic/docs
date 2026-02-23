@@ -1,0 +1,45 @@
+---
+title: 'Add More Websites'
+description: 'Connect additional websites to your organization and install the tracking script.'
+icon: 'globe'
+---
+
+> Every website you want to track with bchic Analytics must first be connected to your organization. Once linked, you'll receive an individual tracking script for each domain.
+
+## Connect a website
+
+Navigate to **Settings → Organization** and expand the **Linked Website URLs** section. You'll see all currently connected domains along with an input field to add new ones.
+
+Enter the full URL of your website (e.g. `https://my-website.com`) and click the **+** icon to save it.
+
+<Note>
+    You can link as many websites as you like to a single organization. Each domain gets its own tracking script with a unique website ID.
+</Note>
+
+## Install the tracking script
+
+Once a website is linked, you can retrieve its script. Click the **code icon** next to the desired domain in the list. A pop-up will open with a personalized installation guide.
+
+First, select your **website platform** — supported options include WordPress, Webflow, Shopify, Squarespace, Wix, Framer, and a generic HTML option. You'll then be walked through how to embed the script on your platform.
+
+The script itself looks something like this:
+
+```html
+<script defer src="https://analytics.bchic.de/script.js" data-website-id="YOUR-WEBSITE-ID"></script>
+```
+
+Copy the script and paste it into the `<head>` section of your website as instructed.
+
+<Tip>
+    For detailed step-by-step guides for each platform, check out our [Integrations section](/en/integration/integrationen). We recommend following the instructions there, as they account for platform-specific nuances.
+</Tip>
+
+## Verify tracking
+
+After installation, you can check whether tracking is active on your website's **Overview page**. As soon as the first pageview is registered, data will appear in your dashboard.
+
+If no data shows up after a few minutes, make sure that:
+
+*   **the script is placed in the `<head>` section** of your page — not in the `<body>`.
+*   **the website ID** in the script is correct and matches the linked domain.
+*   **no ad blocker** is preventing tracking in your browser (try disabling it temporarily to test).

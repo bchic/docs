@@ -66,7 +66,8 @@
                 "group": "Einstellungen & Konfiguration",
                 "pages": [
                   "de/settings/account-settings",
-                  "de/settings/organisation-settings"
+                  "de/settings/organisation-settings",
+                  "de/settings/website-creation"
                 ]
               },
               {
@@ -185,7 +186,8 @@
                 "group": "Settings & Configuration",
                 "pages": [
                   "en/settings/account-settings",
-                  "en/settings/organisation-settings"
+                  "en/settings/organisation-settings",
+                  "en/settings/website-creation"
                 ]
               },
               {

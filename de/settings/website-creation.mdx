@@ -1,0 +1,45 @@
+---
+title: 'Weitere Websites hinzufügen'
+description: 'Verknüpfe zusätzliche Websites mit deiner Organisation und installiere das Tracking-Skript.'
+icon: 'globe'
+---
+
+> Jede Website, die du mit bchic Analytics tracken möchtest, muss zuerst mit deiner Organisation verknüpft werden. Nach der Verknüpfung erhältst du ein individuelles Tracking-Skript für jede Domain.
+
+## Website verknüpfen
+
+Navigiere zu **Einstellungen → Organisation** und klappe den Bereich **Verknüpfte Website URLs** auf. Dort siehst du alle bereits verbundenen Domains sowie ein Eingabefeld, um neue hinzuzufügen.
+
+Gib die vollständige URL deiner Website ein (z. B. `https://meine-website.de`) und klicke auf das **+**-Symbol, um sie zu speichern.
+
+<Note>
+    Du kannst beliebig viele Websites mit einer Organisation verknüpfen. Jede Domain erhält dabei ein eigenes Tracking-Skript mit einer eindeutigen Website-ID.
+</Note>
+
+## Tracking-Skript installieren
+
+Sobald eine Website verknüpft ist, kannst du das zugehörige Skript abrufen. Klicke in der Liste der verknüpften URLs auf das **Code-Symbol** neben der gewünschten Domain. Es öffnet sich ein Pop-up mit deiner persönlichen Installationsanleitung.
+
+Wähle zunächst deinen **Website-Anbieter** aus – unterstützt werden WordPress, Webflow, Shopify, Squarespace, Wix, Framer sowie eine generische HTML-Option. Anschließend wird dir erklärt, wie du das Skript auf deiner Plattform einbindest.
+
+Das Skript selbst sieht in etwa so aus:
+
+```html
+<script defer src="https://analytics.bchic.de/script.js" data-website-id="DEINE-WEBSITE-ID"></script>
+```
+
+Kopiere das Skript und füge es gemäß der Anleitung in den `<head>`-Bereich deiner Website ein.
+
+<Tip>
+    Detaillierte Schritt-für-Schritt-Anleitungen für jede Plattform findest du in unserem [Integrations-Bereich](/de/integration/integrationen). Wir empfehlen, die dortigen Anleitungen zu befolgen, da sie plattformspezifische Besonderheiten berücksichtigen.
+</Tip>
+
+## Tracking überprüfen
+
+Nach der Installation kannst du auf der **Übersichtsseite** deiner Website prüfen, ob das Tracking aktiv ist. Sobald der erste Seitenaufruf registriert wurde, erscheinen die Daten im Dashboard.
+
+Wenn nach einigen Minuten noch keine Daten ankommen, stelle sicher, dass:
+
+*   **das Skript im `<head>`-Bereich** der Seite eingebunden ist – nicht im `<body>`.
+*   **die Website-ID** im Skript korrekt ist und zur verknüpften Domain passt.
+*   **kein Ad-Blocker** das Tracking im Browser verhindert (zum Testen kurz deaktivieren).
