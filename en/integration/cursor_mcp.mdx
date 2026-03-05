@@ -1,0 +1,54 @@
+---
+title: 'Cursor (cursor.com)'
+description: 'Use bchic Analytics directly in Cursor via the Model Context Protocol (MCP).'
+---
+
+The bchic MCP Server connects your analytics data to Cursor's AI assistant. Ask questions about your traffic, top pages, or visitor trends without leaving your editor — ideal for data-informed development workflows.
+
+<Steps>
+    <Step title="Retrieve your MCP Token">
+        First, you need your personal **MCP Token** from the bchic Dashboard.
+
+        1. Open **Settings** (gear icon bottom left).
+        2. Navigate to the **Integrations** section.
+        3. Copy the token displayed under **MCP Access Token**.
+
+    </Step>
+
+    <Step title="Open Cursor MCP Settings">
+        In Cursor, open the **Settings** panel (`Cmd + ,` on macOS / `Ctrl + ,` on Windows) and navigate to the **MCP** tab.
+
+        Click **Add new global MCP server**.
+
+    </Step>
+
+    <Step title="Add the bchic MCP Server">
+        Cursor uses a `mcp.json` config file. Add the following entry — replacing `YOUR-TOKEN-HERE` with the token copied in step 1:
+
+        ``` json mcp.json
+        {
+            "mcpServers": {
+            "bchic-analytics": {
+            "url": "https://mcp.analytics.bchic.de/mcp?token=YOUR-TOKEN-HERE"
+        }
+        ```
+
+        Save the file. Cursor will automatically connect to the server.
+
+    </Step>
+
+    <Step title="Query your analytics in the AI chat">
+        Open the Cursor AI chat (`Cmd + L` / `Ctrl + L`) and ask anything about your analytics:
+
+        - *"What are my top pages this week?"*
+        - *"How many visitors did we have yesterday?"*
+        - *"Which pages have the highest bounce rate?"*
+
+        Cursor's AI will call the bchic MCP Server and return your live data inline.
+
+    </Step>
+</Steps>
+
+## Verification
+
+If the Cursor AI can answer questions about your site's traffic, the integration is active. If the server shows as disconnected in the MCP tab, verify that your token is correct and that you saved the `mcp.json` file properly.

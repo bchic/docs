@@ -1,0 +1,43 @@
+---
+title: 'Claude (claude.ai)'
+description: 'Nutze bchic Analytics direkt in Claude über das Model Context Protocol (MCP).'
+---
+
+Der bchic MCP Server ermöglicht es dir, deine Analysedaten in natürlicher Sprache abzufragen — direkt in Claude. Stelle Fragen wie *„Wie viele Besucher hatten wir letzte Woche?"* oder *„Was sind meine meistbesuchten Seiten diesen Monat?"* ohne deinen Chat zu verlassen.
+
+<Steps>
+    <Step title="MCP Token abrufen">
+        Zuerst benötigst du deinen persönlichen **MCP Token** aus dem bchic Dashboard.
+
+        1. Öffne die **Einstellungen** (Zahnrad-Icon unten links).
+        2. Navigiere zum Bereich **Integrationen**.
+        3. Kopiere den Token unter **MCP Access Token**.
+    </Step>
+
+    <Step title="MCP Server in Claude hinzufügen">
+        Öffne [claude.ai](https://claude.ai) und gehe zu **Einstellungen → Konnektoren**.
+
+        Klicke auf **Benutzerdefinierten Konnektor hinzufügen** und gib die eben kopierte Server-URL aus den bchic Analytics Einstellungen ein.
+
+        ```
+        https://mcp.analytics.bchic.de/mcp?token=YOUR-TOKEN-HERE
+        ```
+
+        Vergib einen Namen (z.B. `bchic Analytics`) und bestätige.
+    </Step>
+
+    <Step title="Conversation starten">
+        Das war's. Öffne einen neuen Chat in Claude und stelle beliebige Fragen zu deinen Analysedaten:
+
+        - *„Was waren meine Top 5 Seiten letzten Monat?"*
+        - *„Wie viele eindeutige Besucher hatte ich diese Woche?"*
+        - *„Welche Referrer haben gestern den meisten Traffic gebracht?"*
+
+        Claude ruft automatisch den bchic MCP Server auf und gibt deine Live-Daten zurück.
+
+    </Step>
+</Steps>
+
+## Überprüfung
+
+Wenn Claude Fragen zu deinen Besucherzahlen oder meistbesuchten Seiten beantworten kann, funktioniert die Integration korrekt. Bei einer Fehlermeldung prüfe, ob der Token korrekt ist und die MCP Server-URL ohne Leerzeichen eingegeben wurde.

@@ -1,0 +1,51 @@
+---
+title: 'Cursor (cursor.com)'
+description: 'Nutze bchic Analytics direkt in Cursor über das Model Context Protocol (MCP).'
+---
+
+Der bchic MCP Server verbindet deine Analysedaten mit dem KI-Assistenten in Cursor. Stelle Fragen zu Traffic, meistbesuchten Seiten oder Besuchertrends ohne deinen Editor zu verlassen — ideal für datengetriebene Entwicklungs-Workflows.
+
+<Steps>
+    <Step title="MCP Token abrufen">
+        Zuerst benötigst du deinen persönlichen **MCP Token** aus dem bchic Dashboard.
+
+        1. Öffne die **Einstellungen** (Zahnrad-Icon unten links).
+        2. Navigiere zum Bereich **Integrationen**.
+        3. Kopiere den Token unter **MCP Access Token**.
+    </Step>
+
+    <Step title="Cursor MCP Einstellungen öffnen">
+        Öffne in Cursor die **Einstellungen** (`Cmd + ,` auf macOS / `Ctrl + ,` auf Windows) und navigiere zum Tab **MCP**.
+
+        Klicke auf **Add new global MCP server**.
+    </Step>
+
+    <Step title="bchic MCP Server eintragen">
+        Cursor nutzt eine `mcp.json` Konfigurationsdatei. Füge folgenden Eintrag hinzu — ersetze dabei `YOUR-TOKEN-HERE` durch den kopierten Token:
+
+        ```json mcp.json
+        {
+            "mcpServers": {
+            "bchic-analytics": {
+            "url": "https://mcp.analytics.bchic.de/mcp?token=YOUR-TOKEN-HERE"
+        }
+        ```
+
+        Speichere die Datei. Cursor verbindet sich automatisch mit dem Server.
+    </Step>
+
+    <Step title="Analytics im KI-Chat abfragen">
+        Öffne den Cursor KI-Chat (`Cmd + L` / `Ctrl + L`) und stelle beliebige Fragen zu deinen Analysedaten:
+
+        - *„Was sind meine meistbesuchten Seiten diese Woche?"*
+        - *„Wie viele Besucher hatte ich gestern?"*
+        - *„Welche Seiten haben die höchste Absprungrate?"*
+
+        Der KI-Assistent ruft den bchic MCP Server auf und gibt deine Live-Daten direkt im Chat zurück.
+
+    </Step>
+</Steps>
+
+## Überprüfung
+
+Wenn der Cursor KI-Assistent Fragen zu deinem Traffic beantworten kann, ist die Integration aktiv. Wird der Server im MCP-Tab als nicht verbunden angezeigt, prüfe ob der Token korrekt ist und die `mcp.json` Datei gespeichert wurde.
