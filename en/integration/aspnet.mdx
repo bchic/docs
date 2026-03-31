@@ -1,0 +1,217 @@
+---
+title: 'ASP.NET Integration'
+description: 'Integrate bchic Analytics into your ASP.NET Web Application or MVC project.'
+---
+
+bchic Analytics can be integrated into any ASP.NET application in just a few minutes. The tracking script is placed centrally in your layout or master page and automatically captures all page views without cookies or personal data.
+
+<Steps>
+    <Step title="Get your tracking script">
+        First, retrieve your personal tracking script from the bchic dashboard.
+
+        1. Open **Settings** (gear icon bottom left).
+        2. Navigate to **Tracking → Setup**.
+        3. Copy the displayed script tag with your website ID.
+
+        The script looks something like this:
+
+        ```html
+        <script defer src="https://cloud.bchic.de/script.js" data-website-id="your-website-id"></script>
+        ```
+    </Step>
+
+    <Step title="Add script to your layout">
+        Depending on your ASP.NET version, you'll integrate the script differently:
+
+        ### ASP.NET MVC / .NET Core
+
+        Open your central layout file (usually `Views/Shared/_Layout.cshtml`) and add the script in the `<head>` section:
+
+        ```html
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="utf-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>@ViewBag.Title - My Application</title>
+
+                <!-- bchic Analytics -->
+                <script defer src="https://cloud.bchic.de/script.js" data-website-id="your-website-id"></script>
+
+                @Styles.Render("~/Content/css")
+                @Scripts.Render("~/bundles/modernizr")
+        </head>
+        <body>
+        @RenderBody()
+        </body>
+        </html>
+        ```
+
+        ### ASP.NET Web Forms
+
+        Open your master page (usually `Site.Master`) and add the script in the `<head>` section of the `<asp:Content>` area:
+
+            ```html
+            <%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="YourApp.SiteMaster" %>
+            <!DOCTYPE html>
+            <html lang="en">
+            <head runat="server">
+                <meta charset="utf-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <title><%: Page.Title %> - My Application</title>
+
+                <!-- bchic Analytics -->
+                <script defer src="https://cloud.bchic.de/script.js" data-website-id="your-website-id"></script>
+
+                <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+                </asp:ContentPlaceHolder>
+            </head>
+            <body>
+            <form id="form1" runat="server">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                </asp:ContentPlaceHolder>
+            </form>
+            </body>
+            </html>
+            ```
+
+            ### ASP.NET Core Razor Pages
+
+            Open `Pages/Shared/_Layout.cshtml` and add the script:
+
+            ```html
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="utf-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <title>@ViewData["Title"] - My Application</title>
+
+                <!-- bchic Analytics -->
+                <script defer src="https://cloud.bchic.de/script.js" data-website-id="your-website-id"></script>
+
+                <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+            </head>
+            <body>
+            <div class="container">
+                <main role="main" class="pb-3">
+                    @RenderBody()
+                </main>
+            </div>
+            @await RenderSectionAsync("Scripts", required: false)
+            </body>
+            </html>
+            ```
+    </Step>
+
+    <Step title="Deploy and verify">
+        1. Save your changes and deploy your application.
+        2. Open your website in a browser.
+        3. Check in the bchic dashboard under **Live** → **Active Visitors** to see if your visit was tracked.
+
+        Alternatively, you can check in the browser DevTools (F12) → Network tab if a request to `cloud.bchic.de/api/send` was successfully sent (Status 202).
+    </Step>
+</Steps>
+
+## Advanced Configuration
+
+### Track custom events
+
+In addition to page views, you can track custom events like button clicks or form submissions:
+
+```javascript
+// In a script block or separate JS file
+function trackCustomEvent(eventName, eventData) {
+if (window.bchic) {
+    window.bchic.track(eventName, eventData);
+}
+}
+
+// Example: Track button click
+document.getElementById('download-button').addEventListener('click', function() {
+trackCustomEvent('download', { file: 'whitepaper.pdf' });
+});
+```
+
+### Single Page Application (SPA) support
+
+If you're running an ASP.NET Core app with a frontend framework like React or Vue.js, you need to manually track page views when the URL changes:
+
+```javascript
+// Call on every route change
+if (window.bchic) {
+window.bchic.track();
+}
+```
+
+### Content Security Policy (CSP)
+
+If you're using a Content Security Policy, add bchic to your allowed domains:
+
+```html
+<meta http-equiv="Content-Security-Policy" content="
+    script-src 'self' https://cloud.bchic.de;
+    connect-src 'self' https://cloud.bchic.de;
+">
+    ```
+
+    Or in your `Web.config` or `Startup.cs`:
+
+    ```csharp
+    // ASP.NET Core Startup.cs
+    app.Use(async (context, next) =>
+    {
+        context.Response.Headers.Add("Content-Security-Policy",
+            "script-src 'self' https://cloud.bchic.de; connect-src 'self' https://cloud.bchic.de;");
+        await next();
+    });
+    ```
+
+    ### Exclude development environment
+
+    To disable tracking on `localhost` or in development environments, use a Razor condition:
+
+    ```html
+    @if (!Context.Request.Host.Host.Contains("localhost"))
+    {
+        <script defer src="https://cloud.bchic.de/script.js" data-website-id="your-website-id"></script>
+    }
+    ```
+
+    ## Common Issues
+
+    ### Script doesn't load
+
+    - Check if the `data-website-id` is correct (no spaces, no trailing slash).
+    - Make sure no firewall or ad blocker is blocking the script.
+    - Check the browser console (F12) for JavaScript errors.
+
+    ### No data in dashboard
+
+    - Wait 1-2 minutes after the first visit for data to be processed.
+    - Make sure the script is in the `<head>`, not at the end of `<body>`.
+- Verify your website is publicly accessible (not behind VPN/firewall).
+
+### POST requests are blocked
+
+If you're using `AntiForgeryToken` or CSRF protection, make sure external POST requests to `cloud.bchic.de` are not affected. bchic sends tracking data via POST, but these don't require CSRF tokens.
+
+## Privacy & Compliance
+
+bchic Analytics is **fully GDPR-compliant** without cookies or consent banners:
+
+- **No cookies** → No consent required
+- **No IP storage** → Anonymization through hashing
+- **Servers in Germany** (Hetzner Falkenstein)
+- **No third-country transfer** → No US cloud
+
+Your privacy policy should still mention bchic. We provide ready-made text templates: [Privacy Policy Templates](https://docs.bchic.de/en/legal/privacy-templates)
+
+## Support
+
+If you need help with the integration or have questions about your specific ASP.NET setup, feel free to reach out:
+
+- **Email:** [support@bchic.de](mailto:support@bchic.de)
+- **Chat:** Directly in the dashboard (icon bottom right)
+
+We're happy to help with setup, including screenshare or remote sessions.
