@@ -1,0 +1,202 @@
+---
+title: 'Google Ads Tracking'
+description: 'Track your Google Ads campaigns automatically with UTM parameters and valuable campaign details.'
+---
+
+bchic Analytics automatically captures all visitors coming from Google Ads to your website – as long as URLs are tagged with UTM parameters. With the right configuration, you'll track not just traffic sources, but also campaign names, keywords, ad groups, and more.
+
+## Automatic Tracking
+
+bchic automatically recognizes all visitors with UTM parameters in the URL and categorizes them as **Paid Traffic**. You'll see these visits in the dashboard under **Traffic Sources → UTM Campaigns**.
+
+### Standard UTM Parameters
+
+The most important UTM parameters for Google Ads:
+
+| Parameter | Description | Example |
+|-----------|-------------|---------|
+| `utm_source` | Traffic source | `google` |
+| `utm_medium` | Marketing medium | `cpc`, `ppc` |
+| `utm_campaign` | Campaign name | `summer_sale_2026` |
+| `utm_term` | Keyword (optional) | `analytics+software` |
+| `utm_content` | Ad content (optional) | `textad_v1` |
+
+**Example URL:**
+```
+https://yourdomain.com/?utm_source=google&utm_medium=cpc&utm_campaign=summer_sale_2026&utm_term=analytics+software&utm_content=headline_a
+```
+
+## Google Ads Configuration
+
+<Steps>
+    <Step title="Enable auto-tagging">
+        Google Ads can automatically append URLs with additional parameters (GCLID), but for bchic you need **manual UTM parameters**.
+
+        1. Open Google Ads and go to **Settings → Account settings**.
+        2. Navigate to **Auto-tagging**.
+        3. Make sure **Auto-tagging is enabled** (recommended, even though we're adding manual parameters).
+
+        <Note>
+        Auto-tagging adds the `gclid` parameter, which is important for Google Analytics. For bchic we use UTM parameters in addition, and both can work in parallel.
+        </Note>
+    </Step>
+
+    <Step title="Set tracking template at account level">
+        To automatically append UTM parameters to all campaign URLs, set a **tracking template** at account level.
+
+        1. Go to **Settings → Account settings**.
+        2. Scroll to **Tracking** and click on **Tracking template**.
+        3. Add the following template:
+
+        ```
+        {lpurl}?utm_source=google&utm_medium=cpc&utm_campaign={campaignid}&utm_term={keyword}&utm_content={creative}
+        ```
+
+        **Parameter placeholders explained:**
+        - `{lpurl}` – Your destination URL
+        - `{campaignid}` – Unique campaign ID
+        - `{keyword}` – The matched keyword
+        - `{creative}` – Ad group ID or creative ID
+
+        4. Click **Save**.
+
+        <Warning>
+        Test the template before going live. Google Ads offers a **Test** button to verify the URL is generated correctly.
+        </Warning>
+    </Step>
+
+    <Step title="Alternative: ValueTrack parameters for more details">
+        Google Ads offers **ValueTrack parameters** that let you pass even more information:
+
+        ```
+        {lpurl}?utm_source=google&utm_medium=cpc&utm_campaign={campaignid}&utm_term={keyword}&utm_content={creative}&matchtype={matchtype}&network={network}&device={device}
+        ```
+
+        **Additional parameters:**
+        - `{matchtype}` – Keyword match type (broad, phrase, exact)
+        - `{network}` – Ad network (search, display)
+        - `{device}` – Device type (mobile, desktop, tablet)
+        - `{placement}` – Placement (for display ads)
+        - `{target}` – Targeting criterion
+
+        This data appears in bchic under **UTM Content** or in URL parameters and can be analyzed in custom reports.
+    </Step>
+
+    <Step title="Campaign-specific customizations (optional)">
+        If you want to set different UTM parameters for individual campaigns:
+
+        1. Open the desired **Campaign → Settings**.
+        2. Scroll to **Campaign URL options**.
+        3. Set a **tracking template** at campaign level:
+
+        ```
+        {lpurl}?utm_source=google&utm_medium=cpc&utm_campaign=black_friday&utm_term={keyword}
+        ```
+
+        This overrides the account template only for this campaign.
+    </Step>
+</Steps>
+
+## Verify Tracking
+
+After setup, you can verify that UTM parameters are being passed correctly:
+
+1. **Google Ads Preview Tool:** Click on an ad in the ad preview and check the URL in the address bar.
+2. **bchic Dashboard:** Go to **Traffic Sources → UTM Campaigns** and see if new campaigns appear.
+3. **Browser DevTools:** After clicking an ad, open DevTools (F12) → Network → check URL parameters in the request.
+
+**Example of a correctly tagged URL:**
+```
+https://yourdomain.com/landing?utm_source=google&utm_medium=cpc&utm_campaign=12345678&utm_term=analytics+tool&utm_content=98765&gclid=abc123xyz
+```
+
+## Analysis in bchic
+
+In the bchic dashboard, you'll find Google Ads traffic under:
+
+- **Traffic Sources → UTM Campaigns:** Overview of all campaigns with sessions, conversions, bounce rate.
+- **Traffic Sources → UTM Source/Medium:** Filter by `google / cpc` for all Google Ads traffic.
+- **UTM Term:** See which keywords drive the most traffic.
+- **UTM Content:** Compare performance of different ad texts or creatives.
+
+### Track custom events
+
+If you want to track conversions like form submissions or purchases:
+
+```javascript
+// Example: Conversion after form submission
+document.getElementById('contact-form').addEventListener('submit', function() {
+    if (window.bchic) {
+        window.bchic.track('lead', { source: 'google_ads' });
+    }
+});
+```
+
+You'll see these events under **Events** in the dashboard and can link them to UTM parameters.
+
+## Common Issues
+
+### UTM parameters not being transferred
+
+- **Problem:** You see traffic but no UTM data in the dashboard.
+- **Solution:** Check if the tracking template in Google Ads is saved correctly. Test the URL with the Google Ads Preview Tool.
+
+### Campaign IDs instead of names
+
+- **Problem:** Dashboard shows only IDs (e.g. `12345678`) instead of campaign names.
+- **Solution:** This is normal when using `{campaignid}`. Use `{_campaign}` (with underscore!) instead for campaign names:
+
+```
+{lpurl}?utm_source=google&utm_medium=cpc&utm_campaign={_campaign}&utm_term={keyword}
+```
+
+<Warning>
+`{_campaign}` returns the campaign name, which may contain spaces and special characters. URLs should be URL-encoded, which Google Ads handles automatically.
+</Warning>
+
+### Duplicate parameters (gclid + UTM)
+
+- **Problem:** URLs have both `gclid` and UTM parameters.
+- **Solution:** This is correct and intended. `gclid` is for Google Analytics, UTM parameters for bchic. Both can coexist.
+
+### Keywords appear as {keyword}
+
+- **Problem:** The placeholder isn't being replaced.
+- **Solution:** Make sure the tracking template is set at **account level**, not in the final URL. Google Ads only replaces placeholders in templates, not in manually entered URLs.
+
+## Best Practices
+
+### Consistent naming convention
+
+Use consistent names for campaigns and parameters:
+
+- ✅ `utm_campaign=summer_sale_2026_search`
+- ✅ `utm_campaign=black_friday_display`
+- ❌ `utm_campaign=Summer Sale 2026!` (spaces, special chars)
+
+### Set medium correctly
+
+- `cpc` or `ppc` for paid search
+- `display` for display ads
+- `shopping` for Google Shopping
+- `video` for YouTube ads
+
+### Use UTM builder
+
+For manual campaigns (e.g., newsletter with Google Ads link), you can use a UTM builder:
+
+**Example tool:** [Google Campaign URL Builder](https://ga-dev-tools.google/campaign-url-builder/)
+
+## Privacy
+
+UTM parameters contain **no personal data** and are GDPR-compliant. Keywords and campaign names are technical information, not user identifiers.
+
+bchic stores UTM data aggregated and anonymized – just like all other analytics data.
+
+## Support
+
+If you need help setting up Google Ads tracking or have questions about specific ValueTrack parameters:
+
+- **Email:** [kontakt@bchic.de](mailto:support@bchic.de)
+
+We're happy to help with configuration and show you how to get the most out of your campaign data.

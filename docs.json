@@ -68,6 +68,11 @@
                   "de/plattform/ai/mcp-tools"]
               },
               {
+                "group": "Paid Traffic",
+                "pages": [
+                  "de/ads/google-ads-tracking"]
+              },
+              {
                 "group": "Einstellungen & Konfiguration",
                 "pages": [
                   "de/settings/account-settings",
@@ -195,6 +200,11 @@
                 "group": "Model Context Protocol (MCP)",
                 "pages": [
                   "en/plattform/ai/mcp-tools"]
+              },
+              {
+                "group": "Paid Traffic",
+                "pages": [
+                  "en/ads/google-ads-tracking"]
               },
               {
                 "group": "Settings & Configuration",
