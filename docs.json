@@ -70,7 +70,7 @@
               {
                 "group": "Paid Traffic",
                 "pages": [
-                  "de/ads/google-ads-tracking"]
+                  "de/ads/google-ads-tracking", "de/ads/meta-ads-tracking"]
               },
               {
                 "group": "Einstellungen & Konfiguration",
@@ -204,7 +204,7 @@
               {
                 "group": "Paid Traffic",
                 "pages": [
-                  "en/ads/google-ads-tracking"]
+                  "en/ads/google-ads-tracking","en/ads/meta-ads-tracking"]
               },
               {
                 "group": "Settings & Configuration",

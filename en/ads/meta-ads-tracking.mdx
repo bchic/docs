@@ -1,0 +1,273 @@
+---
+title: 'Instagram & Meta Ads'
+description: 'Track your Instagram and Facebook campaigns with dynamic URL parameters and detailed performance data.'
+---
+
+bchic Analytics automatically captures all visitors coming from Instagram or Facebook Ads to your website. With the right URL parameters, you'll track not just traffic sources, but also campaign names, ad sets, creatives, and placements (Stories, Feed, Reels).
+
+## Automatic Tracking
+
+bchic automatically recognizes all visitors with UTM parameters in the URL and categorizes them as **Paid Traffic**. You'll see these visits in the dashboard under **Traffic Sources → UTM Campaigns**.
+
+### Standard UTM Parameters
+
+The most important UTM parameters for Meta Ads:
+
+| Parameter | Description | Example |
+|-----------|-------------|---------|
+| `utm_source` | Traffic source | `instagram`, `facebook` |
+| `utm_medium` | Marketing medium | `paid_social`, `social_paid` |
+| `utm_campaign` | Campaign name | `summer_sale_2026` |
+| `utm_content` | Ad name/creative | `carousel_product_a` |
+| `utm_term` | Ad set/targeting (optional) | `women_25-34_berlin` |
+
+**Example URL:**
+```
+https://yourdomain.com/?utm_source=instagram&utm_medium=paid_social&utm_campaign=summer_sale_2026&utm_content=carousel_product_a
+```
+
+## Meta Ads Configuration
+
+<Steps>
+    <Step title="Set URL parameters at campaign level">
+        Meta Ads (formerly Facebook Ads Manager) offers **dynamic URL parameters** that are automatically filled with campaign data.
+
+        1. Open **Meta Ads Manager** ([business.facebook.com](https://business.facebook.com)).
+        2. Select the desired **Campaign**.
+        3. Click **Edit**.
+        4. Scroll down to **Tracking** → **URL Parameters**.
+        5. Add the following parameters:
+
+        ```
+        utm_source={{site_source_name}}&utm_medium=paid_social&utm_campaign={{campaign.name}}&utm_content={{ad.name}}&utm_term={{adset.name}}
+        ```
+
+        6. Click **Publish**.
+
+        <Note>
+        `{{site_source_name}}` automatically returns `Instagram` or `Facebook` – so you can cover both channels with one template.
+        </Note>
+    </Step>
+
+    <Step title="Dynamic parameters explained">
+        Meta offers numerous **dynamic placeholders** you can use:
+
+        | Parameter | What it tracks | Example output |
+        |-----------|----------------|----------------|
+        | `{{site_source_name}}` | Platform | `Instagram`, `Facebook` |
+        | `{{campaign.name}}` | Campaign name | `summer_sale_2026` |
+        | `{{campaign.id}}` | Campaign ID | `120247774987700538` |
+        | `{{adset.name}}` | Ad set name | `women_25-34_berlin` |
+        | `{{adset.id}}` | Ad set ID | `120247771712260538` |
+        | `{{ad.name}}` | Ad name | `carousel_product_a` |
+        | `{{ad.id}}` | Ad ID | `120247775752120538` |
+        | `{{placement}}` | Placement | `Instagram_Stories`, `feed`, `Instagram_Reels` |
+
+        <Warning>
+        **Important:** Use `{{campaign.name}}`, **not** `{{campaign.id}}`. Otherwise you'll see only numbers like `120247774987700538` in the dashboard instead of readable campaign names.
+        </Warning>
+
+        **Recommended template with all important data:**
+        ```
+        utm_source={{site_source_name}}&utm_medium=paid_social&utm_campaign={{campaign.name}}&utm_content={{ad.name}}&utm_term={{adset.name}}&placement={{placement}}
+        ```
+    </Step>
+
+    <Step title="Set URL parameters at ad level (optional)">
+        If you need different parameters for individual ads:
+
+        1. Open the desired **Ad** in Ads Manager.
+        2. Click **Edit**.
+        3. Scroll to **Tracking** → **URL Parameters**.
+        4. Set individual parameters (overrides campaign settings).
+
+        **Example for Instagram Stories ad:**
+        ```
+        utm_source=instagram&utm_medium=stories&utm_campaign={{campaign.name}}&utm_content=story_swipe_up
+        ```
+    </Step>
+
+    <Step title="Set URL parameters at account level (for all campaigns)">
+        To automatically set URL parameters for **all future campaigns**:
+
+        1. Go to **Business Settings** → **Data Sources** → **Pixels**.
+        2. Select your pixel.
+        3. Scroll to **Event Setup Tool** → **URL Parameters**.
+        4. Add your default template.
+
+        <Note>
+        This setting only applies to new campaigns. Existing campaigns must be adjusted manually.
+        </Note>
+    </Step>
+</Steps>
+
+## Verify Tracking
+
+After setup, you can verify that URL parameters are being passed correctly:
+
+1. **Meta Ads Manager Preview:** Click **Ad Preview** and check the URL in the preview browser.
+2. **bchic Dashboard:** Go to **Traffic Sources → UTM Campaigns** and see if new campaigns appear.
+3. **Browser DevTools:** After clicking an ad, open DevTools (F12) → Network → check URL parameters.
+
+**Example of a correctly tagged URL:**
+```
+https://yourdomain.com/landing?utm_source=Instagram&utm_medium=paid_social&utm_campaign=summer_sale_2026&utm_content=carousel_product_a&utm_term=women_25-34_berlin&placement=Instagram_Stories
+```
+
+## Analysis in bchic
+
+In the bchic dashboard, you'll find Instagram & Facebook Ads traffic under:
+
+- **Traffic Sources → UTM Campaigns:** Overview of all campaigns with sessions, conversions, bounce rate.
+- **Traffic Sources → UTM Source/Medium:** Filter by `Instagram / paid_social` or `Facebook / paid_social`.
+- **UTM Content:** Compare performance of different ads/creatives.
+- **UTM Term:** See which ad sets (targeting) perform best.
+
+### Placement analysis
+
+If you use `placement={{placement}}`, you can analyze:
+
+- **Instagram Stories** vs. **Feed** vs. **Reels**
+- **Facebook Feed** vs. **Marketplace** vs. **Audience Network**
+
+You'll find this data under **Custom Parameters** (if you set `placement=` as a separate parameter) or in the URL details.
+
+### Track custom events
+
+If you want to track conversions like purchases, leads, or video views:
+
+```javascript
+// Example: Conversion after button click
+document.getElementById('cta-button').addEventListener('click', function() {
+    if (window.bchic) {
+        window.bchic.track('click_cta', { source: 'instagram_stories' });
+    }
+});
+```
+
+You'll see these events under **Events** in the dashboard and can link them to UTM parameters.
+
+## Common Issues
+
+### Only numbers instead of campaign names in dashboard
+
+- **Problem:** You see `120247774987700538` instead of `summer_sale_2026`.
+- **Solution:** You're using `{{campaign.id}}` instead of `{{campaign.name}}`. Change the URL parameters:
+
+```
+❌ utm_campaign={{campaign.id}}
+✅ utm_campaign={{campaign.name}}
+```
+
+If you need both, combine them:
+```
+utm_campaign={{campaign.name}}&campaign_id={{campaign.id}}
+```
+
+### URL parameters not being transferred
+
+- **Problem:** You see traffic but no UTM data in the dashboard.
+- **Solution:** Check if URL parameters are saved in the campaign. Meta Ads only applies parameters if they were set **before** publishing.
+
+### Placeholders not being replaced
+
+- **Problem:** URL literally shows `{{campaign.name}}`.
+- **Solution:** You probably entered parameters in the **destination URL** instead of the **URL parameters field**. Meta only replaces placeholders in the dedicated field.
+
+### Instagram and Facebook traffic not separated
+
+- **Problem:** You only see `utm_source=facebook` for both channels.
+- **Solution:** Use `{{site_source_name}}` instead of a hardcoded value:
+
+```
+❌ utm_source=facebook
+✅ utm_source={{site_source_name}}
+```
+
+### Special characters in campaign names
+
+- **Problem:** Campaign name contains spaces or special characters (e.g., `Summer Sale 2026!`).
+- **Solution:** Meta encodes URLs automatically. In bchic, the name will appear as `Summer%20Sale%202026%21`. Better: Use underscores instead of spaces in campaign names (`summer_sale_2026`).
+
+## Best Practices
+
+### Consistent naming convention
+
+Use consistent names for campaigns and ads:
+
+- ✅ `utm_campaign=summer_sale_instagram_stories`
+- ✅ `utm_content=carousel_v1`
+- ❌ `utm_campaign=Summer Sale 2026!` (spaces, special chars)
+
+### Set source and medium correctly
+
+For Instagram:
+```
+utm_source=instagram&utm_medium=paid_social
+```
+
+For Facebook:
+```
+utm_source=facebook&utm_medium=paid_social
+```
+
+Or use `{{site_source_name}}` for both:
+```
+utm_source={{site_source_name}}&utm_medium=paid_social
+```
+
+### Ad sets as utm_term
+
+Use `utm_term` for targeting/ad sets to see which audience performs best:
+
+```
+utm_term={{adset.name}}
+```
+
+Example output: `women_25-34_berlin`, `men_35-44_munich`
+
+### Placement as separate parameter
+
+If you want to analyze placements in detail:
+
+```
+&placement={{placement}}
+```
+
+Then you'll see exactly whether Stories, Feed, or Reels convert better.
+
+## Instagram Shopping & Reels
+
+### Instagram Shopping Posts
+
+For shopping posts, you can set URL parameters directly in the product link:
+
+1. Open **Instagram → Profile → Settings → Business**.
+2. Go to **Shopping** → **Catalog Products**.
+3. Edit the product URL and add parameters:
+
+```
+https://yourdomain.com/product?utm_source=instagram&utm_medium=shopping&utm_campaign=organic_post
+```
+
+### Instagram Reels Ads
+
+Reels ads are automatically marked with `{{placement}}` as `Instagram_Reels`:
+
+```
+utm_source=instagram&utm_medium=paid_social&utm_campaign={{campaign.name}}&placement={{placement}}
+```
+
+## Privacy
+
+UTM parameters contain **no personal data** and are GDPR-compliant. Campaign names, ad sets, and placements are technical information, not user identifiers.
+
+bchic stores UTM data aggregated and anonymized – just like all other analytics data.
+
+## Support
+
+If you need help setting up Instagram/Meta Ads tracking or have questions about specific dynamic parameters:
+
+- **Email:** [kontakt@bchic.studio](mailto:support@bchic.de)
+
+We're happy to help with configuration and show you how to get the most out of your campaign data.
