@@ -1,0 +1,165 @@
+---
+title: 'Web Vitals'
+description: 'Tracke Core Web Vitals wie LCP, CLS, INP, FCP und TTFB, um die echte Ladeperformance deiner Website zu messen und zu verbessern.'
+icon: 'gauge-high'
+---
+
+Web Vitals liefert dir echte Performance-Daten direkt aus den Browsern deiner Besucher. Statt auf synthetische Lab-Tests zu vertrauen, siehst du genau, wie schnell deine Seite für echte Nutzer lädt und reagiert — aufgeschlüsselt nach Seite, Land, Gerät, Browser und Betriebssystem.
+
+bchic trackt alle fünf zentralen Metriken: **LCP**, **CLS**, **INP**, **FCP** und **TTFB**.
+
+---
+
+## Web Vitals aktivieren
+
+Für Web Vitals brauchst du zwei Schritte: das Feature im Dashboard aktivieren und den Script-Tag auf deiner Seite aktualisieren.
+
+<Steps>
+    <Step title="Im Dashboard aktivieren">
+        Navigiere zu **Einstellungen → Organisation**, hovere über die gewünschte Website und klicke auf **Snippet**. Klicke dann auf **Skript-Einstellungen bearbeiten**.
+
+        Im Konfigurationsdialog unter **Optimierte Analysen konfigurieren** schaltest du den Toggle bei **Web Vitals** ein. Die Beschreibung lautet:
+
+        *Erfasse Core Web Vitals (LCP, CLS, INP, FCP, TTFB), um die Ladeperformance deiner Seite zu messen und zu verbessern.*
+
+        Klicke auf **Speichern**, um die Änderung zu übernehmen.
+    </Step>
+    <Step title="Script-Tag aktualisieren">
+        Nach dem Aktivieren enthält dein Script-Tag das Attribut `data-track-performance="true"`. Stelle sicher, dass deine Website das aktualisierte Snippet verwendet:
+
+        ```html
+        <script
+            defer
+            src="https://analytics.bchic.de/script.js"
+            data-website-id="DEINE_WEBSITE_ID"
+            data-track-performance="true"
+        ></script>
+        ```
+
+        Wenn du das bchic-Snippet bereits eingebunden hast, füge einfach das Attribut `data-track-performance="true"` zu deinem bestehenden Tag hinzu.
+    </Step>
+    <Step title="Daten fließen">
+        Sobald das aktualisierte Script live ist, beginnt bchic mit der Erfassung von Web-Vitals-Daten aus echten Besuchersitzungen. Navigiere in der Seitenleiste zu **Webseiten → Web Vitals**, um dein Dashboard zu sehen. Es kann einige Minuten dauern, bis die ersten Datenpunkte erscheinen.
+    </Step>
+</Steps>
+
+<Info>
+    Wenn Web Vitals noch nicht aktiviert ist, zeigt das Dashboard einen leeren Zustand mit einem **Performance aktivieren**-Button, der dich direkt zur Konfiguration führt.
+</Info>
+
+---
+
+## Das Web Vitals Dashboard
+
+Sobald Daten einfließen, gibt dir das Web Vitals Dashboard ein vollständiges Bild der realen Performance deiner Website.
+
+### Übersichtskarten
+
+Am oberen Rand zeigen fünf Metrikkarten deine aktuelle Performance auf einen Blick:
+
+| Metrik | Was sie misst | Guter Schwellenwert |
+| :--- | :--- | :--- |
+| **LCP** (Largest Contentful Paint) | Wie lange es dauert, bis das größte sichtbare Element gerendert ist | ≤ 2,5s |
+| **CLS** (Cumulative Layout Shift) | Wie stark sich das Seitenlayout während des Ladens unerwartet verschiebt | ≤ 0,1 |
+| **INP** (Interaction to Next Paint) | Wie schnell die Seite auf Nutzerinteraktionen reagiert (Klicks, Tippen, Tasteneingaben) | ≤ 200ms |
+| **FCP** (First Contentful Paint) | Wie lange es dauert, bis das erste Inhaltselement erscheint | ≤ 1,8s |
+| **TTFB** (Time to First Byte) | Wie lange der Browser auf das erste Byte vom Server wartet | ≤ 800ms |
+
+Jede Karte zeigt den aktuellen Wert und einen **Trendindikator** mit der prozentualen Veränderung im Vergleich zum vorherigen Zeitraum (grün bei Verbesserung, rot bei Verschlechterung).
+
+<Tip>
+    Die Werte sind farbcodiert: **Grün** bedeutet gut, **Gelb** bedeutet verbesserungswürdig und **Rot** bedeutet schlecht — gemäß Googles Core Web Vitals Schwellenwerten.
+</Tip>
+
+### Perzentil-Auswahl
+
+Oben rechts kannst du zwischen Perzentilen wechseln: **P50**, **P75**, **P90**, **P95** und **P99**.
+
+- **P75** (Standard) ist das Perzentil, das Google für die Core Web Vitals Bewertung verwendet — es repräsentiert die Erfahrung von 75% deiner Nutzer.
+- **P50** zeigt die mediane Erfahrung.
+- **P95 / P99** hilft dir, Ausreißer und Worst-Case-Szenarien zu erkennen (z.B. Nutzer mit langsamen Verbindungen oder alten Geräten).
+
+### Web Vitals im Zeitverlauf
+
+Das Zeitreihen-Diagramm zeigt, wie sich alle fünf Metriken über den gewählten Zeitraum entwickeln. Jede Metrik wird als eigene Linie dargestellt, sodass du Regressionen erkennen, Änderungen mit Deployments korrelieren und Verbesserungen im Zeitverlauf verfolgen kannst.
+
+Nutze die Zeitraumauswahl (24h, 7d, 30d, 90d oder benutzerdefinierter Zeitraum), um herein- oder herauszuzoomen.
+
+### Web Vitals nach Dimension
+
+Die Aufschlüsselungstabelle am unteren Rand ermöglicht es dir, deine Performance-Daten nach fünf Dimensionen zu unterteilen:
+
+| Dimension | Was du erfährst |
+| :--- | :--- |
+| **Seiten** | Welche Seiten schnell und welche langsam sind. Identifiziere deine schlechtesten Seiten. |
+| **Länder** | Wie die Performance nach Geografie variiert. Erkenne Regionen mit hoher Latenz. |
+| **Geräte** | Vergleiche Desktop vs. Mobile vs. Tablet Performance. |
+| **Browser** | Sieh, ob bestimmte Browser (z.B. Safari, Chrome, Firefox) Probleme verursachen. |
+| **OS** | Prüfe, ob bestimmte Betriebssysteme die Performance beeinflussen. |
+
+Jede Zeile zeigt alle fünf Metriken (LCP, CLS, INP, FCP, TTFB) plus die Anzahl der Messungen, sodass du die Daten nach Stichprobengröße gewichten kannst.
+
+---
+
+## Zeitraum & Filter
+
+Wie alle bchic-Dashboards unterstützt Web Vitals:
+
+- **Voreingestellte Zeiträume**: 24h, 7d, 30d, 90d
+- **Benutzerdefinierte Zeiträume**: Klicke auf die Datumsauswahl, um einen beliebigen Zeitraum zu wählen
+- **Filter**: Klicke auf den **Filter**-Button, um Daten nach Seite, Land, Gerät, Browser, OS oder Referrer einzugrenzen
+
+---
+
+## Script-Attribut-Referenz
+
+| Attribut | Wert | Beschreibung |
+| :--- | :--- | :--- |
+| `data-track-performance` | `"true"` | Aktiviert die Erfassung von Web Vitals (LCP, CLS, INP, FCP, TTFB) |
+
+### Kombiniertes Beispiel
+
+Ein vollständiger Script-Tag mit Web Vitals neben anderen Features:
+
+```html
+<script
+    defer
+    src="https://analytics.bchic.de/script.js"
+    data-website-id="DEINE_WEBSITE_ID"
+    data-track-performance="true"
+    data-anonymize-url="true"
+    data-track-consent="true"
+></script>
+```
+
+---
+
+## So funktioniert es
+
+bchic nutzt die [Performance Observer API](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver) des Browsers, um Web Vitals aus echten Nutzersitzungen zu erfassen. Die Daten werden clientseitig gesammelt und zusammen mit den Pageview-Daten gesendet — keine zusätzlichen Requests, kein Performance-Einfluss auf deine Website und keine Cookies erforderlich.
+
+<Note>
+    Web-Vitals-Daten hängen von echtem Nutzer-Traffic ab. Bei Seiten mit sehr wenigen Besuchern können die Metriken stärker schwanken. Die Spalte **Messungen** in der Dimensionsaufschlüsselung hilft dir, die statistische Signifikanz einzuschätzen.
+</Note>
+
+---
+
+## Best Practices
+
+<AccordionGroup>
+    <Accordion title="Fokussiere dich zuerst auf P75">
+        Googles Core Web Vitals Bewertung nutzt das 75. Perzentil. Beginne damit, deine P75-Werte zu optimieren, um die CWV-Bewertung zu bestehen. Nutze dann P95/P99, um Ausreißer zu finden.
+    </Accordion>
+    <Accordion title="Prüfe deine langsamsten Seiten">
+        Nutze die **Seiten**-Dimension, um deine schlechtesten Performer zu finden. Eine einzelne langsame Seite (z.B. eine schwere Landing Page) kann deine Gesamtwerte herunterziehen. Priorisiere Fixes nach Traffic-Volumen × Performance-Impact.
+    </Accordion>
+    <Accordion title="Vergleiche Mobile vs. Desktop">
+        Mobile Nutzer erleben oft schlechtere Performance durch langsamere Netzwerke und weniger leistungsfähige Geräte. Nutze die **Geräte**-Dimension zum Vergleich und priorisiere Mobile-Optimierungen.
+    </Accordion>
+    <Accordion title="Korreliere mit Deployments">
+        Nutze das Zeitreihen-Diagramm, um Regressionen nach Deployments zu erkennen. Wenn du nach einem Release einen LCP-Anstieg siehst, kannst du die Ursache schnell eingrenzen.
+    </Accordion>
+    <Accordion title="Vernachlässige TTFB nicht">
+        TTFB wird oft übersehen, ist aber die Grundlage aller anderen Metriken. Ein langsamer TTFB bedeutet, dass alles andere später startet. Prüfe deine Server-Antwortzeiten, CDN-Konfiguration und Caching-Strategie.
+    </Accordion>
+</AccordionGroup>

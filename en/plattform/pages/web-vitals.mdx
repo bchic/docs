@@ -1,0 +1,165 @@
+---
+title: 'Web Vitals'
+description: 'Track Core Web Vitals like LCP, CLS, INP, FCP, and TTFB to measure and improve your site's real-user performance.'
+icon: 'gauge-high'
+---
+
+Web Vitals gives you real-user performance data straight from your visitors' browsers. Instead of relying on synthetic lab tests, you see exactly how fast your site loads and responds for actual users — broken down by page, country, device, browser, and OS.
+
+bchic tracks all five key metrics: **LCP**, **CLS**, **INP**, **FCP**, and **TTFB**.
+
+---
+
+## Enabling Web Vitals
+
+Web Vitals requires two steps: enabling the feature in your dashboard and updating the script tag on your site.
+
+<Steps>
+    <Step title="Enable in the Dashboard">
+        Navigate to **Settings → Organization**, hover over the website you want to configure, and click **Snippet**. Then click **Edit Script Settings**.
+
+        In the configuration modal under **Configure Advanced Analytics**, toggle **Web Vitals** on. You'll see the description:
+
+        *Capture Core Web Vitals (LCP, CLS, INP, FCP, TTFB) to measure and improve your page's loading performance.*
+
+        Click **Save** to apply.
+    </Step>
+    <Step title="Update the Script Tag">
+        After enabling Web Vitals, your script tag will include the `data-track-performance="true"` attribute. Make sure your site is using the updated snippet:
+
+        ```html
+        <script
+            defer
+            src="https://analytics.bchic.de/script.js"
+            data-website-id="YOUR_WEBSITE_ID"
+            data-track-performance="true"
+        ></script>
+        ```
+
+        If you're already using the bchic snippet, you can simply add the `data-track-performance="true"` attribute to your existing tag.
+    </Step>
+    <Step title="Data Starts Flowing">
+        Once the updated script is live, bchic begins collecting Web Vitals data from real visitors. Navigate to **Websites → Web Vitals** in the sidebar to see your dashboard. It may take a few minutes for the first data points to appear.
+    </Step>
+</Steps>
+
+<Info>
+    If you haven't enabled Web Vitals yet, the dashboard shows an empty state with a quick-access **Enable Performance** button that takes you directly to the configuration.
+</Info>
+
+---
+
+## The Web Vitals Dashboard
+
+Once data is flowing, the Web Vitals dashboard gives you a complete picture of your site's real-user performance.
+
+### Overview Cards
+
+At the top, five metric cards show your current performance at a glance:
+
+| Metric | What It Measures | Good Threshold |
+| :--- | :--- | :--- |
+| **LCP** (Largest Contentful Paint) | How long it takes for the largest visible element to render | ≤ 2.5s |
+| **CLS** (Cumulative Layout Shift) | How much the page layout shifts unexpectedly during loading | ≤ 0.1 |
+| **INP** (Interaction to Next Paint) | How quickly the page responds to user interactions (clicks, taps, key presses) | ≤ 200ms |
+| **FCP** (First Contentful Paint) | How long it takes for the first piece of content to appear | ≤ 1.8s |
+| **TTFB** (Time to First Byte) | How long the browser waits for the first byte from the server | ≤ 800ms |
+
+Each card displays the current value and a **trend indicator** showing the percentage change compared to the previous period (green for improvement, red for regression).
+
+<Tip>
+    Values are color-coded: **green** means good, **yellow** means needs improvement, and **red** means poor — following Google's Core Web Vitals thresholds.
+</Tip>
+
+### Percentile Selector
+
+In the top-right corner, you can switch between percentiles: **P50**, **P75**, **P90**, **P95**, and **P99**.
+
+- **P75** (default) is what Google uses for Core Web Vitals assessment — it represents the experience of 75% of your users.
+- **P50** shows the median experience.
+- **P95 / P99** helps you catch outliers and worst-case scenarios (e.g. users on slow connections or old devices).
+
+### Web Vitals Over Time
+
+The time series chart shows how all five metrics trend over your selected date range. Each metric is plotted as its own line, so you can spot regressions, correlate changes with deployments, and track improvements over time.
+
+Use the date range selector (24h, 7d, 30d, 90d, or custom range) to zoom in or out.
+
+### Web Vitals by Dimension
+
+The breakdown table at the bottom lets you slice your performance data by five dimensions:
+
+| Dimension | What You Learn |
+| :--- | :--- |
+| **Pages** | Which pages are fast and which are slow. Identify your worst-performing pages. |
+| **Countries** | How performance varies by geography. Spot regions with high latency. |
+| **Devices** | Compare desktop vs. mobile vs. tablet performance. |
+| **Browser** | See if specific browsers (e.g. Safari, Chrome, Firefox) cause issues. |
+| **OS** | Check if certain operating systems affect performance. |
+
+Each row shows all five metrics (LCP, CLS, INP, FCP, TTFB) plus the number of measurements, so you can weight the data by sample size.
+
+---
+
+## Time Range & Filters
+
+Like all bchic dashboards, Web Vitals supports:
+
+- **Preset ranges**: 24h, 7d, 30d, 90d
+- **Custom date ranges**: Click the date picker to select any range
+- **Filters**: Click the **Filter** button to narrow data by page, country, device, browser, OS, or referrer
+
+---
+
+## Script Attribute Reference
+
+| Attribute | Value | Description |
+| :--- | :--- | :--- |
+| `data-track-performance` | `"true"` | Enables Web Vitals collection (LCP, CLS, INP, FCP, TTFB) |
+
+### Combined Example
+
+A complete script tag with Web Vitals alongside other features:
+
+```html
+<script
+    defer
+    src="https://analytics.bchic.de/script.js"
+    data-website-id="YOUR_WEBSITE_ID"
+    data-track-performance="true"
+    data-anonymize-url="true"
+    data-track-consent="true"
+></script>
+```
+
+---
+
+## How It Works
+
+bchic uses the browser's [Performance Observer API](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver) to capture Web Vitals from real user sessions. The data is collected client-side and sent alongside pageview data — no additional requests, no performance impact on your site, and no cookies required.
+
+<Note>
+    Web Vitals data depends on real user traffic. If a page has very few visitors, the metrics may fluctuate more. The **Measurements** column in the dimension breakdown helps you assess statistical significance.
+</Note>
+
+---
+
+## Best Practices
+
+<AccordionGroup>
+    <Accordion title="Focus on P75 First">
+        Google's Core Web Vitals assessment uses the 75th percentile. Start by optimizing your P75 values to pass the CWV assessment. Then use P95/P99 to catch edge cases.
+    </Accordion>
+    <Accordion title="Check Your Slowest Pages">
+        Use the **Pages** dimension to find your worst performers. A single slow page (e.g. a heavy landing page) can drag down your overall scores. Prioritize fixes by traffic volume × performance impact.
+    </Accordion>
+    <Accordion title="Compare Mobile vs. Desktop">
+        Mobile users often experience worse performance due to slower networks and less powerful devices. Use the **Devices** dimension to compare and prioritize mobile optimizations.
+    </Accordion>
+    <Accordion title="Correlate with Deployments">
+        Use the time series chart to spot regressions after deployments. If you see LCP spike after a release, you can pinpoint the cause quickly.
+    </Accordion>
+    <Accordion title="Don't Ignore TTFB">
+        TTFB is often overlooked but is the foundation of all other metrics. A slow TTFB means everything else starts late. Check your server response times, CDN configuration, and caching strategy.
+    </Accordion>
+</AccordionGroup>

@@ -48,7 +48,8 @@
                     "pages": ["de/plattform/pages/utm","de/plattform/pages/ai-visibility","de/plattform/pages/conversions"]
                   },
                   "de/plattform/pages/funnels",
-                  "de/plattform/pages/user-journey"
+                  "de/plattform/pages/user-journey",
+                  "de/plattform/pages/web-vitals"
                 ]
               },
               {
@@ -182,7 +183,8 @@
                     ]
                   },
                   "en/plattform/pages/funnels",
-                  "en/plattform/pages/user-journey"
+                  "en/plattform/pages/user-journey",
+                  "en/plattform/pages/web-vitals"
                 ]
               },
               {

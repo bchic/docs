@@ -1,43 +1,189 @@
 ---
 title: 'URL Anonymisierung & Parameter'
-description: 'So maskierst du personenbezogene Daten in Pfaden und Query-Parametern.'
+description: 'So maskierst du personenbezogene Daten in Pfaden und Query-Parametern — visuell im Dashboard oder manuell im Script-Tag.'
 icon: 'user-shield'
 ---
 
-Ein sehr wichtiger Teil der datenschutzkonformen Einrichtung ist die **URL-Anonymisierung**. Da wir keine personenbezogenen Daten (PII) erfassen, müssen URLs, die persönliche Identifier enthalten (z.B. eine User-ID, ein Token oder eine Bestellnummer), maskiert oder entfernt werden.
+Ein sehr wichtiger Teil der datenschutzkonformen Einrichtung ist die **URL-Anonymisierung**. Da wir keine personenbezogenen Daten (PII) erfassen, müssen URLs, die persönliche Identifier enthalten (z.B. eine User-ID, ein Token oder eine Bestellnummer), maskiert oder entfernt werden — **bevor** sie den Browser des Nutzers verlassen.
 
-Unser Script bietet dir dafür zwei mächtige Werkzeuge: Die Maskierung von URL-Pfaden (`data-anonymize-url`) und das Entfernen von Query-Parametern (`data-exclude-params`).
+bchic bietet dir dafür zwei Wege:
+
+1. **Den visuellen Anonymisierungs-Builder** im Dashboard (empfohlen)
+2. **Manuelle Konfiguration** direkt im Script-Tag
+
+---
+
+## Den Anonymisierungs-Builder öffnen
+
+Der schnellste Weg zur Konfiguration führt über das Dashboard:
+
+<Steps>
+    <Step title="Organisation öffnen">
+        Navigiere zu **Einstellungen → Organisation**. Du siehst dort eine Liste aller verknüpften Website-URLs deiner Organisation.
+    </Step>
+    <Step title="Snippet öffnen">
+        Hovere über die gewünschte Website und klicke auf **Snippet**. Es öffnet sich die Installationsanleitung mit deinem aktuellen Script-Tag.
+    </Step>
+    <Step title="Skript-Einstellungen bearbeiten">
+        Klicke auf den Button **Skript-Einstellungen bearbeiten**. Es öffnet sich der Konfigurations-Editor.
+    </Step>
+    <Step title="Datenschutz & Anonymisierung">
+        Scrolle zum Bereich **Datenschutz & Anonymisierung** und aktiviere den Toggle. Hier findest du die beiden Bereiche:
+        - **URL-Anonymisierung** — für Pfad-Segmente
+        - **Query-Parameter ausschließen** — für URL-Parameter
+
+        Klicke auf **Konfigurieren**, um den visuellen Builder zu öffnen.
+    </Step>
+</Steps>
 
 ---
 
 ## 1. URL-Pfade anonymisieren
 
-Wenn deine Website URLs wie `https://beispiel.de/profil/12345/bestellungen` nutzt, ist `12345` eine personenbezogene User-ID. Füge das Attribut `data-anonymize-url` zu deinem Script-Tag hinzu, um diese Daten lokal im Browser des Nutzers zu maskieren, bevor sie an uns gesendet werden.
+Wenn deine Website URLs wie `https://beispiel.de/profil/12345/bestellungen` nutzt, ist `12345` eine personenbezogene User-ID. Die URL-Anonymisierung maskiert diese dynamischen Segmente **lokal im Browser**, bevor der Pageview an bchic gesendet wird.
 
-### Option A: Der Auto-Detect Modus (Empfohlen)
+### Der URL Anonymization Builder
 
-Die einfachste Methode ist der automatische Modus. Wenn du den Wert auf `true` setzt, sucht das Script selbstständig nach gängigen ID-Formaten und ersetzt diese durch `/uuid`.
+Der visuelle Builder macht das Erstellen von Anonymisierungs-Regeln so einfach wie möglich:
+
+#### Muster automatisch erkennen lassen
+
+Du kannst mehrere URLs aus deiner Website in das Textfeld oben einfügen. Klicke auf **Detect Patterns** — der Builder findet automatisch die Segmente, die sich zwischen den URLs unterscheiden, und schlägt dir passende Anonymisierungs-Vorlagen vor.
+
+<Info>
+    **Beispiel:** Füge diese URLs ein:
+    ```
+    https://example.com/users/123/profile
+    https://example.com/users/456/profile
+    https://example.com/users/789/settings
+    ```
+    Der Builder erkennt, dass sich das dritte Segment (`123`, `456`, `789`) ändert, und schlägt automatisch `/{path}/users/{userId}/*` als Vorlage vor.
+</Info>
+
+#### Vorlage manuell erstellen
+
+Du kannst Templates auch direkt im **Path Template**-Editor bauen:
+
+- Jedes Pfad-Segment wird als eigener Baustein angezeigt
+- Klicke auf die geschweiften Klammern **`{}`**, um ein Segment in einen **Platzhalter** umzuwandeln — dieser Teil wird dann in der getrackten URL maskiert
+- Bearbeite den Platzhalter-Namen direkt inline (z.B. `{userId}`, `{orderId}`, `{token}`)
+
+#### Sub-Pfade nach dem Template
+
+Unter **Sub-Paths After The Template** wählst du, wie mit dem Rest der URL nach deinem Muster umgegangen wird:
+
+<CardGroup cols={3}>
+    <Card title="Exact Match" icon="equals">
+        Die Pfadlänge muss **exakt** mit der Vorlage übereinstimmen. Längere URLs werden nicht gematcht.
+    </Card>
+    <Card title="Keep Rest /*" icon="arrows-left-right">
+        Alle Unterseiten **nach** dem Treffer bleiben erhalten.
+
+        `/u/{id}/*` macht aus `/u/123/settings` → `/u/id/settings`
+    </Card>
+    <Card title="Drop Rest /*!" icon="scissors">
+        Alles nach dem Template wird **abgeschnitten**.
+
+        `/u/{id}/*!` macht aus `/u/123/settings` → `/u/id`
+    </Card>
+</CardGroup>
+
+#### Live-Vorschau
+
+Unter dem Template siehst du sofort eine **Live-Vorschau** ("What Gets Sent"), die dir zeigt, wie eine Beispiel-URL nach der Anonymisierung aussehen würde. So kannst du deine Regeln validieren, bevor du sie aktivierst.
+
+<Check>
+    **Beispiel:** Bei der Vorlage `/{path}/seg/{segment}/*!` wird aus `/a1b2c3d4e5/seg/xyz_tok789/details/42` die anonymisierte URL `/path/seg/segment`.
+</Check>
+
+Du kannst über **+ Add Rule** mehrere Regeln gleichzeitig anlegen. Klicke abschließend auf **Apply**, um die Konfiguration zu übernehmen.
+
+### Auto-Detect Modus
+
+Wenn du keine benutzerdefinierten Vorlagen erstellen möchtest, aktiviere einfach den **Auto-detect mode** im Builder. Dieser sucht automatisch nach gängigen ID-Formaten und ersetzt sie durch `/uuid`.
+
+**Was wird automatisch erkannt?**
+
+| Muster | Beispiel | Ergebnis |
+| :--- | :--- | :--- |
+| UUIDs | `/orders/550e8400-e29b-41d4...` | `/orders/uuid` |
+| Hex-Hashes (24+ Zeichen) | `/commit/a1b2c3d4e5f6a1b2c3d4e5f6` | `/commit/uuid` |
+| Numerische IDs (18+ Ziffern) | `/invoice/123456789012345678` | `/invoice/uuid` |
+| Alphanumerische Token (20+ Zeichen) | `/session/xK9mP2nQ8rT5vW7yZ1...` | `/session/uuid` |
+
+<Warning>
+    Der Auto-Detect Modus erkennt nur IDs ab einer bestimmten Länge. Wenn deine Website kürzere IDs nutzt (z.B. `/user/42` oder `/order/abc`), verwende stattdessen benutzerdefinierte Vorlagen.
+</Warning>
+
+---
+
+## 2. Query-Parameter ausschließen
+
+Oft stecken personenbezogene Daten nicht im Pfad, sondern in den URL-Parametern nach dem `?` (z.B. `?token=abc123` oder `?session=xyz`). Im Bereich **Query-Parameter ausschließen** kannst du diese Parameter gezielt entfernen oder leeren.
+
+### Konfiguration im Dashboard
+
+Im Bereich **Datenschutz & Anonymisierung** findest du unter der URL-Anonymisierung den Abschnitt **Query-Parameter ausschließen**. Gib deine Regeln kommasepariert ein.
+
+### Zwei Aktionen
+
+<CardGroup cols={2}>
+    <Card title="Parameter komplett entfernen (Löschen)" icon="trash">
+        **Format:** `/pfad:parameter`
+
+        Der Parameter wird vollständig aus der URL gelöscht.
+        - **Regel:** `/{path}:token`
+        - **Original:** `/abc123?token=secret&other=value`
+        - **Gesendet:** `/abc123?other=value`
+    </Card>
+    <Card title="Wert leeren (Key behalten)" icon="eraser">
+        **Format:** `/pfad:parameter=` (mit `=` am Ende)
+
+        Der Key bleibt erhalten, aber der Wert wird geleert. Nützlich, wenn du tracken willst, *dass* gesucht wurde, aber nicht *was*.
+        - **Regel:** `/{path}:token=`
+        - **Original:** `/abc123?token=secret&other=value`
+        - **Gesendet:** `/abc123?token=&other=value`
+    </Card>
+</CardGroup>
+
+### Pfad-Vorlagen mit Wildcards
+
+Die Pfad-Vorlagen bei den Parameter-Regeln unterstützen dieselben Platzhalter und Wildcards wie bei der URL-Anonymisierung:
+
+| Regel | Wirkung |
+| :--- | :--- |
+| `/{path}:token` | Entfernt `token` auf allen Seiten mit einem dynamischen ersten Segment |
+| `/path/*:token=` | Leert `token` auf allen Unterseiten von `/path/` |
+| `/auth/signup:token` | Entfernt `token` nur exakt auf `/auth/signup` |
+
+### Live-Vorschau
+
+Auch bei den Query-Parameter-Regeln siehst du unter **"Was gesendet wird"** eine Live-Vorschau, wie die URLs nach der Verarbeitung aussehen:
+
+| Original | Regel | Gesendet |
+| :--- | :--- | :--- |
+| `/abc123?token=secret&other=value` | `/{path}:token` | `/abc123?other=value` |
+| `/abc123?token=secret&other=value` | `/{path}:token=` | `/abc123?token=&other=value` |
+| `/path/detail?token=secret&other=value` | `/path/*:token=` | `/path/detail?token=&other=value` |
+
+---
+
+## 3. Manuelle Konfiguration im Script-Tag
+
+Alle Einstellungen aus dem Dashboard werden automatisch in den Script-Tag übernommen. Du kannst die Attribute aber auch manuell setzen, wenn du das bevorzugst.
+
+### `data-anonymize-url`
 
 ```html
+<!-- Auto-Detect Modus -->
 <script
     defer
     src="https://analytics.bchic.de/script.js"
     data-website-id="DEINE_WEBSITE_ID"
     data-anonymize-url="true"
 ></script>
-```
 
-**Was wird automatisch erkannt?**
-* **UUIDs:** `/orders/550e8400-e29b...` ➔ `/orders/uuid`
-* **Hex-Hashes (24+ Zeichen):** `/commit/a1b2c3d4e5f6...` ➔ `/commit/uuid`
-* **Numerische IDs (18+ Ziffern):** `/invoice/123456789012345678` ➔ `/invoice/uuid`
-* **Alphanumerische Token (20+ Zeichen):** `/session/xK9mP2nQ8rT5...` ➔ `/session/uuid`
-
-### Option B: Benutzerdefinierte Vorlagen (Templates)
-
-Wenn deine IDs kürzer sind (z.B. Benutzernamen oder kurze IDs), kannst du benutzerdefinierte Vorlagen verwenden. Das Script nutzt eine Mustersprache, um dynamische Teile zu maskieren. Mehrere Regeln trennst du einfach durch ein Komma.
-
-```html
+<!-- Benutzerdefinierte Vorlagen (kommasepariert) -->
 <script
     defer
     src="https://analytics.bchic.de/script.js"
@@ -46,20 +192,7 @@ Wenn deine IDs kürzer sind (z.B. Benutzernamen oder kurze IDs), kannst du benut
 </script>
 ```
 
-#### Syntax für Vorlagen
-
-| Symbol | Funktion | Beispiel Output |
-| :--- | :--- | :--- |
-| `{platzhalter}` | Ersetzt den dynamischen Teil durch den Platzhalternamen. | `/profil/{userId}` |
-| *(kein Wildcard)* | **Exakter Treffer:** Die Länge der URL muss exakt mit der Vorlage übereinstimmen. | Eingabe: `/a/b/c` wird ignoriert, wenn Regel `/a/b` ist. |
-| `/*` | **Rest beibehalten:** Behält alle Unterseiten nach dem Treffer bei. | Vorlage `/u/{id}/*` macht aus `/u/123/settings` ➔ `/u/id/settings` |
-| `/*!` | **Rest abschneiden:** Entfernt alles, was nach dem Template kommt. | Vorlage `/u/{id}/*!` macht aus `/u/123/settings` ➔ `/u/id` |
-
----
-
-## 2. Query-Parameter ausschließen
-
-Oft verbergen sich personenbezogene Daten nicht im Pfad, sondern in der URL nach dem Fragezeichen (z.B. `?token=abc123` oder `?session=xyz`). Mit dem Attribut `data-exclude-params` kannst du diese Parameter gezielt entfernen oder leeren.
+### `data-exclude-params`
 
 ```html
 <script
@@ -70,34 +203,42 @@ Oft verbergen sich personenbezogene Daten nicht im Pfad, sondern in der URL nach
 ></script>
 ```
 
-### Syntax für Parameter-Regeln
+### Kombiniertes Beispiel
 
-Das Format ist immer `[Pfad-Vorlage]:[Parameter-Name][Aktion]`. Die Pfad-Vorlage unterstützt dieselben `{platzhalter}` und Wildcards (`/*`, `/*!`) wie oben beschrieben.
+Ein vollständiger Script-Tag mit URL-Anonymisierung, Parameter-Ausschlüssen und weiteren Features:
 
-<CardGroup cols={2}>
-    <Card title="Parameter komplett entfernen" icon="trash">
-        **Format:** `/pfad:parameter`
-        
-        Der Parameter wird vollständig aus der URL gelöscht.
-        * **Regel:** `/auth/verify:token`
-        * **Original:** `/auth/verify?token=123&lang=de`
-        * **Gesendet:** `/auth/verify?lang=de`
-    </Card>
-    <Card title="Wert leeren (Key behalten)" icon="eraser">
-        **Format:** `/pfad:parameter=` (Beachte das Gleichheitszeichen am Ende)
-        
-        Der Key bleibt erhalten, aber der Wert wird geleert. Nützlich, wenn du tracken willst, *dass* gesucht wurde, aber nicht *was*.
-        * **Regel:** `/search:q=`
-        * **Original:** `/search?q=meine+suche&sort=asc`
-        * **Gesendet:** `/search?q=&sort=asc`
-    </Card>
-</CardGroup>
+```html
+<script
+    defer
+    src="https://analytics.bchic.de/script.js"
+    data-website-id="DEINE_WEBSITE_ID"
+    data-track-performance="true"
+    data-anonymize-url="/{path}/seg/{segment}/*!"
+    data-exclude-params="/{path}:token, /path/*:token="
+    data-track-consent="true"
+></script>
+```
+
+### Syntax-Referenz
+
+| Symbol | Funktion | Beispiel |
+| :--- | :--- | :--- |
+| `{platzhalter}` | Ersetzt den dynamischen Teil durch den Platzhalternamen | `/profil/{userId}` |
+| *(kein Wildcard)* | **Exakter Treffer** — Pfadlänge muss exakt übereinstimmen | `/a/b` matcht nicht `/a/b/c` |
+| `/*` | **Rest beibehalten** — Unterseiten nach dem Treffer bleiben erhalten | `/u/{id}/*` → `/u/id/settings` |
+| `/*!` | **Rest abschneiden** — Alles nach dem Template wird entfernt | `/u/{id}/*!` → `/u/id` |
 
 ---
 
 ## Überprüfung & Testing
 
-Woher weißt du, ob alles korrekt funktioniert? Prüfe es direkt im Browser:
+Woher weißt du, ob alles korrekt funktioniert? Es gibt zwei Wege:
+
+### Im Dashboard
+
+Die **Live-Vorschau** im Builder zeigt dir direkt, wie jede Regel wirkt. Nutze die "What Gets Sent"-Anzeige, um deine Konfiguration zu validieren, bevor du auf Apply klickst.
+
+### Im Browser
 
 1. Öffne die **Entwicklertools** deines Browsers (F12).
 2. Wechsle zum Tab **Netzwerk** (Network).
@@ -108,3 +249,25 @@ Woher weißt du, ob alles korrekt funktioniert? Prüfe es direkt im Browser:
 <Check>
     Das Feld `url` im Payload sollte bereits die anonymisierte Form (z.B. `/profil/userId/...` oder entfernte Parameter) enthalten. Ist das der Fall, verlassen keine persönlichen Daten den Browser des Nutzers.
 </Check>
+
+---
+
+## Best Practices
+
+<AccordionGroup>
+    <Accordion title="Starte mit dem Auto-Detect Modus">
+        Wenn du dir unsicher bist, welche URLs personenbezogene Daten enthalten, aktiviere zunächst den Auto-Detect Modus. Er fängt die meisten gängigen ID-Formate automatisch ab. Ergänze dann bei Bedarf benutzerdefinierte Vorlagen für kürzere IDs.
+    </Accordion>
+    <Accordion title="Nutze 'Detect Patterns' im Builder">
+        Kopiere 3–5 verschiedene URLs derselben Seite (mit unterschiedlichen IDs) in den Builder und klicke auf **Detect Patterns**. Der Builder erkennt die dynamischen Segmente automatisch und erstellt dir ein passendes Template.
+    </Accordion>
+    <Accordion title="Drop Rest (/*!) für maximale Privatsphäre">
+        Wenn du dir nicht sicher bist, ob Unterseiten sensible Daten enthalten könnten, verwende `/*!` (Drop Rest). So wird alles nach dem gematchten Pattern abgeschnitten und du bist auf der sicheren Seite.
+    </Accordion>
+    <Accordion title="Leere statt Löschen bei Such-Parametern">
+        Für Such-Parameter wie `?q=` empfiehlt sich das Leeren (`/search:q=`) statt dem vollständigen Entfernen. So siehst du weiterhin in deinen Analytics, *dass* Nutzer die Suche verwendet haben — nur nicht *was* sie gesucht haben.
+    </Accordion>
+    <Accordion title="Teste mit der Live-Vorschau">
+        Nutze immer die Live-Vorschau im Builder, bevor du deine Regeln speicherst. Teste mit echten URLs aus deiner Website, um sicherzustellen, dass keine personenbezogenen Daten durchrutschen.
+    </Accordion>
+</AccordionGroup>
