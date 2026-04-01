@@ -1,103 +1,110 @@
 ---
-title: 'URL Anonymization'
-description: 'How to mask personal data in URLs.'
+title: 'URL Anonymization & Parameters'
+description: 'How to mask personal data in paths and query parameters.'
 icon: 'user-shield'
 ---
 
-A very important part of a GDPR-compliant setup is **URL Anonymization**. Since we do not collect personally identifiable information (PII), URLs containing personal identifiers (e.g., a User ID, a name, or an order number) must be masked.
+A crucial part of a GDPR-compliant setup is **URL Anonymization**. Since we do not collect personally identifiable information (PII), URLs containing personal identifiers (e.g., a User ID, an auth token, or an order number) must be masked or removed.
 
-This allows us to analyze general user behavior on page types without being able to draw conclusions about a specific person.
+Our script provides two powerful tools for this: Masking URL paths (`data-anonymize-url`) and stripping query parameters (`data-exclude-params`).
 
-## Example Scenario
+---
 
-Imagine your website has a URL structure like:
-`https://example-shop.com/profile/12345/orders`
+## 1. Anonymizing URL Paths
 
-Here, `12345` is a unique `userId` and thus personal data. According to GDPR, this often must not be sent in plain text to analytics tools.
+If your website uses URLs like `https://example.com/profile/12345/orders`, the `12345` is a personal User ID. Add the `data-anonymize-url` attribute to your script tag to mask this data locally in the visitor's browser before it is ever sent to us.
 
-### The Solution
+### Option A: Auto-Detect Mode (Recommended)
 
-Add the `data-anonymize-url` attribute to your existing script tag.
-
-<CodeGroup>
-    ```html Before (Standard)
-    <script
-        defer
-        src="https://analytics.bchic.de/script.js"
-        data-website-id="YOUR_WEBSITE_ID"
-    ></script>
-    ```
-
-    ```html After (Anonymized)
-    <script
-        defer
-        src="https://analytics.bchic.de/script.js"
-        data-website-id="YOUR_WEBSITE_ID"
-        data-anonymize-url="/profile/{userId}/*"
-    ></script>
-    ```
-</CodeGroup>
-
-<Info>
-    **What is happening here?**
-    Instead of the full URL `/profile/12345/orders`, the script now sends `/profile/userId/orders` to the dashboard. Your statistics remain cleanly grouped, but the User ID never leaves the visitor's browser.
-</Info>
-
-## Functionality & Syntax
-
-The `data-anonymize-url` attribute uses a simple pattern language to mask dynamic parts. Our script replaces the corresponding segments *before* the data is sent.
-
-| Symbol | Function |
-| :--- | :--- |
-| `{placeholder}` | Curly braces define a dynamic part. The content (e.g., `{userId}`) is displayed as text in the reports. |
-| `*` | The wildcard ("catch-all"). Everything at this position or after is ignored or masked. |
-
-### Defining Multiple Rules
-
-If you have several different URL structures, you can simply list the rules **separated by a comma**.
+The easiest method is the automatic mode. By setting the value to `true`, the script automatically detects common ID formats and replaces them with `/uuid`.
 
 ```html
 <script
     defer
     src="https://analytics.bchic.de/script.js"
-    data-website-id="YOUR_ID"
-    data-anonymize-url="/profile/{userId}/*, /orders/details/{orderId}"
+    data-website-id="YOUR_WEBSITE_ID"
+    data-anonymize-url="true"
 ></script>
 ```
 
-In this case, two URL types are handled:
-1. All URLs starting with `/profile/` (User IDs are masked).
-2. URLs for order details (e.g., `/orders/details/98765`).
+**What gets detected automatically?**
+* **UUIDs:** `/orders/550e8400-e29b...` ➔ `/orders/uuid`
+* **Hex hashes (24+ chars):** `/commit/a1b2c3d4e5f6...` ➔ `/commit/uuid`
+* **Numeric IDs (18+ digits):** `/invoice/123456789012345678` ➔ `/invoice/uuid`
+* **Alphanumeric tokens (20+ chars):** `/session/xK9mP2nQ8rT5...` ➔ `/session/uuid`
 
-## Real-world Examples
+### Option B: Custom Templates
 
-<CardGroup cols={1}>
-    <Card title="Mask Public Usernames" icon="user">
-        Original: `example.com/user/max-mustermann`
+If your IDs are shorter (e.g., usernames or short database IDs), you can define custom templates. The script uses a pattern language to mask dynamic parts. You can define multiple rules by separating them with a comma.
 
-        **Rule:** `data-anonymize-url="/user/{username}"`
+```html
+<script
+    defer
+    src="https://analytics.bchic.de/script.js"
+    data-website-id="YOUR_WEBSITE_ID"
+    data-anonymize-url="/profile/{userId}/*, /order/{orderId}/*!"
+></script>
+```
 
-        Result in Dashboard: `/user/{username}`
+#### Template Syntax
+
+| Symbol | Function | Example Output |
+| :--- | :--- | :--- |
+| `{placeholder}` | Replaces the dynamic part with the placeholder's name. | `/profile/{userId}` |
+| *(no wildcard)* | **Exact match:** The path length must match the template exactly. | Input `/a/b/c` is ignored if rule is `/a/b`. |
+| `/*` | **Keep sub-paths:** Retains any path segments after the match. | Template `/u/{id}/*` turns `/u/123/settings` ➔ `/u/id/settings` |
+| `/*!` | **Drop sub-paths:** Strips everything that comes after the template match. | Template `/u/{id}/*!` turns `/u/123/settings` ➔ `/u/id` |
+
+---
+
+## 2. Excluding Query Parameters
+
+Personal data often isn't in the path, but hidden after the question mark in the URL (e.g., `?token=abc123` or `?session=xyz`). With the `data-exclude-params` attribute, you can target and remove or empty specific query parameters.
+
+```html
+<script
+    defer
+    src="https://analytics.bchic.de/script.js"
+    data-website-id="YOUR_WEBSITE_ID"
+    data-exclude-params="/auth/signup:token, /search:q="
+></script>
+```
+
+### Parameter Rule Syntax
+
+The format is always `[Path-Template]:[Parameter-Name][Action]`. The Path-Template supports the same `{placeholder}` and wildcards (`/*`, `/*!`) described above.
+
+<CardGroup cols={2}>
+    <Card title="Delete parameter completely" icon="trash">
+        **Format:** `/path:parameter`
+        
+        The parameter is entirely removed from the URL.
+        * **Rule:** `/auth/verify:token`
+        * **Original:** `/auth/verify?token=123&lang=en`
+        * **Sent as:** `/auth/verify?lang=en`
     </Card>
-    <Card title="Order IDs in Checkout" icon="cart-shopping">
-        Original: `shop.com/checkout/success/order/B-1023-4567`
-
-        **Rule:** `data-anonymize-url="/checkout/success/order/{orderId}"`
-
-        Result in Dashboard: `/checkout/success/order/{orderId}`
+    <Card title="Empty value (Keep key)" icon="eraser">
+        **Format:** `/path:parameter=` (Note the equal sign at the end)
+        
+        The key is kept, but the value is cleared. Useful if you want to track *that* a search occurred, but not *what* was searched.
+        * **Rule:** `/search:q=`
+        * **Original:** `/search?q=my+query&sort=asc`
+        * **Sent as:** `/search?q=&sort=asc`
     </Card>
 </CardGroup>
 
+---
+
 ## Verification & Testing
 
-How do you know if it works? Check it directly in the browser.
+How do you know if it's working correctly? Check it directly in your browser:
 
 1. Open your browser's **Developer Tools** (F12).
 2. Switch to the **Network** tab.
-3. Load a page on your website that contains such a URL.
-4. Look for the request to `analytics.bchic.de`.
-5. Click on the request and look at the **Payload**.
+3. Load a page on your website that contains a URL or parameter you want to mask.
+4. Look for the tracking request sent to `analytics.bchic.de`.
+5. Click on the request and inspect the **Payload**.
 
 <Check>
-    The `url` field in the payload should already contain the anonymized form (e.g., `/profile/userId/...`). If this is the case, no personal data is being transmitted.
+    The `url` field in the payload should already contain the anonymized form (e.g., `/profile/userId/...` or missing parameters). If this is the case, no personal data ever leaves the user's browser.
 </Check>
