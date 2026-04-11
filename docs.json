@@ -49,7 +49,7 @@
                   },
                   "de/plattform/pages/funnels",
                   "de/plattform/pages/user-journey",
-                  "de/plattform/pages/web-vitals"
+                  "de/docs/web-vitals"
                 ]
               },
               {
@@ -184,7 +184,7 @@
                   },
                   "en/plattform/pages/funnels",
                   "en/plattform/pages/user-journey",
-                  "en/plattform/pages/web-vitals"
+                  "en/docs/web-vitals"
                 ]
               },
               {
