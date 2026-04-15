@@ -21,6 +21,35 @@ description: 'An overview of the latest features, improvements, and bug fixes fo
 
 ---
 
+## <span className="date-badge">April 2026</span> Consent Segmentation, Activity Timeline & Compliance Suite
+
+The biggest update yet for the Business Intelligence section. Three new dashboards, a completely revamped Script Editor and deeper insight into data quality.
+
+### Feature: Consent Segmentation Dashboard
+Compare visitors with and without cookie consent at a glance. The new dashboard shows the consent rate as a donut chart, consent distribution over time and a percentile analysis of the time to accept (P50 through P99). The dimensions table lets you break down consent rates by country, device, browser, OS, source and channel.
+
+Requires a supported CMP (Cookiebot, OneTrust, Usercentrics or IAB TCF v2) or manual activation via `data-track-consent="true"` in the tracking script.
+
+### Feature: Activity Timeline
+Discover when your visitors are active. The dashboard shows peak hour, peak day and the weekday/weekend split as KPI cards. Hourly and weekly distributions are available as a toggleable bar chart with previous period comparison. A weekly heatmap combines both dimensions for quick pattern recognition. The new conversion filter lets you narrow the view to sessions with specific conversion events.
+
+### Feature: Web Vitals Dashboard
+Core Web Vitals directly in bchic. Track LCP, FID, CLS and other performance metrics for your website without external tools. Can be enabled via the Script Editor under "Configure Advanced Analytics".
+
+### Feature: Compliance Suite & URL Anonymization
+New compliance page with an overview of all privacy-related settings. URL anonymization automatically strips sensitive query parameters and personal data from captured URLs before they are stored.
+
+### Improved: Script Editor (Configure Advanced Analytics)
+New central configuration page for advanced tracking options. Web Vitals, Consent Segmentation, third-party system integration and privacy settings can each be toggled individually without editing the tracking script manually.
+
+### Improved: Filters & Segmentation
+Filters now display active values and operators directly in the filter tags bar. The calculation for reader, dropper and bot segments has been reworked. A new `filterExcludeBots` parameter allows targeted exclusion of bot traffic.
+
+### Improved: MCP Knowledge System
+The MCP server automatically learns from interactions and stores website-specific knowledge via a `withKnowledge()` wrapper. AI assistants receive better context on follow-up questions without needing to re-query the data.
+
+---
+
 ## <span className="date-badge">March 2026</span> New Integrations & Authentication
 
 More connectivity: MCP support and social login make bchic more flexible and accessible.

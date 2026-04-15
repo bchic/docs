@@ -20,6 +20,35 @@ description: 'Eine Übersicht der neuesten Funktionen, Verbesserungen und Fehler
 
 ---
 
+## <span className="date-badge">April 2026</span> Consent Segmentation, Aktivitätsverlauf & Compliance Suite
+
+Das bisher größte Update für die Business Intelligence Sektion. Drei neue Dashboards, ein komplett überarbeiteter Script Editor und tiefere Einblicke in die Datenqualität.
+
+### Feature: Consent Segmentation Dashboard
+Vergleiche Besucher mit und ohne Cookie-Consent auf einen Blick. Das neue Dashboard zeigt die Zustimmungsrate als Donut-Chart, die Consent-Verteilung im Zeitverlauf und eine Perzentil-Analyse der Zeit bis zur Akzeptierung (P50 bis P99). Über die Dimensions-Tabelle schlüsselst du Consent-Raten nach Ländern, Geräten, Browsern, OS, Quellen und Kanälen auf.
+
+Erfordert ein unterstütztes CMP (Cookiebot, OneTrust, Usercentrics oder IAB TCF v2) oder die manuelle Aktivierung über `data-track-consent="true"` im Tracking Script.
+
+### Feature: Aktivitätsverlauf
+Erkenne wann deine Besucher aktiv sind. Das Dashboard zeigt Spitzenstunde, Spitzentag und die Werktag/Wochenende-Verteilung als KPI Cards. Die Stundenverteilung und Wochenverteilung sind als umschaltbares Balkendiagramm mit Vorperioden-Vergleich verfügbar. Eine Wochen-Heatmap kombiniert beide Dimensionen für schnelle Mustererkennung. Über den neuen Konversionsfilter lässt sich die Ansicht auf Sessions mit bestimmten Conversion-Events einschränken.
+
+### Feature: Web Vitals Dashboard
+Core Web Vitals direkt in bchic. Tracke LCP, FID, CLS und weitere Performance-Metriken deiner Website ohne externe Tools. Aktivierbar über den Script Editor unter „Optimierte Analysen konfigurieren".
+
+### Feature: Compliance Suite & URL-Anonymisierung
+Neue Compliance-Seite mit Übersicht aller datenschutzrelevanten Einstellungen. URL-Anonymisierung entfernt automatisch sensible Query-Parameter und persönliche Daten aus erfassten URLs, bevor sie gespeichert werden.
+
+### Verbessert: Script Editor (Optimierte Analysen konfigurieren)
+Neue zentrale Konfigurationsseite für erweiterte Tracking-Optionen. Web Vitals, Consent Segmentation, Integration bestehender Systeme und Datenschutz-Einstellungen lassen sich einzeln per Toggle aktivieren, ohne das Tracking Script manuell zu bearbeiten.
+
+### Verbessert: Filter & Segmentierung
+Filter zeigen jetzt aktive Werte und Operatoren direkt in der Filter-Tags-Leiste an. Die Berechnung für Reader, Dropper und Bot-Segmente wurde überarbeitet. Neuer `filterExcludeBots` Parameter ermöglicht den gezielten Ausschluss von Bot-Traffic.
+
+### Verbessert: MCP Knowledge System
+Der MCP-Server lernt automatisch aus Interaktionen und speichert Website-spezifisches Wissen über einen `withKnowledge()` Wrapper. KI-Assistenten erhalten dadurch besseren Kontext bei Folgefragen, ohne dass Daten erneut abgefragt werden müssen.
+
+---
+
 ## <span className="date-badge">März 2026</span> Neue Integrationen & Authentifizierung
 
 Mehr Konnektivität: MCP-Support und Social Login machen bchic flexibler und zugänglicher.
