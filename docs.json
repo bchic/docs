@@ -61,7 +61,8 @@
               {
                 "group": "Business Intelligence (BI)",
                 "pages": [
-                  "de/plattform/pages/change-impact"]
+                  "de/plattform/pages/change-impact", "de/plattform/pages/consent", "de/plattform/pages/activity"]
+
               },
               {
                 "group": "Model Context Protocol (MCP)",
@@ -196,7 +197,7 @@
               {
                 "group": "Business Intelligence (BI)",
                 "pages": [
-                  "en/plattform/pages/change-impact"]
+                  "en/plattform/pages/change-impact","en/plattform/pages/consent", "en/plattform/pages/activity"]
               },
               {
                 "group": "Model Context Protocol (MCP)",
