@@ -30,6 +30,39 @@ Das Skript selbst sieht in etwa so aus:
 
 Kopiere das Skript und füge es gemäß der Anleitung in den `<head>`-Bereich deiner Website ein.
 
+### Skript über die eigene Domain ausliefern
+
+Wenn deine Content Security Policy (CSP) nur Skripte und Requests von deiner eigenen Domain erlaubt, kannst du sowohl das Tracking-Skript als auch die Event-API über deinen Webserver proxien. Deine Website lädt bchic dann von deiner eigenen Origin:
+
+```html
+<script defer src="/js/analytics.js" data-website-id="DEINE-WEBSITE-ID"></script>
+```
+
+Füge bei nginx Locations wie diese in den `server`-Block der Domain ein, auf der deine Website läuft:
+
+```nginx
+location = /js/analytics.js {
+    proxy_pass https://analytics.bchic.de/script.js;
+    proxy_set_header Host analytics.bchic.de;
+    proxy_ssl_server_name on;
+    proxy_ssl_protocols TLSv1.2 TLSv1.3;
+    proxy_buffering on;
+}
+
+location = /js/api/send {
+    proxy_pass https://analytics.bchic.de/api/send;
+    proxy_set_header Host analytics.bchic.de;
+    proxy_ssl_server_name on;
+    proxy_ssl_protocols TLSv1.2 TLSv1.3;
+    proxy_buffering on;
+    proxy_http_version 1.1;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+}
+```
+
+Lade nginx nach der Änderung neu und stelle sicher, dass deine CSP `script-src 'self'` und `connect-src 'self'` erlaubt.
+
 <Tip>
     Detaillierte Schritt-für-Schritt-Anleitungen für jede Plattform findest du in unserem [Integrations-Bereich](/de/integration/integrationen). Wir empfehlen, die dortigen Anleitungen zu befolgen, da sie plattformspezifische Besonderheiten berücksichtigen.
 </Tip>
