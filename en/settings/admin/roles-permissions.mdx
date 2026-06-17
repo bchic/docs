@@ -1,0 +1,158 @@
+---
+title: 'Roles & Permissions'
+description: 'Control what each role on your team can see and do – from full admin access to read-only rights.'
+icon: 'user-shield'
+---
+
+> Use **Roles & Permissions** to define which areas and actions are available to each role on your team. This ensures every member has exactly the rights they need for their work – no more and no less.
+
+## Overview
+
+The page offers two views that you can toggle in the top right:
+
+- **Roles** — a card overview of all roles with their key properties.
+- **Detailed** — a full permissions matrix that shows every individual permission per role.
+
+Use the **"Search permission…"** field to find a specific permission. Create custom roles via **"Create new role"**. You can also clone one of the standard roles and use it as a starting point for a customized role.
+
+---
+
+## Standard roles
+
+bchic Analytics ships with four standard roles that cover the most common use cases:
+
+| Role | Purpose |
+|---|---|
+| **Account Owner** | Full admin access to all areas and settings |
+| **Manager** | Team and website management |
+| **Member** | Website editing |
+| **Viewer** | Read-only rights |
+
+---
+
+## Permission categories
+
+In the **Detailed** view, permissions are organized into four categories. Assignment is hierarchical: higher roles include the rights of the lower categories.
+
+| Category | Count | Account Owner | Manager | Member | Viewer |
+|---|---|:---:|:---:|:---:|:---:|
+| Administration | 8 | ✓ | – | – | – |
+| Team Editing | 6 | ✓ | ✓ | – | – |
+| Website Editing | 8 | ✓ | ✓ | ✓ | – |
+| Website Viewing | 25 | ✓ | ✓ | ✓ | ✓ |
+
+### Administration
+
+Reserved for administrative tasks around the team, billing, and configuration:
+
+- Manage team settings
+- Manage website settings
+- Manage billing
+- View usage
+- Manage team members
+- Manage roles and permissions
+- Manage navigation sidebars
+- Manage Google Search Console
+
+### Team Editing
+
+Rights to manage the team and its members:
+
+- Edit team profile
+- Invite members
+- Remove members
+- Edit member roles
+- View member list
+- View member details
+
+### Website Editing
+
+Rights to edit the analytics-relevant configuration of a website:
+
+- Edit visitor filters
+- Edit sitemap
+- Edit URL grouping rules
+- Edit privacy path
+- Edit funnels
+- Edit impact reports
+- Edit UTM reports
+- Edit journeys
+
+### Website Viewing
+
+With 25 permissions, this is the most extensive category. It essentially bundles **read rights** to all analyses and reports – that is, viewing data without changing the underlying configuration. This category is available to all roles by default, including the **Viewer** role.
+
+- View overview
+- View visitor filters
+- View dashboard
+- View events
+- View outbound links
+- View scroll depth
+- View user groups
+- View user group activity
+- View user group consents
+- View user group sitemap
+- View journeys
+- View funnels
+- View UTM
+- View UTM conversions
+- View AI visibility
+- View Web Vitals
+- View Impact
+- View Compliance
+- View website list
+- Manage integrations
+- View subscription status
+- Manage MCP token
+- Use MCP
+- Use Google Search Console
+- Customize sidebar
+
+<Note>
+    Some entries in this category are not pure read rights in the strict sense:
+
+    - **Manage integrations** and **Manage MCP token** give a role access to their **own** integrations or token page – not to the team-wide setup.
+    - **Use MCP**, **Use Google Search Console**, and **Customize sidebar** are the per-role **capability toggles** (see the ["Manage" vs. "use"](#manage-vs-use) section). They are active for all roles by default.
+
+    Setting up these integrations team-wide remains reserved for the admin permissions **"Manage Google Search Console"** and **"Manage navigation sidebars"** in the *Administration* category.
+</Note>
+
+---
+
+## "Manage" vs. "use"
+
+An important distinction concerns the difference between *using* a feature and *managing* its configuration.
+
+In the **Roles** view, you'll also find per-role **capability toggles** that define what a role is allowed to actively use:
+
+- **Use MCP**
+- **Use Google Search Console**
+- **Customize sidebar**
+
+These capabilities are **active for all roles by default**.
+
+Clearly distinct from these are the admin permissions **"Manage Google Search Console"** and **"Manage navigation sidebars"** from the *Administration* category.
+
+<Note>
+    **The rule of thumb:**
+    - *use / customize* = work with data or customize your **own** sidebar → available to **all roles**.
+    - *manage* = set up the integration or set the **role defaults** for everyone → for **admins only**.
+
+    Example: every role may view GSC data ("Use Google Search Console"), but only an admin connects the Google account and sets up the integration ("Manage Google Search Console").
+</Note>
+
+---
+
+## Related topics
+
+<CardGroup cols={3}>
+    <Card title="MCP Tools" icon="paperclip" href="/en/platform/ai/mcp-tools">
+        MCP access is controlled per role via the "Use MCP" capability.
+    </Card>
+    <Card title="Sidebar Customizer" icon="table-columns" href="/en/settings/admin/sidebar-customizer">
+        "Manage navigation sidebars" controls the role defaults, "Customize sidebar" the personal customization.
+    </Card>
+    <Card title="Google Search Console" icon="google" href="/en/settings/google-search-console">
+        "Manage Google Search Console" controls the setup, "use" the data access.
+    </Card>
+</CardGroup>

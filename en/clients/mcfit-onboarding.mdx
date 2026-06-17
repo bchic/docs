@@ -235,32 +235,36 @@ Follow these simple steps to build your team within the platform.
     <Step title="Choose a Role">
         Before sending the invitation, you must assign a role to the new member. Each role has a specific set of permissions designed for different levels of access.
 
-        <CardGroup>
-            <Card title="Employee" icon="user">
-                **Limited Access**
-                - ✅ Can view shared dashboards and reports.
-                - ❌ No insight into billing or usage information.
+        <CardGroup cols={2}>
+            <Card title="Account Owner" icon="shield-check">
+                **Full Admin Access**
+                - ✅ Full access to all settings and user management.
+                - ✅ Can manage integrations, billing, and usage data.
             </Card>
             <Card title="Manager" icon="users">
-                **Extended Access**
-                - ✅ Can manage team members (create/edit).
-                - ✅ Has full access to all team dashboards and analytics.
-                - ❌ No access to global organization settings.
+                **Team & Website Management**
+                - ✅ Can manage team members (invite/edit).
+                - ✅ Full access to dashboards and website configuration.
+                - ❌ No access to billing and global organization settings.
             </Card>
-            <Card title="Admin" icon="shield-check">
-                **Unrestricted Access**
-                - ✅ Full access to all settings and user management.
-                - ✅ Can manage data sources and integrations.
-                - ✅ Complete insight into all analyses and usage data.
+            <Card title="Member" icon="user">
+                **Website Editing**
+                - ✅ Can view analytics and edit the website configuration (filters, funnels, etc.).
+                - ❌ No team or billing management.
+            </Card>
+            <Card title="Viewer" icon="eye">
+                **Read-Only Access**
+                - ✅ Can view dashboards and reports.
+                - ❌ No editing rights.
             </Card>
         </CardGroup>
 
         <Tip>
-            **Our Recommendation:** For most users, like members of your marketing team, the **Employee** role is the perfect choice. It provides full access to analytics data and dashboards without granting access to system-critical menus like billing or global settings.
+            **Our Recommendation:** For most users, like members of your marketing team, the **Member** role is the perfect choice. It provides access to analytics data and website editing without granting access to system-critical menus like billing or global settings.
         </Tip>
 
         <Note>
-            **Coming Soon:** We are working on providing the ability to create your own granular user roles for even more control.
+            You can also create **custom roles** with granular permissions or clone a standard role. See [Roles & Permissions](en/settings/admin/roles-permissions) for details.
         </Note>
     </Step>
 

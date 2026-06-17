@@ -1,0 +1,60 @@
+---
+title: 'Sidebar Customizer'
+description: 'Configure the default navigation per role and decide who may customize their own sidebar.'
+icon: 'table-columns'
+---
+
+> With the **Sidebar Customizer** you define how the side navigation looks for each role. This gives every team member a clean navigation tailored to their tasks – and lets you decide whether they may adjust it further themselves.
+
+## Overview
+
+Configuration is done **per role**. Use the **role dropdown** at the top to select the role you are editing. All settings on the page then apply to that role.
+
+---
+
+## Customization Permissions
+
+Two toggles control the fundamental behavior of the selected role:
+
+- **Allow sidebar customization** — users of this role may adjust their **own** sidebar navigation. When disabled, all users of the role see only the default sidebar configured here.
+- **Show Business plan pages in navigation** — sets the **default** for the role, applied as long as a user has not set their own preference.
+
+---
+
+## Default Sidebar for [Role]
+
+In the main area you configure the **default sidebar** for the selected role. This configuration applies to all users of the role who have not made their own adjustments.
+
+### Controls
+
+- **Add group** — creates a new navigation group.
+- **Drag** — drag an entire row to reorder entries or nest them.
+- **Double-click** — renames an entry.
+- **Trash** — removes an entry.
+- **Reset** — discards your changes and restores the original state.
+- **Save** — applies the configuration to the role.
+
+On the right, a **live preview** reflects your changes instantly.
+
+### Sub-entries & Default Sub-pages
+
+Entries can contain **sub-entries** to build a multi-level navigation. Examples:
+
+- **Events** → Outbound Links, Scroll Depth
+- **User Behavior** → Activity History, Consent Segmentation, Sitemap
+- **UTM** → AI Visibility, Conversions
+
+In addition, an entry can have a defined **default sub-page** – the page opened when clicking the parent entry (e.g. **Events → Events Overview**).
+
+---
+
+## Relationship with Permissions
+
+The Sidebar Customizer is closely tied to two permissions from [Roles & Permissions](/en/settings/admin/roles-permissions):
+
+- **"Manage navigation sidebars"** (admin permission) — allows setting the **role defaults** here.
+- **"Customize sidebar"** (capability) — allows end users to adjust their **own** sidebar (corresponds to the *Allow sidebar customization* toggle).
+
+<Note>
+    *Managing* (admin) means: defining the default navigation for an entire role. *Customizing* (capability) means: changing your own personal sidebar. See the "manage" vs. "use" distinction on the [Roles & Permissions](en/settings/admin/roles-permissions) page.
+</Note>

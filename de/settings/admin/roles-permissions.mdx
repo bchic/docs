@@ -1,0 +1,158 @@
+---
+title: 'Rollen & Berechtigungen'
+description: 'Verwalte, was jede Rolle in deinem Team sehen und tun darf – von vollständigem Admin-Zugriff bis zu reinen Leserechten.'
+icon: 'user-shield'
+---
+
+> Über **Rollen & Berechtigungen** legst du fest, welche Bereiche und Aktionen den einzelnen Rollen in deinem Team zur Verfügung stehen. So stellst du sicher, dass jedes Mitglied genau die Rechte hat, die es für seine Arbeit braucht – nicht mehr und nicht weniger.
+
+## Übersicht
+
+Die Seite bietet zwei Ansichten, die du oben rechts umschalten kannst:
+
+- **Rollen** — eine Karten-Übersicht aller Rollen mit ihren wichtigsten Eigenschaften.
+- **Detailliert** — eine vollständige Berechtigungs-Matrix, in der jede einzelne Berechtigung pro Rolle dargestellt wird.
+
+Über das Suchfeld **„Berechtigung suchen…"** findest du gezielt eine bestimmte Berechtigung. Eigene Rollen erstellst du über **„Neue Rolle erstellen"**. Du kannst auch eine der Standard-Rollen klonen und als Ausgangspunkt für eine angepasste Rolle verwenden.
+
+---
+
+## Standard-Rollen
+
+bchic Analytics bringt vier Standard-Rollen mit, die die häufigsten Anwendungsfälle abdecken:
+
+| Rolle | Zweck |
+|---|---|
+| **Kontoinhaber:in** | Vollständiger Admin-Zugriff auf alle Bereiche und Einstellungen |
+| **Manager** | Team- und Website-Verwaltung |
+| **Mitglied** | Website-Bearbeitung |
+| **Betrachter** | Nur Leserechte |
+
+---
+
+## Berechtigungs-Kategorien
+
+In der **Detailliert**-Ansicht sind die Berechtigungen in vier Kategorien gegliedert. Die Vergabe ist hierarchisch: Höhere Rollen umfassen die Rechte der niedrigeren Kategorien.
+
+| Kategorie | Anzahl | Kontoinhaber:in | Manager | Mitglied | Betrachter |
+|---|---|:---:|:---:|:---:|:---:|
+| Administration | 8 | ✓ | – | – | – |
+| Team-Bearbeitung | 6 | ✓ | ✓ | – | – |
+| Website-Bearbeitung | 8 | ✓ | ✓ | ✓ | – |
+| Website-Anzeige | 25 | ✓ | ✓ | ✓ | ✓ |
+
+### Administration
+
+Reserviert für administrative Aufgaben rund um Team, Abrechnung und Konfiguration:
+
+- Team-Einstellungen verwalten
+- Website-Einstellungen verwalten
+- Abrechnung verwalten
+- Nutzung ansehen
+- Teammitglieder verwalten
+- Rollen und Berechtigungen verwalten
+- Navigations-Sidebars verwalten
+- Google Search Console verwalten
+
+### Team-Bearbeitung
+
+Rechte zur Verwaltung des Teams und seiner Mitglieder:
+
+- Teamprofil bearbeiten
+- Mitglieder einladen
+- Mitglieder entfernen
+- Mitgliederrollen bearbeiten
+- Mitgliederliste ansehen
+- Mitglieder Details ansehen
+
+### Website-Bearbeitung
+
+Rechte zum Bearbeiten der analyserelevanten Konfiguration einer Website:
+
+- Besucherfilter bearbeiten
+- Sitemap bearbeiten
+- URL-Gruppierungsregeln bearbeiten
+- Datenschutz-Pfad bearbeiten
+- Funnels bearbeiten
+- Impact-Berichte bearbeiten
+- UTM-Berichte bearbeiten
+- Journeys bearbeiten
+
+### Website-Anzeige
+
+Mit 25 Berechtigungen die umfangreichste Kategorie. Sie bündelt im Wesentlichen **Leserechte** auf alle Auswertungen und Berichte – also das Ansehen von Daten, ohne die zugrunde liegende Konfiguration zu verändern. Diese Kategorie steht standardmäßig allen Rollen zur Verfügung, auch der Rolle **Betrachter**.
+
+- Übersicht ansehen
+- Besucherfilter ansehen
+- Dashboard ansehen
+- Events ansehen
+- Outbound-Links ansehen
+- Scroll-Tiefe ansehen
+- Nutzergruppen ansehen
+- Nutzergruppen-Aktivität ansehen
+- Nutzergruppen-Einwilligungen ansehen
+- Nutzergruppen-Sitemap ansehen
+- Journeys ansehen
+- Funnels ansehen
+- UTM ansehen
+- UTM-Conversions ansehen
+- KI-Sichtbarkeit ansehen
+- Web Vitals ansehen
+- Impact ansehen
+- Compliance ansehen
+- Website-Liste ansehen
+- Integrationen verwalten
+- Abonnementstatus ansehen
+- MCP-Token verwalten
+- MCP nutzen
+- Google Search Console nutzen
+- Sidebar anpassen
+
+<Note>
+    Einige Einträge dieser Kategorie sind keine reinen Leserechte im engeren Sinn:
+
+    - **Integrationen verwalten** und **MCP-Token verwalten** geben einer Rolle Zugriff auf die **eigene** Integrations- bzw. Token-Seite – nicht auf die teamweite Einrichtung.
+    - **MCP nutzen**, **Google Search Console nutzen** und **Sidebar anpassen** sind die rollenweisen **Capability-Toggles** (siehe Abschnitt [„Verwalten" vs. „nutzen"](#verwalten-vs-nutzen)). Sie sind standardmäßig für alle Rollen aktiv.
+
+    Das teamweite Einrichten dieser Integrationen bleibt den Admin-Berechtigungen **„Google Search Console verwalten"** und **„Navigations-Sidebars verwalten"** aus der Kategorie *Administration* vorbehalten.
+</Note>
+
+---
+
+## „Verwalten" vs. „nutzen"
+
+Eine wichtige Unterscheidung betrifft den Unterschied zwischen dem *Nutzen* eines Features und dem *Verwalten* seiner Konfiguration.
+
+In der **Rollen**-Ansicht findest du zusätzlich rollenweise **Capability-Toggles**, die festlegen, was eine Rolle aktiv nutzen darf:
+
+- **MCP nutzen**
+- **Google Search Console nutzen**
+- **Sidebar anpassen**
+
+Diese Capabilities sind **standardmäßig für alle Rollen aktiv**.
+
+Davon klar abzugrenzen sind die Admin-Berechtigungen **„Google Search Console verwalten"** und **„Navigations-Sidebars verwalten"** aus der Kategorie *Administration*.
+
+<Note>
+    **Die Faustregel:**
+    - *nutzen / anpassen* = Daten verwenden bzw. die **eigene** Sidebar anpassen → für **alle Rollen** verfügbar.
+    - *verwalten* = die Integration einrichten bzw. die **Rollen-Defaults** für alle setzen → nur für **Admins**.
+
+    Beispiel: Jede Rolle darf GSC-Daten ansehen („Google Search Console nutzen"), aber nur ein Admin verbindet das Google-Konto und richtet die Integration ein („Google Search Console verwalten").
+</Note>
+
+---
+
+## Verwandte Themen
+
+<CardGroup cols={3}>
+    <Card title="MCP Tools" icon="paperclip" href="/de/plattform/ai/mcp-tools">
+        Der MCP-Zugriff wird pro Rolle über die Capability „MCP nutzen" gesteuert.
+    </Card>
+    <Card title="Sidebar Customizer" icon="table-columns" href="/de/settings/admin/sidebar-customizer">
+        „Navigations-Sidebars verwalten" steuert die Rollen-Defaults, „Sidebar anpassen" das eigene Anpassen.
+    </Card>
+    <Card title="Google Search Console" icon="google" href="/de/settings/google-search-console">
+        „Google Search Console verwalten" steuert die Einrichtung, „nutzen" den Datenzugriff.
+    </Card>
+</CardGroup>

@@ -20,6 +20,46 @@ description: 'Eine Übersicht der neuesten Funktionen, Verbesserungen und Fehler
 
 ---
 
+## <span className="date-badge">Juni 2026</span> Google Search Console, Journey-Analyse & Impact über MCP
+
+<img className="block dark:hidden" src="/images/changelog/gsc-light.jpeg" alt="Google Search Console dashboard in bchic" />
+<img className="hidden dark:block" src="/images/changelog/gsc-dark.jpeg" alt="Google Search Console dashboard in bchic" />
+
+Das bisher größte Update für Reporting und KI-Integration. Impact misst jetzt auch die Wirkung deiner Änderungen auf Ladezeiten und Google-Rankings, die komplette Customer Journey wird visuell nachvollziehbar – und sowohl Impact-Daten als auch Search-Console-Daten stehen ab sofort direkt über den MCP-Server zur Verfügung. Dazu granulare Rollen-Berechtigungen, eine konfigurierbare Sidebar und globale Filter mit REGEX.
+
+### Feature: Impact misst jetzt Web Vitals & Search-Performance
+Change Impact Analysis geht den entscheidenden Schritt weiter. Du setzt einen Impact-Marker bei einem Release, Relaunch oder Kampagnenstart und siehst nicht mehr nur die Wirkung auf Traffic und Conversions, sondern auch auf deine **Core Web Vitals** und deine **Google-Search-Performance**. Hat das neue Hero-Bild den LCP verschlechtert? Sind nach dem Content-Update die Impressionen und die durchschnittliche Position gestiegen? Vorher/Nachher-Vergleich pro Marker, ohne dass du drei Tools nebeneinander öffnen musst.
+
+### Feature: Google Search Console Integration
+Klicks, Impressionen, CTR und durchschnittliche Position direkt in bchic – kein Wechsel mehr in die Search Console. Das Dashboard zeigt alle vier Kernmetriken als umschaltbare Zeitreihe mit Vorperioden-Vergleich. Über die Filter lassen sich die Daten gezielt eingrenzen, etwa auf organischen Google-Traffic. Die Daten stehen damit für Reports, Impact-Marker und MCP zur Verfügung.
+
+### Feature: Impact-Daten & GSC jetzt über MCP
+Der wichtigste Schritt für unsere Website-Intelligence-Vision: KI-Assistenten können jetzt über den MCP-Server **sowohl Impact-Wirkungsdaten als auch Search-Console-Daten** abrufen. Du fragst direkt im Chat „Wie hat sich der Relaunch letzte Woche auf die Rankings ausgewirkt?" oder „Welche Marker haben die Web Vitals verschlechtert?" – und bekommst die Antwort mit deinen echten Daten. Damit wird die KI vom Reporting-Add-on zum Analysten, der den vollständigen Wirkungskontext kennt.
+
+### Feature: Events in der Journey-Analyse sichtbar
+Die Pfad-Analyse zeigt jetzt nicht nur die Seitenwechsel, sondern auch die **Events**, die unterwegs ausgelöst werden – direkt visuell im Pfad. So siehst du auf einen Blick, *wo* in der Journey ein Event getriggert wird (z. B. ein ausgehender Link-Klick auf einen PDF-Download oder eine OpenTable-Buchung) und *wie häufig*. Per Klick auf einen Schritt öffnest du die Ereignis-Details mit den konkreten Ziel-URLs und ihrer Häufigkeit. Schritt-für-Schritt-Flow mit Verlustraten, durchschnittlicher Verweildauer und Loop-Erkennung bleibt erhalten, und Konfigurationen lassen sich weiterhin als **gespeicherte Journey** sichern und wiederverwenden.
+
+### Feature: Länder-Karte
+Geografische Verteilung auf einen Blick. Die Länder-Ansicht lässt sich jetzt zwischen Liste und interaktiver Weltkarte umschalten – Intensität der Einfärbung entspricht dem Besucheranteil, mit Zoom und Reset. Per Expand öffnest du die Vollbild-Ansicht: Karte und Länderliste mit Besucherzahl, Trend und Flaggen nebeneinander, inklusive Suche und Pagination für die vollständige Länderliste.
+
+### Feature: Browser, OS & Versionen
+Detaillierte Technik-Aufschlüsselung deiner Besucher. Umschaltbar zwischen Browser- und OS-Ansicht, jeweils mit Besucherzahl und Trend. Per Drilldown öffnest du die konkreten **Versionen** (z. B. iOS 26.5.0 vs. 18.7.x) – neue Versionen werden mit einem „Neu"-Badge markiert, sodass du Migrationswellen und kompatibilitätskritische Altversionen sofort erkennst.
+
+### Feature: Rollen & Berechtigungen
+Granulare Rechteverwaltung pro Rolle. Vier Rollen – Kontoinhaber:in, Manager, Mitglied und Betrachter – lassen sich mit individuellen Berechtigungen ausstatten: Administration, Team-Bearbeitung, Website-Bearbeitung und Website-Anzeige. Zusätzlich pro Rolle steuerbar, ob **MCP genutzt**, **Google Search Console abgerufen** und die **Sidebar angepasst** werden darf. Umschaltbar zwischen Rollen-Übersicht und detaillierter Matrix.
+
+### Feature: Sidebar Customizer
+Konfiguriere die Standard-Navigation pro Rolle. Gruppen und Einträge lassen sich per Drag-and-drop sortieren, verschachteln, umbenennen und entfernen, mit Live-Vorschau. Über einen Toggle erlaubst du Benutzern einer Rolle, ihre eigene Sidebar anzupassen – oder gibst eine feste Standard-Konfiguration vor.
+
+### Verbessert: Globaler Pfad-Filter
+Der Pfad-Filter wirkt jetzt global über alle Reports hinweg. Einmal auf eine Seite oder einen Seitenbereich eingegrenzt, bleibt der Kontext über Dashboard, Journeys, Ereignisse und Audience-Reports erhalten.
+
+### Verbessert: Suche & Filter mit REGEX
+Neue „Alle"-Textsuche, die übergreifend über alle Felder filtert statt nur über eine einzelne Dimension. Zusätzlich lässt sich pro Filter ein **REGEX-Operator** aktivieren – für präzise Treffer auf URL-Muster, Kampagnen-Namen oder Event-Werte.
+
+
+---
+
 ## <span className="date-badge">April 2026</span> Consent Segmentation, Aktivitätsverlauf & Compliance Suite
 
 Das bisher größte Update für die Business Intelligence Sektion. Drei neue Dashboards, ein komplett überarbeiteter Script Editor und tiefere Einblicke in die Datenqualität.
@@ -182,12 +222,6 @@ Veröffentlichung einer umfassenden Dokumentation zur Erläuterung aller Plattfo
 
 ### Verbessert: Hauptnavigation
 Einführung einer neuen, gestapelten Seitenleiste zur besseren Übersicht und schnelleren Navigation.
-
-<video autoPlay muted playsInline
-       className="rounded-lg"
-       src="/videos/new-menu.mp4"
-       alt="Widgets im bchic Analytics Dashboard"
-/>
 
 ---
 

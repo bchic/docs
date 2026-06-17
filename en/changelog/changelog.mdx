@@ -18,6 +18,44 @@ description: 'An overview of the latest features, improvements, and bug fixes fo
   `}
 </style>
 
+---
+
+## <span className="date-badge">June 2026</span> Google Search Console, Journey Analysis & Impact via MCP
+
+<img className="block dark:hidden" src="/images/changelog/gsc-light.jpeg" alt="Google Search Console dashboard in bchic" />
+<img className="hidden dark:block" src="/images/changelog/gsc-dark.jpeg" alt="Google Search Console dashboard in bchic" />
+
+Our biggest update yet for reporting and AI integration. Impact now also measures how your changes affect load times and Google rankings, the entire customer journey becomes visually traceable – and both Impact data and Search Console data are now available directly through the MCP server. On top of that: granular role permissions, a configurable sidebar, and global filters with REGEX.
+
+### Feature: Impact now measures Web Vitals & search performance
+Change Impact Analysis takes the decisive step further. You set an impact marker on a release, relaunch, or campaign launch and now see its effect not just on traffic and conversions, but also on your **Core Web Vitals** and your **Google search performance**. Did the new hero image hurt your LCP? Did impressions and average position rise after the content update? Before/after comparison per marker, without having to keep three tools open side by side.
+
+### Feature: Google Search Console integration
+Clicks, impressions, CTR, and average position right inside bchic – no more switching over to Search Console. The dashboard shows all four core metrics as a toggleable time series with previous-period comparison. Filters let you narrow the data down precisely, for example to organic Google traffic. The data is therefore available for reports, impact markers, and MCP.
+
+### Feature: Impact data & GSC now available via MCP
+The most important step for our website intelligence vision: AI assistants can now retrieve **both impact effect data and Search Console data** through the MCP server. Ask directly in chat "How did last week's relaunch affect rankings?" or "Which markers hurt Web Vitals?" – and get the answer based on your real data. This turns the AI from a reporting add-on into an analyst that knows the full context of what your changes caused.
+
+### Feature: Events visible in journey analysis
+Path analysis now shows not just the page transitions, but also the **events** triggered along the way – directly and visually within the path. At a glance you can see *where* in the journey an event is triggered (e.g. an outbound link click on a PDF download or an OpenTable booking) and *how often*. Click a step to open the event details with the specific target URLs and their frequency. The step-by-step flow with drop-off rates, average time on page, and loop detection stays in place, and configurations can still be saved as a **saved journey** and reused.
+
+### Feature: Country map
+Geographic distribution at a glance. The countries view can now be toggled between a list and an interactive world map – color intensity reflects the share of visitors, with zoom and reset. Expand it to open the full-screen view: map and country list with visitor count, trend, and flags side by side, including search and pagination for the complete list of countries.
+
+### Feature: Browsers, OS & versions
+A detailed technical breakdown of your visitors. Toggle between browser and OS view, each with visitor count and trend. Drill down to the specific **versions** (e.g. iOS 26.5.0 vs. 18.7.x) – new versions are marked with a "New" badge, so you can immediately spot migration waves and compatibility-critical legacy versions.
+
+### Feature: Roles & permissions
+Granular permission management per role. Four roles – Account Owner, Manager, Member, and Viewer – can be configured with individual permissions: Administration, Team Editing, Website Editing, and Website Viewing. You can also control per role whether **MCP**, **Google Search Console**, and **sidebar customization** may be used. Toggle between the role overview and the detailed matrix.
+
+### Feature: Sidebar Customizer
+Configure the default navigation per role. Groups and items can be sorted, nested, renamed, and removed via drag-and-drop, with a live preview. A toggle lets you allow users of a role to customize their own sidebar – or set a fixed default configuration.
+
+### Improved: Global path filter
+The path filter now applies globally across all reports. Once narrowed to a page or section, the context is preserved across Dashboard, Journeys, Events, and audience reports.
+
+### Improved: Search & filters with REGEX
+A new "All" text search that filters across all fields instead of just a single dimension. You can also enable a **REGEX operator** per filter – for precise matches on URL patterns, campaign names, or event values.
 
 ---
 
@@ -181,12 +219,6 @@ Launched comprehensive documentation to explain all platform features.
 
 ### Improved: Main Navigation
 Introduced a new stacked sidebar for a clearer overview and faster navigation.
-
-<video autoPlay muted playsInline
-       className="rounded-lg"
-       src="/videos/new-menu.mp4"
-       alt="New navigation menu in bchic Analytics Dashboard"
-/>
 
 ---
 

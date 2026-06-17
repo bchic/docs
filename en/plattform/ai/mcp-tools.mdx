@@ -4,7 +4,8 @@ description: 'Overview of all available MCP tools and the questions you can ask 
 icon: 'paperclip'
 ---
 
-The bchic MCP Server provides **20 tools** that you can call directly in Claude or Cursor using natural language. Here is a complete overview.
+{/* TODO: Tool-Anzahl prüfen – durch das neue Google-Search-Console-Tool ggf. anzupassen */}
+The bchic MCP Server provides numerous tools that you can call directly in Claude or Cursor using natural language. Here is a complete overview.
 
 ## Overview & Traffic
 
@@ -58,10 +59,24 @@ The bchic MCP Server provides **20 tools** that you can call directly in Claude 
 | Tool | Example Questions |
 |------|------------------|
 | **Impact Reports** | "Which changes are being tracked for this website?" · "Which deployments have been analyzed so far?" |
-| **Impact Analysis** | "Did the last deployment improve traffic?" · "What was the SEO effect of the content update?" · "Which change had the biggest positive impact?" |
+| **Impact Analysis** | "Did the last deployment improve traffic?" · "What was the SEO effect of the content update?" · "How did LCP change after the release?" · "Which change had the biggest positive impact?" |
+
+## Google Search Console
+
+| Tool | Example Questions |
+|------|------------------|
+| **Google Search Console** | "How many clicks came from Google Search last week?" · "Which pages have the most impressions?" · "How has my average position developed?" · "How is the CTR compared to last month?" |
+
+<Note>
+    The GSC data comes from the [Google Search Console integration](/en/settings/google-search-console) and is available from the Growth plan.
+</Note>
 
 ---
 
 <Note>
     All tools are called automatically — you don't need to know any tool names. Just ask your question in natural language and the AI assistant will pick the right tool.
+</Note>
+
+<Note>
+    MCP access is controlled **per role** via the **"Use MCP"** capability (enabled for all roles by default). Details under [Roles & Permissions](/en/settings/admin/roles-permissions).
 </Note>

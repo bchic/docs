@@ -422,32 +422,36 @@ Folgen Sie diesen einfachen Schritten, um Ihr Team auf der Plattform aufzubauen.
     <Step title="Eine Rolle auswählen">
         Bevor Sie die Einladung versenden, müssen Sie dem neuen Mitglied eine Rolle zuweisen. Jede Rolle verfügt über spezifische Berechtigungen, die für unterschiedliche Zugriffsebenen konzipiert sind.
 
-        <CardGroup>
-            <Card title="Mitarbeiter/in" icon="user">
-                **Begrenzter Zugriff**
-                - ✅ Kann freigegebene Dashboards und Berichte ansehen.
-                - ❌ Keine Einsicht in Abrechnungs- oder Nutzungsinformationen.
+        <CardGroup cols={2}>
+            <Card title="Kontoinhaber:in" icon="shield-check">
+                **Vollständiger Admin-Zugriff**
+                - ✅ Voller Zugriff auf alle Einstellungen und die Benutzerverwaltung.
+                - ✅ Kann Integrationen, Abrechnung und Nutzungsdaten verwalten.
             </Card>
             <Card title="Manager" icon="users">
-                **Erweiterter Zugriff**
-                - ✅ Kann Teammitglieder verwalten (erstellen/bearbeiten).
-                - ✅ Hat vollen Zugriff auf alle Dashboards und Analysen des Teams.
-                - ❌ Kein Zugriff auf globale Organisationseinstellungen.
+                **Team- und Website-Verwaltung**
+                - ✅ Kann Teammitglieder verwalten (einladen/bearbeiten).
+                - ✅ Voller Zugriff auf Dashboards und Website-Konfiguration.
+                - ❌ Kein Zugriff auf Abrechnung und globale Organisationseinstellungen.
             </Card>
-            <Card title="Admin" icon="shield-check">
-                **Uneingeschränkter Zugriff**
-                - ✅ Voller Zugriff auf alle Einstellungen und die Benutzerverwaltung.
-                - ✅ Kann Datenquellen und Integrationen verwalten.
-                - ✅ Vollständige Einsicht in alle Analysen und Nutzungsdaten.
+            <Card title="Mitglied" icon="user">
+                **Website-Bearbeitung**
+                - ✅ Kann Analysedaten ansehen und die Website-Konfiguration bearbeiten (Filter, Funnels etc.).
+                - ❌ Keine Team- oder Abrechnungsverwaltung.
+            </Card>
+            <Card title="Betrachter" icon="eye">
+                **Nur Leserechte**
+                - ✅ Kann Dashboards und Berichte ansehen.
+                - ❌ Keine Bearbeitungsrechte.
             </Card>
         </CardGroup>
 
         <Tip>
-            **Unsere Empfehlung:** Für die meisten Nutzer, wie z.B. Mitglieder Ihres Marketing-Teams, ist die Rolle **Mitarbeiter/in** die perfekte Wahl. Sie bietet vollen Zugriff auf Analysedaten und Dashboards, ohne den Zugriff auf systemkritische Menüs wie Abrechnungen oder globale Einstellungen zu gewähren.
+            **Unsere Empfehlung:** Für die meisten Nutzer, wie z.B. Mitglieder Ihres Marketing-Teams, ist die Rolle **Mitglied** die perfekte Wahl. Sie bietet Zugriff auf Analysedaten und die Website-Bearbeitung, ohne den Zugriff auf systemkritische Menüs wie Abrechnungen oder globale Einstellungen zu gewähren.
         </Tip>
 
         <Note>
-            **Demnächst verfügbar:** Wir arbeiten daran, Ihnen die Möglichkeit zu geben, eigene granulare Benutzerrollen zu erstellen, um Ihnen noch mehr Kontrolle zu geben.
+            Sie können zusätzlich **eigene Rollen** mit granularen Berechtigungen erstellen oder eine Standard-Rolle klonen. Details finden Sie unter [Rollen & Berechtigungen](de/settings/admin/roles-permissions).
         </Note>
     </Step>
 

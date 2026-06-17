@@ -4,7 +4,8 @@ description: 'Übersicht aller verfügbaren MCP Tools und welche Fragen du damit
 icon: 'paperclip'
 ---
 
-Der bchic MCP Server stellt **20 Tools** bereit, die du direkt in Claude oder Cursor per natürlicher Sprache aufrufen kannst. Hier findest du eine vollständige Übersicht.
+{/* TODO: Tool-Anzahl prüfen – durch das neue Google-Search-Console-Tool ggf. anzupassen */}
+Der bchic MCP Server stellt zahlreiche Tools bereit, die du direkt in Claude oder Cursor per natürlicher Sprache aufrufen kannst. Hier findest du eine vollständige Übersicht.
 
 ## Übersicht & Traffic
 
@@ -58,10 +59,24 @@ Der bchic MCP Server stellt **20 Tools** bereit, die du direkt in Claude oder Cu
 | Tool | Beispielfragen |
 |------|---------------|
 | **Impact-Berichte** | „Welche Änderungen werden für diese Website getrackt?" · „Welche Deployments wurden bisher analysiert?" |
-| **Impact-Analyse** | „Hat das letzte Deployment den Traffic verbessert?" · „Was war der SEO-Effekt des Content-Updates?" · „Welche Änderung hatte den größten positiven Einfluss?" |
+| **Impact-Analyse** | „Hat das letzte Deployment den Traffic verbessert?" · „Was war der SEO-Effekt des Content-Updates?" · „Wie hat sich der LCP nach dem Release verändert?" · „Welche Änderung hatte den größten positiven Einfluss?" |
+
+## Google Search Console
+
+| Tool | Beispielfragen |
+|------|---------------|
+| **Google Search Console** | „Wie viele Klicks kamen letzte Woche aus der Google-Suche?" · „Welche Seiten haben die meisten Impressionen?" · „Wie hat sich meine durchschnittliche Position entwickelt?" · „Wie ist die CTR im Vergleich zum Vormonat?" |
+
+<Note>
+    Die GSC-Daten stammen aus der [Google Search Console Integration](/de/settings/google-search-console) und stehen ab dem Growth-Plan zur Verfügung.
+</Note>
 
 ---
 
 <Note>
     Alle Tools werden automatisch aufgerufen — du musst keine Tool-Namen kennen. Stell einfach deine Frage in natürlicher Sprache, und der KI-Assistent wählt das passende Tool.
+</Note>
+
+<Note>
+    Der MCP-Zugriff wird **pro Rolle** über die Capability **„MCP nutzen"** gesteuert (standardmäßig für alle Rollen aktiv). Details unter [Rollen & Berechtigungen](/de/settings/admin/roles-permissions).
 </Note>

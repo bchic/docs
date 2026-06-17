@@ -95,6 +95,13 @@
                     ]
                   },
                   {
+                    "group": "Team & Berechtigungen",
+                    "pages": [
+                      "de/settings/admin/roles-permissions",
+                      "de/settings/admin/sidebar-customizer"
+                    ]
+                  },
+                  {
                     "group": "Compliance & Governance",
                     "pages": [
                       "de/compliance/usage",
@@ -113,8 +120,14 @@
                 "pages": ["de/integration/integrationen" ,"de/integration/mintlify", "de/integration/framer" , "de/integration/wordPress" , "de/integration/webflow" , "de/integration/wix" , "de/integration/vue" , "de/integration/squareSpace", "de/integration/aspnet" , "de/integration/sPAs"]
               },
               {
-                "group": "Model Context Protocol (MCP)",
-                "pages": ["de/integration/claude_mcp" , "de/integration/cursor_mcp" ]
+                "group": "Integrationen",
+                "pages": [
+                  {
+                    "group": "Model Context Protocol (MCP)",
+                    "pages": ["de/integration/claude_mcp", "de/integration/cursor_mcp"]
+                  },
+                  "de/settings/google-search-console"
+                ]
               },
               {
                 "group": "Anwendung",
@@ -230,6 +243,13 @@
                     ]
                   },
                   {
+                    "group": "Team & Permissions",
+                    "pages": [
+                      "en/settings/admin/roles-permissions",
+                      "en/settings/admin/sidebar-customizer"
+                    ]
+                  },
+                  {
                     "group": "Compliance & Governance",
                     "pages": [
                       "en/compliance/usage",
@@ -248,8 +268,14 @@
                 "pages": ["en/integration/integrationen" ,"en/integration/mintlify", "en/integration/framer" , "en/integration/wordPress" , "en/integration/webflow" , "en/integration/wix" , "en/integration/vue" , "en/integration/squareSpace", "en/integration/aspnet" , "en/integration/sPAs"]
               },
               {
-                "group": "Model Context Protocol (MCP)",
-                "pages": ["en/integration/claude_mcp" , "en/integration/cursor_mcp" ]
+                "group": "Integrations",
+                "pages": [
+                  {
+                    "group": "Model Context Protocol (MCP)",
+                    "pages": ["en/integration/claude_mcp", "en/integration/cursor_mcp"]
+                  },
+                  "en/settings/google-search-console"
+                ]
               },
               {
                 "group": "Application",

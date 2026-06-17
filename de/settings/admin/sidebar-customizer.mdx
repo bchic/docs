@@ -1,0 +1,60 @@
+---
+title: 'Sidebar Customizer'
+description: 'Konfiguriere die Standard-Navigation pro Rolle und lege fest, wer seine eigene Sidebar anpassen darf.'
+icon: 'table-columns'
+---
+
+> Mit dem **Sidebar Customizer** bestimmst du, wie die Seitennavigation für jede Rolle aussieht. So gibst du jedem Team-Mitglied eine aufgeräumte, auf seine Aufgaben zugeschnittene Navigation – und entscheidest, ob es diese selbst weiter anpassen darf.
+
+## Übersicht
+
+Die Konfiguration erfolgt **pro Rolle**. Über das **Rollen-Dropdown** oben wählst du aus, welche Rolle du gerade bearbeitest. Alle Einstellungen auf der Seite beziehen sich anschließend auf diese Rolle.
+
+---
+
+## Anpassungsberechtigungen
+
+Zwei Toggles steuern das grundsätzliche Verhalten der gewählten Rolle:
+
+- **Sidebar anpassen erlauben** — Benutzer dieser Rolle dürfen ihre **eigene** Sidebar-Navigation anpassen. Ist der Toggle deaktiviert, gilt für alle Benutzer der Rolle ausschließlich die hier hinterlegte Standard-Sidebar.
+- **Business-Abo Seiten in der Navigation anzeigen** — legt den **Default** für die Rolle fest, der gilt, solange ein Benutzer kein eigenes Setting gesetzt hat.
+
+---
+
+## Standard-Sidebar für [Rolle]
+
+Im Hauptbereich konfigurierst du die **Standard-Sidebar** der gewählten Rolle. Diese Konfiguration gilt für alle Benutzer der Rolle, die keine eigene Anpassung vorgenommen haben.
+
+### Bedienung
+
+- **Gruppe hinzufügen** — legt eine neue Navigations-Gruppe an.
+- **Ziehen** — ziehe eine ganze Zeile, um Einträge zu sortieren oder ineinander zu verschachteln.
+- **Doppelklick** — benennt einen Eintrag um.
+- **Papierkorb** — entfernt einen Eintrag.
+- **Zurücksetzen** — verwirft deine Änderungen und stellt den Ausgangszustand wieder her.
+- **Speichern** — übernimmt die Konfiguration für die Rolle.
+
+Rechts siehst du eine **Live-Vorschau**, die deine Änderungen sofort widerspiegelt.
+
+### Untereinträge & Standard-Unterseiten
+
+Einträge können **Untereinträge** enthalten und so eine mehrstufige Navigation abbilden. Beispiele:
+
+- **Ereignisse** → Ausgehende Links, Scroll Tiefe
+- **Nutzerverhalten** → Aktivitätsverlauf, Consent Segmentation, Sitemap
+- **UTM** → KI Sichtbarkeit, Conversions
+
+Zusätzlich kann ein Eintrag eine hinterlegte **Standard-Unterseite** haben – die Seite, die beim Klick auf den übergeordneten Eintrag geöffnet wird (z.B. **Ereignisse → Ereignis Übersicht**).
+
+---
+
+## Zusammenhang mit Berechtigungen
+
+Der Sidebar Customizer ist eng mit zwei Berechtigungen aus [Rollen & Berechtigungen](/de/settings/admin/roles-permissions) verknüpft:
+
+- **„Navigations-Sidebars verwalten"** (Admin-Berechtigung) — erlaubt es, hier die **Rollen-Defaults** zu setzen.
+- **„Sidebar anpassen"** (Capability) — erlaubt es Endnutzern, ihre **eigene** Sidebar anzupassen (entspricht dem Toggle *Sidebar anpassen erlauben*).
+
+<Note>
+    *Verwalten* (Admin) heißt: die Standard-Navigation für eine ganze Rolle festlegen. *Anpassen* (Capability) heißt: die eigene, persönliche Sidebar verändern. Siehe dazu die Unterscheidung „verwalten" vs. „nutzen" auf der Seite [Rollen & Berechtigungen](de/settings/admin/roles-permissions).
+</Note>
