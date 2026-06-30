@@ -1,0 +1,74 @@
+---
+title: 'Langdock (langdock.com)'
+description: 'Use bchic Analytics directly in Langdock via the Model Context Protocol (MCP).'
+---
+
+The bchic MCP Server lets you query your analytics data in natural language directly inside Langdock. Ask questions like *"How many visitors did we have last week?"* or *"What are my top pages this month?"* without ever leaving your chat.
+
+Unlike some clients, Langdock keeps integrations opt-in per conversation: you create the integration once, then attach it to a chat with an `@` mention whenever you want bchic to answer.
+
+<Note>
+    Label names below are shown in **English** with the German Langdock labels in parentheses. The exact wording depends on your workspace language, but the position in the UI stays the same.
+</Note>
+
+## Add the MCP Server in Langdock
+
+<Steps>
+    <Step title="Open the Integrations page">
+        In the left sidebar, open **Integrations** (*Integrationen*).
+    </Step>
+
+    <Step title="Create a new integration">
+        Top right, click **Add Integration** (*Integration hinzufügen*) and choose **Create new** (*Neu erstellen*).
+    </Step>
+
+    <Step title="Select the MCP connection type">
+        In the dialog, under **Type** (*Typ*), select the middle option **Connect MCP Server** (*MCP Server verbinden*).
+    </Step>
+
+    <Step title="Paste your bchic Server URL">
+        In the **Server URL** field, paste your personal bchic MCP URL:
+
+        ```
+        https://mcp.analytics.bchic.de/mcp?token=YOUR-TOKEN-HERE
+        ```
+
+        You'll find this URL in your bchic dashboard see [Where to find the URL in bchic](#where-to-find-the-url-in-bchic) below.
+
+        Leave **Authentication method** (*Authentifizierungsmethode*) set to **None** (*Keine*) your access token is already part of the URL.
+    </Step>
+
+    <Step title="Create and connect">
+        Click **Create and connect** (*Erstellen und verbinden*). The new integration now appears under the **Created by me** (*Von mir erstellt*) tab, named e.g. `bchic-analytics`.
+    </Step>
+
+    <Step title="Attach it in a chat">
+        Open a new chat and type **`@`**. Pick **Integrations** (*Integrationen*) from the category list, then select your **bchic-analytics** integration to attach it to the conversation.
+
+        With the integration attached, ask anything about your analytics data:
+
+        - *"What were my top 5 pages last month?"*
+        - *"How many unique visitors did I get this week?"*
+        - *"Which referrer drove the most traffic yesterday?"*
+
+        Langdock will call the bchic MCP Server and return your live analytics data.
+    </Step>
+</Steps>
+
+## Where to find the URL in bchic
+
+Your Server URL with your personal access token already embedded lives in your bchic dashboard:
+
+<Steps>
+    <Step title="Open Integrations">
+        In bchic, open **Settings** and go to the **Integrations** (*Integrationen*) section.
+    </Step>
+
+    <Step title="Copy the MCP URL">
+        Find the **MCP Integration (Beta)** card and click **Copy URL** (*URL kopieren*). This copies the full server URL token included. Paste it straight into Langdock's **Server URL** field.
+    </Step>
+</Steps>
+
+## Verification
+
+If Langdock can answer questions about your site's visitor counts or top pages, the integration is working correctly. If you see an error, double-check that the URL was pasted without extra spaces and that the **bchic-analytics** integration is actually attached to the chat via `@`.

@@ -124,7 +124,7 @@
                 "pages": [
                   {
                     "group": "Model Context Protocol (MCP)",
-                    "pages": ["de/integration/claude_mcp", "de/integration/cursor_mcp"]
+                    "pages": ["de/integration/claude_mcp", "de/integration/cursor_mcp", "de/integration/langdock_mcp"]
                   },
                   "de/settings/google-search-console"
                 ]
@@ -272,7 +272,7 @@
                 "pages": [
                   {
                     "group": "Model Context Protocol (MCP)",
-                    "pages": ["en/integration/claude_mcp", "en/integration/cursor_mcp"]
+                    "pages": ["en/integration/claude_mcp", "en/integration/cursor_mcp", "en/integration/langdock_mcp"]
                   },
                   "en/settings/google-search-console"
                 ]
