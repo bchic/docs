@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "name": "bchic Analytics",
-  "theme": "mint",
+  "theme": "willow",
   "colors": {
     "primary": "#3D84FF",
     "light": "#5A9BFF",
