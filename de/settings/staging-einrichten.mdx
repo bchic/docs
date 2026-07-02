@@ -1,0 +1,75 @@
+---
+title: 'Staging einrichten und nutzen'
+description: 'Schritt-für-Schritt-Anleitung: Staging zu einer Website hinzufügen, das Tracking-Script aktualisieren und zwischen Production und Staging wechseln.'
+icon: 'code-branch'
+---
+
+Diese Anleitung führt dich durch den gesamten Flow — von der Aktivierung von Staging für eine Website bis zum sicheren Wechsel zwischen Production und Staging im Dashboard.
+
+<Info>
+    Was Staging ist und wofür es gedacht ist, erfährst du in der [Konzept-Übersicht](/de/settings/staging).
+</Info>
+
+<Steps>
+<Step title="Staging hinzufügen">
+  Öffne zunächst die Website-Einstellungen. Dorthin gelangst du auf zwei Wegen:
+
+  - Über das **Zahnrad-Icon** unten in der Sidebar.
+  - Über **„Website hinzufügen"** im Website-Picker-Dropdown oben.
+
+  Auf der Website-Einstellungsseite sind alle Websites deiner Organisation aufgelistet. Fahre mit der Maus über die Website, für die du Staging aktivieren möchtest — es erscheint die Option **„Add Staging"**.
+
+  Klicke auf **„Add Staging"**, um die Staging-Umgebung für diese Website zu aktivieren.
+</Step>
+
+<Step title="Tracking-Script aktualisieren">
+  Nach dem Klick auf „Add Staging" öffnet sich ein Popup mit deinem aktualisierten Tracking-Script. Es enthält zusätzlich zum bestehenden `data-website-id`-Attribut ein neues `data-staging-website-id`-Attribut:
+
+  ```html
+  <script defer src="https://analytics.bchic.de/script.js"
+    data-website-id="..."
+    data-domain="beispiel.de"
+    data-staging-website-id="..."
+    data-track-performance="true"></script>
+  ```
+
+  Ersetze den bisherigen Tracking-Code auf deiner Website durch dieses aktualisierte Script — üblicherweise im `<head>`-Bereich.
+
+  <Tip>
+      Plattformspezifische Anleitungen zum Einbinden des Scripts (WordPress, Webflow, Shopify u. a.) findest du im [Integrations-Bereich](/de/integration/integrationen).
+  </Tip>
+</Step>
+
+<Step title="Automatisches Routing">
+  Sobald das aktualisierte Script live ist, erfolgt das Routing automatisch — es ist keine weitere manuelle Konfiguration nötig.
+
+  Traffic, der **nicht** über die in `data-domain` hinterlegte Produktions-Domain läuft (z. B. `dev.beispiel.de`, `staging.beispiel.de` oder `localhost`), wird automatisch der Staging-Umgebung zugeordnet, statt in die Production-Statistiken einzufließen.
+
+  <Note>
+      Nur Aufrufe über die exakte `data-domain` zählen als Production. Jede andere Domain oder Subdomain, auf der das Script läuft, landet in Staging.
+  </Note>
+</Step>
+
+<Step title="Staging-Ansicht aufrufen">
+  Um die aufgezeichneten Staging-Daten einzusehen:
+
+  1. Wähle die betreffende Website im **Website-Picker-Dropdown** oben links aus.
+  2. Klicke im gleichen Dropdown auf **„auf Staging wechseln"**.
+</Step>
+
+<Step title="Staging visuell erkennen">
+  Befindest du dich in der Staging-Ansicht, erscheint oben in der Kopfzeile ein gelber Banner mit dem Hinweis **„STAGING-UMGEBUNG"**.
+
+  So ist jederzeit eindeutig erkennbar, dass du nicht auf Live-Produktionsdaten schaust.
+</Step>
+
+<Step title="Zurück zu Production wechseln">
+  Der Rückweg funktioniert identisch zum Wechsel nach Staging: Klicke im Website-Picker-Dropdown auf **„auf Production wechseln"**.
+
+  Der gelbe Banner verschwindet, und du siehst wieder deine regulären Produktionsdaten.
+</Step>
+</Steps>
+
+### Was kommt als Nächstes?
+
+Mit aktiver Staging-Umgebung kannst du jetzt gefahrlos loslegen — zum Beispiel neue [Custom Events](/de/events/custom-events) einbauen oder deine CMP-Einbindung für die [Consent Segmentation](/de/plattform/pages/consent) testen, bevor die Änderungen live gehen.

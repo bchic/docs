@@ -1,0 +1,75 @@
+---
+title: 'Setting up and using Staging'
+description: 'A step-by-step guide: add staging to a website, update the tracking script, and switch between production and staging.'
+icon: 'code-branch'
+---
+
+This guide walks you through the whole flow — from enabling staging for a website to safely switching between production and staging in the dashboard.
+
+<Info>
+    For what staging is and what it's for, see the [concept overview](/en/settings/staging).
+</Info>
+
+<Steps>
+<Step title="Add Staging">
+  Start by opening your website settings. You can get there two ways:
+
+  - Via the **gear icon** at the bottom of the sidebar.
+  - Via **"Add website"** in the website picker dropdown at the top.
+
+  The website settings page lists all websites in your organization. Hover over the website you want to enable staging for — the **"Add Staging"** option appears.
+
+  Click **"Add Staging"** to enable the staging environment for this website.
+</Step>
+
+<Step title="Update the tracking script">
+  After clicking "Add Staging", a popup opens with your updated tracking script. In addition to the existing `data-website-id` attribute, it now includes a new `data-staging-website-id` attribute:
+
+  ```html
+  <script defer src="https://analytics.bchic.de/script.js"
+    data-website-id="..."
+    data-domain="example.com"
+    data-staging-website-id="..."
+    data-track-performance="true"></script>
+  ```
+
+  Replace your existing tracking code on the website with this updated script — typically in the `<head>` section.
+
+  <Tip>
+      Platform-specific instructions for embedding the script (WordPress, Webflow, Shopify, and more) are available in the [integrations section](/en/integration/integrationen).
+  </Tip>
+</Step>
+
+<Step title="Automatic routing">
+  Once the updated script is live, routing happens automatically — no further manual configuration is needed.
+
+  Traffic that does **not** come through the production domain set in `data-domain` (e.g. `dev.example.com`, `staging.example.com`, or `localhost`) is automatically routed to the staging environment instead of flowing into your production statistics.
+
+  <Note>
+      Only requests through the exact `data-domain` count as production. Any other domain or subdomain running the script lands in staging.
+  </Note>
+</Step>
+
+<Step title="Open the staging view">
+  To view the recorded staging data:
+
+  1. Select the relevant website in the **website picker dropdown** at the top left.
+  2. In the same dropdown, click **"Switch to Staging"**.
+</Step>
+
+<Step title="Recognizing staging visually">
+  While in the staging view, a yellow banner reading **"STAGING ENVIRONMENT"** appears at the top of the header.
+
+  This makes it unmistakably clear at all times that you're not looking at live production data.
+</Step>
+
+<Step title="Switch back to Production">
+  Switching back works the same way as switching to staging: click **"Switch to Production"** in the website picker dropdown.
+
+  The yellow banner disappears, and you're back to seeing your regular production data.
+</Step>
+</Steps>
+
+### What's next?
+
+With staging enabled, you can now build with confidence — for example, add new [custom events](/en/events/custom-events) or test your CMP setup for [Consent Segmentation](/en/plattform/pages/consent) before the changes go live.

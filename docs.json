@@ -79,7 +79,11 @@
                 "pages": [
                   "de/settings/account-settings",
                   "de/settings/organisation-settings",
-                  "de/settings/website-creation"
+                  "de/settings/website-creation",
+                  {
+                    "group": "Staging",
+                    "pages": ["de/settings/staging", "de/settings/staging-einrichten"]
+                  }
                 ]
               },
               {
@@ -227,7 +231,11 @@
                 "pages": [
                   "en/settings/account-settings",
                   "en/settings/organisation-settings",
-                  "en/settings/website-creation"
+                  "en/settings/website-creation",
+                  {
+                    "group": "Staging",
+                    "pages": ["en/settings/staging", "en/settings/staging-einrichten"]
+                  }
                 ]
               },
               {

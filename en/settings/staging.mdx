@@ -1,0 +1,48 @@
+---
+title: 'What is Staging?'
+description: 'A separate tracking environment per website, so you can test new events, integrations, or your consent tracking setup without skewing your production data.'
+icon: 'flask'
+---
+
+<img className="block dark:hidden" src="/images/changelog/staging.jpeg" alt="Staging environment in bchic" />
+<img className="hidden dark:block" src="/images/changelog/staging.jpeg" alt="Staging environment in bchic" />
+
+## Overview
+
+Staging is a separate tracking environment for each of your websites, kept apart from production. It solves an everyday problem: you want to add a new event, test a new integration, or adjust your CMP setup for the optional consent evaluation — but every test click on the live site would otherwise skew your real analytics data.
+
+With staging, that no longer happens. Traffic that doesn't come through your registered production domain (e.g. `dev.example.com`, `staging.example.com`, or `localhost`) is automatically routed to a separate staging view. Your production statistics stay untouched in the meantime.
+
+This is especially valuable for:
+- **Development:** Add and verify new custom events or conversion goals risk-free before they go live.
+- **Testing consent tracking:** Run changes to your cookie banner or CMP (e.g. Cookiebot, OneTrust, Usercentrics) through their paces and check that the optional [Consent Segmentation](/en/plattform/pages/consent) picks them up correctly — without skewing your production consent rates.
+- **Integrations:** Validate new platform integrations (CMPs, CRMs, server-side connections) against real requests, without test data flowing into your live dashboards.
+- **QA before releases:** Click through a deployment on a preview or staging domain and immediately see whether tracking fires correctly.
+
+<Note>
+    bchic Analytics itself tracks entirely cookieless and never requires consent to operate. The optional Consent Segmentation feature only measures the consent status of *your own* cookie banner — for comparison, not because bchic needs consent itself.
+</Note>
+
+---
+
+## How the separation works
+
+When you enable staging for a website, it receives an additional `data-staging-website-id` alongside the existing `data-website-id` in the tracking script. bchic Analytics automatically determines which environment a pageview belongs to based on the calling domain — there's no separate install and no manual per-domain configuration required.
+
+Production and staging share the same website within your organization but are kept as separate datasets. You can switch between the two views at any time via the website picker, and a clear indicator ensures you never mistake staging data for real metrics (or vice versa).
+
+<Note>
+    Staging is optional and needs to be enabled once per website. Websites without staging enabled behave exactly as before.
+</Note>
+
+---
+
+## Next step
+
+<Card
+  title="Setting up and using Staging"
+  icon="arrow-right"
+  href="/en/settings/staging-einrichten"
+>
+  A step-by-step guide: add staging to a website, update the tracking script, and switch between production and staging.
+</Card>
